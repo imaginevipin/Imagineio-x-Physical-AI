@@ -84,6 +84,7 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-25 | Auto-save Stop hook added to `.claude/settings.json` | Runs `git add -A && git commit && git push` on every Claude session end — ensures team always sees latest WIP even if tokens run out mid-session. |
 | 2026-03-25 | Homepage v5 started — hero section fully refactored | v4 duplicated to v5. Hero rebuilt into 3-layer structure: (1) headline/CTA, (2) dark code editor (Isaac Sim Python, file tabs, line numbers), (3) two animated asset strip rows. Stats moved out of hero into standalone bar below. |
 | 2026-03-25 | CSS/HTML separated from v5 onwards | `outputs/homepage-vN.html` + `css/homepage-vN.css` (root level). No inline `<style>` blocks from v5 onwards. Rule documented in CLAUDE.md and SUMMARY.md. |
+| 2026-03-25 | Homepage v6 created — hero overhaul + polish pass | v5 base. Hero changes: white bg (no dot pattern), dark code editor replaced with light-theme Scene Builder UI (sidebar + floor plan canvas + properties bar), proof badge + old h1 removed, subtitle promoted to h1 with "simulation-ready" in orange, body copy kept. Strips + pain marquee removed. Navbar: border removed, glassmorphic (`rgba(255,255,255,0.65)` + `blur(24px) saturate(1.8)`), dark logo. Stats bar sits directly below editor. Partners logo strip: 5 real PNG logos from `partners-logos/` folder, greyscale/muted treatment, `116px` vertical padding. |
 
 ---
 
@@ -97,6 +98,7 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-24 | Homepage v3 — real images + CDN | `outputs/homepage-v3.html` | All 38 placeholder divs replaced with real product imagery. CDN switched to jsDelivr for faster loading. |
 | 2026-03-25 | Homepage v4 — complete | `outputs/homepage-v4.html` | Content aligned with PM site + full UI polish pass. See section map and design decisions below. |
 | 2026-03-25 | Homepage v5 — hero refactor (WIP) | `outputs/homepage-v5.html` + `css/homepage-v5.css` | 3-layer hero: headline → dark code editor → animated asset strips. Stats bar below hero. First version with external CSS file. |
+| 2026-03-25 | Homepage v6 — hero overhaul + polish (active WIP) | `outputs/homepage-v6.html` + `css/homepage-v6.css` | White hero bg, light Scene Builder UI editor (460px tall), h1 = "Structured product data for simulation-ready world generation." (orange on "simulation-ready"), body copy below, strips + pain marquee removed, glassmorphic navbar, real partner logos in strip. |
 
 ---
 
@@ -149,7 +151,7 @@ These were discovered and locked in during v4 polish — apply in all future wor
 - **Branch:** `main`
 - **What's in the repo:**
   - `outputs/` — homepage v1–v5 HTML files
-  - `css/` — per-version CSS files (v5 onwards): `homepage-v5.css`
+  - `css/` — per-version CSS files (v5 onwards): `homepage-v5.css`, `homepage-v6.css`
   - `assets/fonts/` — PP Neue Montreal (6 OTF weights)
   - `assets/logos/` — all imagine.io SVG variants
   - `research/` — content gap analysis, design reference
@@ -200,14 +202,15 @@ All product images are served from the `library-assets` GitHub repo via jsDelivr
 
 ## Known Issues / Pending Items
 
-- `homepage-v5` hero refactor is in progress — rest of the page sections are inherited from v4 and untouched.
-- `index.html` (live Vercel site) still points to v4 content — not yet updated to v5.
+- `homepage-v6` is the active WIP — all hero iteration is happening here.
+- `index.html` (live Vercel site) still points to v4 — not yet updated.
+- CSS cache issue observed during v6 work: browser cached old CSS while loading fresh HTML. Fixed by appending `?v=2` to the CSS link in homepage-v6.html. If it happens again, increment the query string (`?v=3`, etc.).
+- `com.apple.provenance` extended attribute appears on all files in the `css/` folder (macOS behavior) — does NOT block writes; file is writable by owner.
 
 ---
 
 ## Next Steps
 
-1. Continue iterating on `homepage-v5` hero until approved
-2. Once v5 hero is approved: propagate remaining section improvements through the page
-3. Update `index.html` to v5 when ready to go live
-4. After homepage approved: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
+1. Continue iterating on `homepage-v6` — hero is in good shape, review remaining sections
+2. Once v6 is approved: update `index.html` to v6 and push to trigger Vercel deploy
+3. After homepage approved: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
