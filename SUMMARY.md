@@ -85,6 +85,11 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-25 | Homepage v5 started — hero section fully refactored | v4 duplicated to v5. Hero rebuilt into 3-layer structure: (1) headline/CTA, (2) dark code editor (Isaac Sim Python, file tabs, line numbers), (3) two animated asset strip rows. Stats moved out of hero into standalone bar below. |
 | 2026-03-25 | CSS/HTML separated from v5 onwards | `outputs/homepage-vN.html` + `css/homepage-vN.css` (root level). No inline `<style>` blocks from v5 onwards. Rule documented in CLAUDE.md and SUMMARY.md. |
 | 2026-03-25 | Homepage v6 created — hero overhaul + polish pass | v5 base. Hero changes: white bg (no dot pattern), dark code editor replaced with light-theme Scene Builder UI (sidebar + floor plan canvas + properties bar), proof badge + old h1 removed, subtitle promoted to h1 with "simulation-ready" in orange, body copy kept. Strips + pain marquee removed. Navbar: border removed, glassmorphic (`rgba(255,255,255,0.65)` + `blur(24px) saturate(1.8)`), dark logo. Stats bar sits directly below editor. Partners logo strip: 5 real PNG logos from `partners-logos/` folder, greyscale/muted treatment, `116px` vertical padding. |
+| 2026-03-25 | v6 logo strip rebuilt from scratch | Old `.proof` class completely removed from HTML + CSS. New `.logo-strip` namespace. `padding: 48px 0`, thin top/bottom borders, `height: 22px` logos, `grayscale(100%) opacity: 0.5` default, hover restores color. Label: "Integrates with your pipeline". Lives as standalone section between stats bar and asset showcase. |
+| 2026-03-25 | v6 asset card system refactored | Old `.asset-card__sim`, `.asset-card__verified`, `.asset-card__verified-dot` removed. New: `aspect-ratio: 4/3`, absolute-positioned `__img` layer, full-bleed gradient overlay (`__overlay` → `__bottom`), unified `.asset-badge` pill (`.asset-badge--left` / `--right`, `backdrop-filter: blur(6px)`). Hover: card lifts `translateY(-4px)`, image scales `1.05`. |
+| 2026-03-25 | v6 asset cards — Apparel images replaced with Kitchen + Bath | All 4 Apparel image references removed. Replaced with: `Kitchen/Dutch Oven_Image 1.jpg` ("Kitchen Environments"), `Bath/Walnut Vanity_Image 1.jpg` ("Bathroom Spaces"), `Kitchen/Kitchen Faucet_Image 1.jpg` ("Kitchen & Bath Fixtures"), `Bath/Bathtub_Image 1.jpg` ("Spa & Wellness"). Categories now: Furniture, Lighting, Kitchen, Bath only. |
+| 2026-03-25 | v6 bug fix — background:url() → background-image:url() | Inline `background:` shorthand was overriding `background-size: cover` and `background-position: center` from CSS class, causing images to not fill card frames. Fixed all 45 occurrences to use `background-image:` instead. |
+| 2026-03-25 | index.html updated to v6 — now live on Vercel | `cp outputs/homepage-v6.html index.html` + pushed to main. Vercel auto-deployed. CSS cache at `?v=7`. |
 
 ---
 
@@ -98,7 +103,7 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-24 | Homepage v3 — real images + CDN | `outputs/homepage-v3.html` | All 38 placeholder divs replaced with real product imagery. CDN switched to jsDelivr for faster loading. |
 | 2026-03-25 | Homepage v4 — complete | `outputs/homepage-v4.html` | Content aligned with PM site + full UI polish pass. See section map and design decisions below. |
 | 2026-03-25 | Homepage v5 — hero refactor (WIP) | `outputs/homepage-v5.html` + `css/homepage-v5.css` | 3-layer hero: headline → dark code editor → animated asset strips. Stats bar below hero. First version with external CSS file. |
-| 2026-03-25 | Homepage v6 — hero overhaul + polish (active WIP) | `outputs/homepage-v6.html` + `css/homepage-v6.css` | White hero bg, light Scene Builder UI editor (460px tall), h1 = "Structured product data for simulation-ready world generation." (orange on "simulation-ready"), body copy below, strips + pain marquee removed, glassmorphic navbar, real partner logos in strip. |
+| 2026-03-25 | Homepage v6 — complete, live on Vercel | `outputs/homepage-v6.html` + `css/homepage-v6.css` (CSS cache `?v=7`) | White hero bg, light Scene Builder UI editor (460px tall), h1 = "Structured product data for simulation-ready world generation." (orange on "simulation-ready"), glassmorphic navbar, `.logo-strip` partner section, refactored asset cards (`aspect-ratio: 4/3`, full-bleed image + gradient overlay, `.asset-badge` pills, Furniture/Lighting/Kitchen/Bath images). Copied to `index.html` and deployed. |
 
 ---
 
@@ -180,12 +185,12 @@ git push
 ### index.html Workflow
 
 - `index.html` lives at the **project root** — this is the live version Vercel serves
-- It is always a copy of the latest approved output (currently: homepage-v4)
+- It is always a copy of the latest approved output (currently: **homepage-v6**)
 - `outputs/` folder is untouched version history — never delete or overwrite files there
 - **To update the live site:** copy the new approved version over `index.html`, then push
   ```bash
-  cp outputs/homepage-v5.html index.html
-  git add index.html && git commit -m "Update index.html — live version (homepage-v5)" && git push
+  cp outputs/homepage-v6.html index.html
+  git add index.html && git commit -m "Update index.html — live version (homepage-v6)" && git push
   ```
 
 ---
@@ -195,22 +200,20 @@ git push
 All product images are served from the `library-assets` GitHub repo via jsDelivr CDN:
 - **Repo:** `github.com/vipinmeena1468/library-assets` — **DO NOT MODIFY this repo.** Other products use it.
 - **CDN pattern:** `https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/[Category]/[filename]`
-- **Categories used:** Furniture, Lighting, Apparel
+- **Categories used:** Furniture, Lighting, Kitchen, Bath (Apparel removed)
 - Images can be used freely across our HTML files — just reference via CDN URL.
 
 ---
 
 ## Known Issues / Pending Items
 
-- `homepage-v6` is the active WIP — all hero iteration is happening here.
-- `index.html` (live Vercel site) still points to v4 — not yet updated.
-- CSS cache issue observed during v6 work: browser cached old CSS while loading fresh HTML. Fixed by appending `?v=2` to the CSS link in homepage-v6.html. If it happens again, increment the query string (`?v=3`, etc.).
+- `homepage-v6` is the current live version — `index.html` = v6, deployed on Vercel.
+- CSS cache bust is at `?v=7` — increment to `?v=8` next time CSS changes in v6.
 - `com.apple.provenance` extended attribute appears on all files in the `css/` folder (macOS behavior) — does NOT block writes; file is writable by owner.
 
 ---
 
 ## Next Steps
 
-1. Continue iterating on `homepage-v6` — hero is in good shape, review remaining sections
-2. Once v6 is approved: update `index.html` to v6 and push to trigger Vercel deploy
-3. After homepage approved: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
+1. Review v6 live on Vercel — full page audit below the hero (mission, platform, tiers, GTC sections)
+2. When ready: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
