@@ -24,7 +24,15 @@
 
 ## Outputs Structure
 
-All deliverables go in `outputs/` as flat files — naming convention: `[page-name]-v[N].html` (e.g. `homepage-v2.html`, `robotics-v1.html`). Never overwrite — always create a new version file.
+All deliverables go in `outputs/` as flat versioned files — naming convention: `[page-name]-v[N].html` (e.g. `homepage-v5.html`). Never overwrite — always create a new version file.
+
+### CSS / HTML Separation (v5 onwards)
+
+- HTML → `outputs/homepage-vN.html`
+- CSS → `css/homepage-vN.css` (project root, outside `outputs/`)
+- HTML links tokens: `<link rel="stylesheet" href="../tokens.css">`
+- HTML links page CSS: `<link rel="stylesheet" href="../css/homepage-vN.css">`
+- No `<style>` blocks inside HTML files from v5 onwards — all styles in the paired `.css` file
 
 ---
 
@@ -73,6 +81,9 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-25 | Hero stats bar: SOC 2 replaced with 150+ Metadata Attributes | SOC 2 is a compliance badge, not a number — doesn't belong in a numeric proof strip. Replaced with a product-specific differentiator. |
 | 2026-03-25 | Orange `<em>` accent added to every section h2 headline | All section h2s now have one orange word/phrase via `h2 em { color: var(--accent) }`. Applied to both `homepage-v4.html` and `index.html`. See Design Rule #8 below. |
 | 2026-03-25 | Specific word-level orange highlights refined per visual review | Validation: "asset." + "variant." orange; Tiers: "Perception", "Navigation", "Manipulation" each individually orange; Ecosystem: "run the simulation." orange. |
+| 2026-03-25 | Auto-save Stop hook added to `.claude/settings.json` | Runs `git add -A && git commit && git push` on every Claude session end — ensures team always sees latest WIP even if tokens run out mid-session. |
+| 2026-03-25 | Homepage v5 started — hero section fully refactored | v4 duplicated to v5. Hero rebuilt into 3-layer structure: (1) headline/CTA, (2) dark code editor (Isaac Sim Python, file tabs, line numbers), (3) two animated asset strip rows. Stats moved out of hero into standalone bar below. |
+| 2026-03-25 | CSS/HTML separated from v5 onwards | `outputs/homepage-vN.html` + `css/homepage-vN.css` (root level). No inline `<style>` blocks from v5 onwards. Rule documented in CLAUDE.md and SUMMARY.md. |
 
 ---
 
@@ -85,6 +96,7 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-23 | Homepage v3 — physicl.ai pattern overhaul | `outputs/homepage-v3.html` | 5 priority changes: social proof above headline, vertical pipeline rows w/ progressive opacity, code demo layered over dark asset grid, image-first use case cards, asymmetric CTA. Also: bordered pill badges, periods on headlines, Verified badges on all image cards, flush ruled tiers, Material Symbols icons. Papaya primary CTAs. |
 | 2026-03-24 | Homepage v3 — real images + CDN | `outputs/homepage-v3.html` | All 38 placeholder divs replaced with real product imagery. CDN switched to jsDelivr for faster loading. |
 | 2026-03-25 | Homepage v4 — complete | `outputs/homepage-v4.html` | Content aligned with PM site + full UI polish pass. See section map and design decisions below. |
+| 2026-03-25 | Homepage v5 — hero refactor (WIP) | `outputs/homepage-v5.html` + `css/homepage-v5.css` | 3-layer hero: headline → dark code editor → animated asset strips. Stats bar below hero. First version with external CSS file. |
 
 ---
 
@@ -136,11 +148,13 @@ These were discovered and locked in during v4 polish — apply in all future wor
 - **Remote:** `https://github.com/imaginevipin/Imagineio-x-Physical-AI.git`
 - **Branch:** `main`
 - **What's in the repo:**
-  - `outputs/` — homepage v1–v4
+  - `outputs/` — homepage v1–v5 HTML files
+  - `css/` — per-version CSS files (v5 onwards): `homepage-v5.css`
   - `assets/fonts/` — PP Neue Montreal (6 OTF weights)
   - `assets/logos/` — all imagine.io SVG variants
   - `research/` — content gap analysis, design reference
   - `tokens.css`, `CLAUDE.md`, `PLAN.md`, `SUMMARY.md`, `prism-design-system.md`
+  - `.claude/settings.json` — Stop hook: auto git commit + push on session end
 
 **To push updates:**
 ```bash
@@ -186,11 +200,14 @@ All product images are served from the `library-assets` GitHub repo via jsDelivr
 
 ## Known Issues / Pending Items
 
-None outstanding. v4 is complete and reviewed.
+- `homepage-v5` hero refactor is in progress — rest of the page sections are inherited from v4 and untouched.
+- `index.html` (live Vercel site) still points to v4 content — not yet updated to v5.
 
 ---
 
 ## Next Steps
 
-1. Connect `imaginevipin/Imagineio-x-Physical-AI` to Vercel (see Vercel Deployment section above)
-2. After homepage approved: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
+1. Continue iterating on `homepage-v5` hero until approved
+2. Once v5 hero is approved: propagate remaining section improvements through the page
+3. Update `index.html` to v5 when ready to go live
+4. After homepage approved: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`

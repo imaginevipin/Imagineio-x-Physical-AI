@@ -6,7 +6,17 @@ Always read `SUMMARY.md` first in every conversation. It contains the full proje
 
 ## Outputs
 
-All deliverables go in `outputs/[work-name]/v[N]/`. Never overwrite a version — always create a new variation folder.
+All deliverables go in `outputs/` as flat versioned files — naming convention: `[page-name]-v[N].html` (e.g. `homepage-v5.html`). Never overwrite a version — always create a new version file.
+
+## CSS / HTML Separation
+
+From `homepage-v5` onwards, every HTML file has a paired external CSS file:
+
+- HTML lives in `outputs/` → `outputs/homepage-vN.html`
+- CSS lives in `css/` (project root) → `css/homepage-vN.css`
+- The HTML file links to it as: `<link rel="stylesheet" href="../css/homepage-vN.css">`
+- `tokens.css` (global Prism design tokens) stays at the project root and is always linked separately as `../tokens.css`
+- Never write `<style>` blocks inside HTML files for v5 onwards — all styles go in the paired `.css` file
 
 ## Model Usage
 
