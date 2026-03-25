@@ -148,15 +148,26 @@ git push
 
 ---
 
-## Vercel Deployment — Plan
+## Vercel Deployment
 
 - **Goal:** deploy final version as a live URL (Vercel)
-- **Status:** Not yet connected — pending homepage final approval
-- **Setup needed:**
-  1. Connect `imaginevipin/Imagineio-x-Physical-AI` repo to Vercel (vercel.com → Import Project)
-  2. Set deploy root to project root (Vercel auto-detects static HTML)
-  3. Every push to `main` will auto-deploy
+- **Status:** `index.html` pushed to GitHub — ready to connect Vercel
+- **Setup (one-time):**
+  1. Go to vercel.com → Add New → Project → Import `imaginevipin/Imagineio-x-Physical-AI`
+  2. Framework: `Other` — leave all settings as default (root `/`, no build command)
+  3. Hit Deploy — every future push to `main` auto-deploys
 - **Note:** Vercel free (Hobby) plan supports private repos via GitHub OAuth — no paid plan needed
+
+### index.html Workflow
+
+- `index.html` lives at the **project root** — this is the live version Vercel serves
+- It is always a copy of the latest approved output (currently: homepage-v4)
+- `outputs/` folder is untouched version history — never delete or overwrite files there
+- **To update the live site:** copy the new approved version over `index.html`, then push
+  ```bash
+  cp outputs/homepage-v5.html index.html
+  git add index.html && git commit -m "Update index.html — live version (homepage-v5)" && git push
+  ```
 
 ---
 
@@ -178,5 +189,5 @@ None outstanding. v4 is complete and reviewed.
 
 ## Next Steps
 
-1. Connect repo to Vercel for live deployment
+1. Connect `imaginevipin/Imagineio-x-Physical-AI` to Vercel (see Vercel Deployment section above)
 2. After homepage approved: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
