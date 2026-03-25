@@ -458,52 +458,52 @@
       background: #fff;
       border-top: 1px solid rgba(0,0,0,0.07);
       border-bottom: 1px solid rgba(0,0,0,0.07);
-      padding: 48px 0;
+      padding: 80px 0;
     }
     .logo-strip__inner {
-      max-width: 960px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 80px;
+      padding: 80px 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 28px;
+      gap: 24px;
     }
     .logo-strip__label {
       font-family: var(--font), sans-serif;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 1.8px;
       text-transform: uppercase;
       color: var(--text-muted);
-      opacity: 0.55;
+      opacity: 1;
       white-space: nowrap;
     }
     .logo-strip__logos {
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 40px;
       gap: clamp(32px, 5vw, 56px);
-      flex-wrap: nowrap;
-      overflow-x: auto;
+      flex-wrap: wrap;
+      overflow-x: visible;
       scrollbar-width: none;
       width: 100%;
     }
     .logo-strip__logos::-webkit-scrollbar { display: none; }
     .logo-strip__logos img {
       display: block;
-      height: 22px;
+      height: 48px;
       width: auto;
       object-fit: contain;
       flex-shrink: 0;
       filter: grayscale(100%);
-      opacity: 0.5;
+      opacity: 0.7;
       transition: opacity 0.2s ease, transform 0.2s ease, filter 0.2s ease;
     }
     .logo-strip__logos img:hover {
       filter: grayscale(0%);
-      opacity: 0.85;
-      transform: translateY(-1px);
+      opacity: 1;
     }
 
 
@@ -511,7 +511,7 @@
        5. ASSET SHOWCASE MARQUEE
     ═══════════════════════════════════════════════════════ */
     .showcase {
-      background: var(--bg-warm);
+      background: var(--bg-subtle);
       padding: var(--section-y) 0;
       overflow: hidden;
     }
@@ -530,86 +530,112 @@
       line-height: 1.1;
     }
     .showcase__rows { display: flex; flex-direction: column; gap: 16px; }
-    .mq { display: flex; overflow: hidden; }
+    .mq {
+      overflow: hidden;
+      position: relative;
+    }
     .mq__track {
       display: flex;
       gap: 16px;
       flex-shrink: 0;
-      animation: roll-left 38s linear infinite;
+      width: max-content;
+      animation: scroll-left 40s linear infinite;
       will-change: transform;
     }
-    .mq__track--rev { animation: roll-right 42s linear infinite; }
+    .mq__track--rev { animation: scroll-right 40s linear infinite; }
 
-    /* Asset card — image-first with overlay labels */
+    @keyframes scroll-left {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+    
+    @keyframes scroll-right {
+      from {
+        transform: translateX(-50%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    /* Asset cards */
     .asset-card {
-      flex-shrink: 0;
+      position: relative;
       width: 280px;
+      aspect-ratio: 4 / 3;
       border-radius: var(--radius-md);
       overflow: hidden;
-      border: 1px solid rgba(0,0,0,0.08);
-      position: relative;
+      background: #eee;
+      flex: 0 0 auto;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
     .asset-card__img {
-      width: 280px;
-      height: 200px;
-      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.4s ease;
     }
-    /* Overlay labels on top of image */
+    .asset-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
+    .asset-card:hover .asset-card__img {
+      transform: scale(1.05);
+    }
     .asset-card__overlay {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 10px 14px;
-      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+      inset: 0;
       display: flex;
-      align-items: flex-end;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 12px;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.65) 0%,
+        rgba(0,0,0,0.35) 40%,
+        rgba(0,0,0,0.1) 70%,
+        transparent 100%
+      );
+    }
+    .asset-card__bottom {
+      display: flex;
       justify-content: space-between;
+      align-items: center;
     }
     .asset-card__label {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 500;
-      color: rgba(255,255,255,0.92);
+      color: rgba(255,255,255,0.95);
     }
     .asset-card__count {
       font-size: 11px;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255,255,255,0.85);
       white-space: nowrap;
     }
-    /* Verified badge top-right */
-    .asset-card__verified {
+    .asset-badge {
       position: absolute;
-      top: 10px; right: 10px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 4px;
-      padding: 3px 8px;
+      top: 10px;
+      padding: 4px 8px;
       font-size: 10px;
       font-weight: 600;
-      color: #86efac;
       letter-spacing: 0.5px;
-      text-transform: uppercase;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      backdrop-filter: blur(6px);
+      opacity: 0.9;
+      transition: opacity 0.2s ease;
     }
-    .asset-card__verified-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: #86efac;
-    }
-    /* Sim-ready badge top-left */
-    .asset-card__sim {
-      position: absolute;
-      top: 10px; left: 10px;
-      background: rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 4px;
-      padding: 3px 8px;
-      font-size: 10px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.7);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
+    .asset-badge--left  { left: 10px; }
+    .asset-badge--right { right: 10px; }
+    .asset-card:hover .asset-badge { opacity: 1; }
 
 
     /* ═══════════════════════════════════════════════════════
