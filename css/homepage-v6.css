@@ -292,7 +292,7 @@
     .editor-filename { font-size: 11px; color: var(--text-muted); font-family: 'SF Mono', 'IBM Plex Mono', monospace; }
 
     /* Editor body */
-    .editor-body { display: flex; height: 340px; }
+    .editor-body { display: flex; height: 460px; }
 
     /* Left sidebar */
     .editor-sidebar {
@@ -456,7 +456,7 @@
     ═══════════════════════════════════════════════════════ */
     .proof {
       background: var(--bg);
-      padding: 72px 0;
+      padding: 112px 0;
     }
     .proof__label {
       text-align: center;
