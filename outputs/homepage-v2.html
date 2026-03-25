@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>imagine.io — The data layer for Physical AI</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+  <style>
+
+    /* ═══════════════════════════════════════════════════════
+       BASE
+    ═══════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:          #ffffff;
+      --bg-warm:     #f4f2ee;
+      --bg-subtle:   #faf9f7;
+      --bg-papaya:   #fbdcce;   /* papaya-100 */
+      --border:      #e8e6e1;
+      --text-head:   #111111;
+      --text-body:   #555550;
+      --text-muted:  #999990;
+      --accent:      #ec4e0b;
+      --accent-dark: #bd3e09;
+      --shadow-sm:   0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.06);
+      --shadow-md:   0 2px 8px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.08);
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   20px;
+      --section-y:   120px;
+    }
+
+    body {
+      font-family: var(--font), sans-serif;
+      background: var(--bg);
+      color: var(--text-body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ─── Container ─── */
+    .wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 80px;
+    }
+
+    /* ─── Buttons ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font), sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      letter-spacing: 0.1px;
+    }
+    .btn-lg { padding: 18px 36px; font-size: 16px; }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-head);
+      border-color: var(--border);
+    }
+    .btn-ghost:hover { border-color: #aaa; background: var(--bg-subtle); }
+    .btn-ghost-light {
+      background: transparent;
+      color: var(--text-head);
+      border-color: rgba(17,17,17,0.2);
+    }
+    .btn-ghost-light:hover { border-color: rgba(17,17,17,0.5); }
+
+    /* ─── Section overline ─── */
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .kicker::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .kicker--muted { color: var(--text-muted); }
+    .kicker--muted::before { background: var(--text-muted); }
+
+    /* ─── Placeholder image ─── */
+    .ph {
+      background: #0a0a0a;
+      border-radius: var(--radius-sm);
+      display: block;
+    }
+
+    /* ─── Image label overlay helper ─── */
+    .img-wrap { position: relative; overflow: hidden; border-radius: var(--radius-md); }
+    .img-wrap .ph { border-radius: 0; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       1. NAVBAR
+    ═══════════════════════════════════════════════════════ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 40px;
+    }
+    .nav__logo img { height: 21px; width: auto; }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+    .nav__links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.1px;
+      transition: color 0.15s;
+    }
+    .nav__links a:hover { color: var(--text-head); }
+    .nav__cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav__cta .btn { padding: 9px 20px; font-size: 14px; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       2. HERO
+    ═══════════════════════════════════════════════════════ */
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 80px 0;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    /* Dot-grid texture */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, #d4d0c8 1.2px, transparent 1.2px);
+      background-size: 36px 36px;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+    /* Bottom fade */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      height: 180px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none;
+    }
+    .hero__content { position: relative; z-index: 1; max-width: 980px; }
+    .hero__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-papaya);
+      border: 1px solid #f4b898;
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #7a2300;
+      margin-bottom: 40px;
+    }
+    .hero__tag-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .hero__h1 {
+      font-size: clamp(56px, 7.5vw, 88px);
+      font-weight: 300;
+      line-height: 1.04;
+      letter-spacing: -3px;
+      color: var(--text-head);
+      margin-bottom: 28px;
+    }
+    .hero__h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero__sub {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-body);
+      max-width: 580px;
+      margin: 0 auto 44px;
+    }
+    .hero__cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 80px;
+    }
+    /* Stats strip */
+    .hero__stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      z-index: 1;
+    }
+    .hero__stat {
+      padding: 20px 40px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .hero__stat:last-child { border-right: none; }
+    .hero__stat-val {
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--text-head);
+      letter-spacing: -0.5px;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .hero__stat-lbl {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       3. PAIN MARQUEE
+    ═══════════════════════════════════════════════════════ */
+    .pain {
+      background: var(--bg-warm);
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .pain__track-wrap {
+      display: flex;
+      overflow: hidden;
+    }
+    .pain__track {
+      display: flex;
+      gap: 12px;
+      animation: roll-left 55s linear infinite;
+      will-change: transform;
+      flex-shrink: 0;
+    }
+    .pain__pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 450;
+      color: var(--text-body);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .pain__dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    @keyframes roll-left {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       4. SOCIAL PROOF
+    ═══════════════════════════════════════════════════════ */
+    .proof {
+      background: var(--bg);
+      padding: 80px 0;
+    }
+    .proof__label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+    .proof__logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 56px;
+      flex-wrap: wrap;
+    }
+    .proof__logo {
+      font-size: 17px;
+      font-weight: 600;
+      color: #bbb8b0;
+      letter-spacing: -0.2px;
+      transition: color 0.2s;
+    }
+    .proof__logo:hover { color: #888; }
+    .proof__logo span { font-weight: 300; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       5. ASSET SHOWCASE MARQUEE
+    ═══════════════════════════════════════════════════════ */
+    .showcase {
+      background: var(--bg-warm);
+      padding: var(--section-y) 0;
+      overflow: hidden;
+    }
+    .showcase__header {
+      text-align: center;
+      margin-bottom: 64px;
+      padding: 0 80px;
+    }
+    .showcase__h2 {
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 400;
+      letter-spacing: -1.5px;
+      color: var(--text-head);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.1;
+    }
+    .showcase__rows {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .mq {
+      display: flex;
+      overflow: hidden;
+      gap: 0;
+    }
+    .mq__track {
+      display: flex;
+      gap: 16px;
+      flex-shrink: 0;
+      animation: roll-left 38s linear infinite;
+      will-change: transform;
+    }
+    .mq__track--rev {
+      animation: roll-right 42s linear infinite;
+    }
+    @keyframes roll-right {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+    .asset-card {
+      flex-shrink: 0;
+      width: 280px;
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: var(--shadow-sm);
+    }
+    .asset-card__img {
+      width: 280px;
+      height: 188px;
+      background: #0a0a0a;
+      display: block;
+    }
+    .asset-card__body {
+      padding: 14px 18px 16px;
+    }
+    .asset-card__label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-head);
+      margin-bottom: 4px;
+    }
+    .asset-card__count {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       6. MISSION
+    ═══════════════════════════════════════════════════════ */
+    .mission {
+      background: var(--bg);
+      padding: var(--section-y) 0;
+    }
+    .mission__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .mission__quote {
+      font-size: clamp(32px, 3.2vw, 44px);
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      color: var(--text-head);
+      position: sticky;
+      top: 100px;
+    }
+    .mission__quote em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .mission__right { display: flex; flex-direction: column; gap: 28px; }
+    .mission__p {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--text-body);
+    }
+    .mission__list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 8px;
+    }
+    .mission__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.55;
+    }
+    .mission__item-dot {
+      width: 22px; height: 22px;
+      background: var(--bg-papaya);
+      border: 1px solid #f4b898;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .mission__item-dot::after {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       7. CODE DEMO
+    ═══════════════════════════════════════════════════════ */
+    .code-sec {
+      background: var(--bg-warm);
+      padding: var(--section-y) 0;
+    }
+    .code-sec__inner {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .code-sec__h2 {
+      font-size: clamp(32px, 3.2vw, 44px);
+      font-weight: 400;
+      letter-spacing: -1px;
+      color: var(--text-head);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .code-sec__p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text-body);
+      margin-bottom: 32px;
+    }
+    .code-feats { display: flex; flex-direction: column; gap: 12px; }
+    .code-feat {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-body);
+    }
+    .code-feat-icon {
+      width: 28px; height: 28px;
+      background: var(--bg-papaya);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    /* Code block */
+    .codeblock {
+      background: #111;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    }
+    .codeblock__bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 16px;
+      background: #1a1a1a;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .codeblock__btn {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .codeblock__btn--r { background: #ff5f57; }
+    .codeblock__btn--a { background: #febc2e; }
+    .codeblock__btn--g { background: #28c840; }
+    .codeblock__fn {
+      margin-left: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .codeblock pre {
+      padding: 28px 28px;
+      font-family: 'SF Mono', 'IBM Plex Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.72);
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .t-kw  { color: #c084fc; }
+    .t-str { color: #86efac; }
+    .t-cmt { color: rgba(255,255,255,0.22); font-style: italic; }
+    .t-fn  { color: #7dd3fc; }
+    .t-num { color: #fcd34d; }
+    .t-key { color: #fda4af; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       8. PIPELINE
+    ═══════════════════════════════════════════════════════ */
+    .pipeline {
+      background: var(--bg);
+      padding: var(--section-y) 0;
+    }
+    .pipeline__hd {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .pipeline__h2 {
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 400;
+      letter-spacing: -1.5px;
+      color: var(--text-head);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.1;
+    }
+    .pipeline__grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      position: relative;
+    }
+    .pipeline__step {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 36px 28px;
+      position: relative;
+    }
+    .pipeline__step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #ccc;
+      z-index: 2;
+    }
+    .pipeline__num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .pipeline__title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-head);
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+    .pipeline__desc {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text-body);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       9. STATS
+    ═══════════════════════════════════════════════════════ */
+    .stats {
+      background: var(--bg-papaya);
+      padding: var(--section-y) 0;
+      border-top: 1px solid #f4b898;
+      border-bottom: 1px solid #f4b898;
+    }
+    .stats__header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .stats__h2 {
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 400;
+      letter-spacing: -1.5px;
+      color: #5e1f04;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.1;
+    }
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: #f4b898;
+      border: 1px solid #f4b898;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .stat-cell {
+      background: var(--bg-papaya);
+      padding: 52px 44px;
+      position: relative;
+    }
+    .stat-cell__num {
+      font-size: clamp(52px, 6vw, 80px);
+      font-weight: 300;
+      letter-spacing: -3px;
+      color: #5e1f04;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .stat-cell__num em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .stat-cell__label {
+      font-size: 15px;
+      font-weight: 500;
+      color: #7a2300;
+      margin-bottom: 8px;
+    }
+    .stat-cell__desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #a04020;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       10. USE CASE SPLIT
+    ═══════════════════════════════════════════════════════ */
+    .usecase {
+      background: var(--bg);
+      padding: var(--section-y) 0;
+    }
+    .usecase__hd {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .usecase__h2 {
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 400;
+      letter-spacing: -1.5px;
+      color: var(--text-head);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.1;
+    }
+    .usecase__split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .uc-panel {
+      border-radius: var(--radius-lg);
+      padding: 52px 48px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .uc-panel--accent {
+      background: var(--bg-papaya);
+      border-color: #f4b898;
+    }
+    .uc-panel--plain { background: var(--bg-subtle); }
+    .uc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+    .uc-badge--accent { background: var(--accent); color: #fff; }
+    .uc-badge--plain { background: var(--border); color: var(--text-body); }
+    .uc-title {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+    .uc-panel--accent .uc-title { color: #3d1000; }
+    .uc-panel--plain .uc-title { color: var(--text-head); }
+    .uc-desc {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .uc-panel--accent .uc-desc { color: #7a2300; }
+    .uc-panel--plain .uc-desc { color: var(--text-body); }
+    .uc-list { display: flex; flex-direction: column; gap: 12px; }
+    .uc-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .uc-panel--accent .uc-item { color: #7a2300; }
+    .uc-panel--plain .uc-item { color: var(--text-body); }
+    .uc-check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .uc-panel--accent .uc-check { background: rgba(255,255,255,0.5); color: var(--accent); }
+    .uc-panel--plain .uc-check { background: var(--bg-papaya); color: var(--accent); }
+    .uc-cta { margin-top: auto; padding-top: 8px; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       11. VALIDATION SHOWCASE
+    ═══════════════════════════════════════════════════════ */
+    .validation {
+      background: var(--bg-warm);
+      padding: var(--section-y) 0;
+    }
+    .validation__inner {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .validation__sticky {
+      position: sticky;
+      top: 100px;
+    }
+    .validation__h2 {
+      font-size: clamp(32px, 3.2vw, 44px);
+      font-weight: 400;
+      letter-spacing: -1px;
+      color: var(--text-head);
+      margin: 16px 0 20px;
+      line-height: 1.15;
+    }
+    .validation__p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text-body);
+      margin-bottom: 40px;
+    }
+    .v-stats { display: flex; flex-direction: column; gap: 0; }
+    .v-stat {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .v-stat:last-child { border-bottom: none; }
+    .v-stat__num {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+    .v-stat__txt {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.5;
+    }
+    /* Cards column */
+    .validation__cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .v-card {
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .v-card__img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #0a0a0a;
+    }
+    .v-card__body { padding: 20px 24px 16px; }
+    .v-card__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .v-card__label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-head);
+    }
+    .v-card__count {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--bg-papaya);
+      border: 1px solid #f4b898;
+      border-radius: 100px;
+      padding: 3px 12px;
+    }
+    .v-card__tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .v-tag {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--bg-warm);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 8px;
+      letter-spacing: 0.5px;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       12. APPLICATION TIERS
+    ═══════════════════════════════════════════════════════ */
+    .tiers {
+      background: var(--bg);
+      padding: var(--section-y) 0;
+    }
+    .tiers__hd {
+      max-width: 640px;
+      margin: 0 auto 72px;
+      text-align: center;
+    }
+    .tiers__h2 {
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 400;
+      letter-spacing: -1.5px;
+      color: var(--text-head);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .tiers__sub {
+      font-size: 17px;
+      color: var(--text-body);
+      line-height: 1.65;
+    }
+    .tiers__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .tier {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 44px 40px;
+      background: var(--bg-subtle);
+      position: relative;
+      overflow: hidden;
+    }
+    .tier--active {
+      background: var(--bg);
+      border-color: #e8e6e1;
+      box-shadow: var(--shadow-md);
+    }
+    .tier__status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 100px;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .tier__status--ready { background: #dcfce7; color: #166534; }
+    .tier__status--soon  { background: #fef9c3; color: #854d0e; }
+    .tier__status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .tier__num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .tier__title {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      color: var(--text-head);
+      margin-bottom: 14px;
+    }
+    .tier__desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-body);
+      margin-bottom: 32px;
+    }
+    .tier__feats { display: flex; flex-direction: column; gap: 10px; }
+    .tier__feat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-body);
+    }
+    .tier__feat-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .tier__feat--dim { color: #bbb; }
+    .tier__feat--dim .tier__feat-dot { background: #ccc; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       13. TRUST / COMMUNITY
+    ═══════════════════════════════════════════════════════ */
+    .trust {
+      background: var(--bg-warm);
+      padding: var(--section-y) 0;
+    }
+    .trust__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .trust__h2 {
+      font-size: clamp(32px, 3.2vw, 44px);
+      font-weight: 400;
+      letter-spacing: -1px;
+      color: var(--text-head);
+      margin: 16px 0 20px;
+      line-height: 1.15;
+    }
+    .trust__p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text-body);
+      margin-bottom: 32px;
+    }
+    .trust__badges { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tbadge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-body);
+      box-shadow: var(--shadow-sm);
+    }
+    .tbadge-icon {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: #dcfce7;
+      border: 1px solid #bbf7d0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px;
+      font-weight: 800;
+      color: #166534;
+      flex-shrink: 0;
+    }
+    .trust__quad {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .t-stat {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .t-stat__num {
+      font-size: 44px;
+      font-weight: 300;
+      letter-spacing: -2px;
+      color: var(--text-head);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .t-stat__label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-body);
+    }
+    .t-stat__sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       14. FINAL CTA
+    ═══════════════════════════════════════════════════════ */
+    .cta-sec {
+      background: var(--bg);
+      padding: var(--section-y) 0;
+    }
+    .cta-sec__inner {
+      background: var(--bg-papaya);
+      border: 1px solid #f4b898;
+      border-radius: 24px;
+      padding: 100px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decorative circle */
+    .cta-sec__inner::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,78,11,0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-sec__inner::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,78,11,0.1), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-sec__content { position: relative; z-index: 1; }
+    .cta-sec__h2 {
+      font-size: clamp(36px, 4.5vw, 60px);
+      font-weight: 400;
+      letter-spacing: -2px;
+      color: #3d1000;
+      max-width: 720px;
+      margin: 16px auto 20px;
+      line-height: 1.08;
+    }
+    .cta-sec__sub {
+      font-size: 18px;
+      color: #7a2300;
+      max-width: 480px;
+      margin: 0 auto 44px;
+      line-height: 1.65;
+    }
+    .cta-sec__btns {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 60px;
+    }
+    .cta-sec .btn-primary { background: #3d1000; border-color: #3d1000; }
+    .cta-sec .btn-primary:hover { background: #5e1f04; border-color: #5e1f04; }
+    .cta-sec .btn-ghost { border-color: rgba(61,16,0,0.25); color: #3d1000; }
+    .cta-sec .btn-ghost:hover { border-color: rgba(61,16,0,0.5); background: rgba(61,16,0,0.05); }
+    .cta-sec__teams {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #a04020;
+      margin-bottom: 20px;
+    }
+    .cta-sec__logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 44px;
+      flex-wrap: wrap;
+    }
+    .cta-sec__logo {
+      font-size: 16px;
+      font-weight: 600;
+      color: rgba(61,16,0,0.3);
+      letter-spacing: -0.2px;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════ */
+    .footer {
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border);
+      padding: 72px 0 40px;
+    }
+    .footer__main {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 64px;
+    }
+    .footer__logo img { height: 19px; margin-bottom: 16px; }
+    .footer__tagline {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 240px;
+    }
+    .footer__col-hd {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .footer__links { display: flex; flex-direction: column; gap: 10px; }
+    .footer__links a {
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: color 0.15s;
+    }
+    .footer__links a:hover { color: var(--text-head); }
+    .footer__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .footer__legal { font-size: 12px; color: var(--text-muted); }
+    .footer__bot-links { display: flex; gap: 24px; }
+    .footer__bot-links a {
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: color 0.15s;
+    }
+    .footer__bot-links a:hover { color: var(--text-head); }
+
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .wrap { padding: 0 40px; }
+      .hero { padding: 80px 40px 0; }
+      .showcase__header { padding: 0 40px; }
+      .stats__grid { grid-template-columns: 1fr 1fr; }
+      .pipeline__grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .pipeline__step::after { display: none; }
+      .footer__main { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      :root { --section-y: 80px; }
+      .wrap { padding: 0 24px; }
+      .hero { padding: 72px 24px 0; }
+      .hero__stats { flex-direction: column; border: none; gap: 0; }
+      .hero__stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .nav__links { display: none; }
+      .mission__inner,
+      .code-sec__inner,
+      .usecase__split,
+      .validation__inner,
+      .trust__inner { grid-template-columns: 1fr; gap: 48px; }
+      .mission__quote { position: static; }
+      .validation__sticky { position: static; }
+      .tiers__grid { grid-template-columns: 1fr; }
+      .stats__grid { grid-template-columns: 1fr 1fr; }
+      .pipeline__grid { grid-template-columns: 1fr; }
+      .footer__main { grid-template-columns: 1fr; gap: 36px; }
+      .footer__bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .cta-sec__inner { padding: 60px 32px; }
+      .cta-sec__btns { flex-direction: column; align-items: center; }
+      .showcase__header { padding: 0 24px; }
+    }
+
+  </style>
+</head>
+<body>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     1. NAVBAR
+═══════════════════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="wrap">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#">
+        <img src="../assets/logos/Horizontal Light.svg" alt="imagine.io">
+      </a>
+      <ul class="nav__links">
+        <li><a href="#">Robotics</a></li>
+        <li><a href="#">Foundation Models</a></li>
+        <li><a href="#">Data</a></li>
+        <li><a href="#">Company</a></li>
+      </ul>
+      <div class="nav__cta">
+        <a href="#" class="btn btn-ghost">Talk to Sales</a>
+        <a href="#" class="btn btn-primary">Request Access</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     2. HERO
+═══════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__content">
+    <div class="hero__tag">
+      <span class="hero__tag-dot"></span>
+      Physical AI Training Data
+    </div>
+    <h1 class="hero__h1">The data layer for<br><em>Physical AI</em></h1>
+    <p class="hero__sub">imagine.io turns structured product data into simulation-ready environments — at scale, in minutes, with the metadata your models need.</p>
+    <div class="hero__cta">
+      <a href="#" class="btn btn-primary btn-lg">Request Access</a>
+      <a href="#" class="btn btn-ghost btn-lg">Talk to Sales</a>
+    </div>
+  </div>
+  <div class="wrap" style="width:100%; position:relative; z-index:1;">
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <div class="hero__stat-val">6+</div>
+        <div class="hero__stat-lbl">Years in Production</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-val">1M+</div>
+        <div class="hero__stat-lbl">Outputs / Month</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-val">25K+</div>
+        <div class="hero__stat-lbl">Structured Products</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-val">10,000×</div>
+        <div class="hero__stat-lbl">Variation Multiplier</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-val">SOC 2</div>
+        <div class="hero__stat-lbl">Type II Certified</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     3. PAIN MARQUEE
+═══════════════════════════════════════════════════════ -->
+<div class="pain">
+  <div class="pain__track-wrap">
+    <!-- Track doubled for seamless loop -->
+    <div class="pain__track">
+      <span class="pain__pill"><span class="pain__dot"></span>Simulation environments take months to build manually</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Sim-to-real gap invalidates months of training</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Physics-inaccurate assets break policy generalisation</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Manual annotation at scale is cost-prohibitive</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Proprietary CAD files aren't sim-ready out of the box</span>
+      <span class="pain__pill"><span class="pain__dot"></span>No structured variation means overfitted policies</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Real-world data collection is slow and expensive</span>
+      <span class="pain__pill"><span class="pain__dot"></span>No metadata means no reproducible training runs</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Scene setup slows every iteration cycle</span>
+      <!-- Duplicate for loop -->
+      <span class="pain__pill"><span class="pain__dot"></span>Simulation environments take months to build manually</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Sim-to-real gap invalidates months of training</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Physics-inaccurate assets break policy generalisation</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Manual annotation at scale is cost-prohibitive</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Proprietary CAD files aren't sim-ready out of the box</span>
+      <span class="pain__pill"><span class="pain__dot"></span>No structured variation means overfitted policies</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Real-world data collection is slow and expensive</span>
+      <span class="pain__pill"><span class="pain__dot"></span>No metadata means no reproducible training runs</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Scene setup slows every iteration cycle</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     4. SOCIAL PROOF
+═══════════════════════════════════════════════════════ -->
+<section class="proof">
+  <div class="wrap">
+    <p class="proof__label">Works seamlessly with your stack</p>
+    <div class="proof__logos">
+      <span class="proof__logo">NVIDIA</span>
+      <span class="proof__logo">Isaac<span> Sim</span></span>
+      <span class="proof__logo">Open<span>USD</span></span>
+      <span class="proof__logo">MuJoCo</span>
+      <span class="proof__logo">Unreal<span> Engine</span></span>
+      <span class="proof__logo">Unity</span>
+      <span class="proof__logo">Gazebo</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     5. ASSET SHOWCASE MARQUEE
+═══════════════════════════════════════════════════════ -->
+<section class="showcase">
+  <div class="showcase__header">
+    <span class="kicker">Asset Library</span>
+    <h2 class="showcase__h2">25,000+ structured environments. Ready for simulation.</h2>
+  </div>
+  <div class="showcase__rows">
+
+    <!-- Row 1 → scrolls left -->
+    <div class="mq">
+      <div class="mq__track">
+        <!-- Set A -->
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Kitchen Environments</p>
+            <p class="asset-card__count">5,200+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Warehouse / Industrial</p>
+            <p class="asset-card__count">3,400+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Office Spaces</p>
+            <p class="asset-card__count">2,900+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Outdoor / Urban</p>
+            <p class="asset-card__count">4,100+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Manufacturing Floors</p>
+            <p class="asset-card__count">1,900+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Retail Spaces</p>
+            <p class="asset-card__count">2,600+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Healthcare Facilities</p>
+            <p class="asset-card__count">1,700+ scenes</p>
+          </div>
+        </div>
+        <!-- Set B (duplicate) -->
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Kitchen Environments</p>
+            <p class="asset-card__count">5,200+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Warehouse / Industrial</p>
+            <p class="asset-card__count">3,400+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Office Spaces</p>
+            <p class="asset-card__count">2,900+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Outdoor / Urban</p>
+            <p class="asset-card__count">4,100+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Manufacturing Floors</p>
+            <p class="asset-card__count">1,900+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Retail Spaces</p>
+            <p class="asset-card__count">2,600+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Healthcare Facilities</p>
+            <p class="asset-card__count">1,700+ scenes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2 → scrolls right -->
+    <div class="mq">
+      <div class="mq__track mq__track--rev">
+        <!-- Set A -->
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Residential Interiors</p>
+            <p class="asset-card__count">3,800+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Logistics / Fulfilment</p>
+            <p class="asset-card__count">2,200+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Laboratory / Research</p>
+            <p class="asset-card__count">1,400+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Automotive / Garage</p>
+            <p class="asset-card__count">1,800+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Outdoor Gardens</p>
+            <p class="asset-card__count">2,100+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Commercial Kitchens</p>
+            <p class="asset-card__count">1,600+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Hospital Corridors</p>
+            <p class="asset-card__count">1,100+ scenes</p>
+          </div>
+        </div>
+        <!-- Set B (duplicate) -->
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Residential Interiors</p>
+            <p class="asset-card__count">3,800+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Logistics / Fulfilment</p>
+            <p class="asset-card__count">2,200+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Laboratory / Research</p>
+            <p class="asset-card__count">1,400+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Automotive / Garage</p>
+            <p class="asset-card__count">1,800+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Outdoor Gardens</p>
+            <p class="asset-card__count">2,100+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Commercial Kitchens</p>
+            <p class="asset-card__count">1,600+ scenes</p>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-card__img ph"></div>
+          <div class="asset-card__body">
+            <p class="asset-card__label">Hospital Corridors</p>
+            <p class="asset-card__count">1,100+ scenes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     6. MISSION
+═══════════════════════════════════════════════════════ -->
+<section class="mission">
+  <div class="wrap">
+    <div class="mission__inner">
+      <h2 class="mission__quote">Physical AI is <em>data-limited,</em> not model-limited.<br>We built imagine.io to fix that.</h2>
+      <div class="mission__right">
+        <p class="mission__p">Robotics and foundation model teams don't need better architectures — they need better data. Data that is physics-accurate, richly annotated, and ready to load into your simulator in under five minutes.</p>
+        <p class="mission__p">imagine.io has been building this infrastructure for six years. Not a research project. A production system processing over one million outputs every month for the teams pushing Physical AI forward.</p>
+        <div class="mission__list">
+          <div class="mission__item">
+            <span class="mission__item-dot"></span>
+            <span>Structured product graph — not scanning, not procedural generation</span>
+          </div>
+          <div class="mission__item">
+            <span class="mission__item-dot"></span>
+            <span>150+ metadata attributes per object: physics, semantics, geometry</span>
+          </div>
+          <div class="mission__item">
+            <span class="mission__item-dot"></span>
+            <span>One environment generates 10,000+ training variants via parametric control</span>
+          </div>
+          <div class="mission__item">
+            <span class="mission__item-dot"></span>
+            <span>SOC 2 Type II certified — enterprise-grade security from day one</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     7. CODE DEMO
+═══════════════════════════════════════════════════════ -->
+<section class="code-sec">
+  <div class="wrap">
+    <div class="code-sec__inner">
+      <div>
+        <span class="kicker">Developer API</span>
+        <h2 class="code-sec__h2">Integrate in minutes. Train at scale.</h2>
+        <p class="code-sec__p">Query any environment, generate thousands of variations, and export directly to your simulator — all from a single Python call. imagine.io slots into your existing training pipeline without friction.</p>
+        <div class="code-feats">
+          <div class="code-feat">
+            <span class="code-feat-icon">→</span>
+            <span>Python SDK with async batch generation support</span>
+          </div>
+          <div class="code-feat">
+            <span class="code-feat-icon">→</span>
+            <span>Native export to Isaac Sim, MuJoCo, and OpenUSD</span>
+          </div>
+          <div class="code-feat">
+            <span class="code-feat-icon">→</span>
+            <span>Parametric variation — lighting, layout, materials, physics</span>
+          </div>
+          <div class="code-feat">
+            <span class="code-feat-icon">→</span>
+            <span>Environments ready in &lt;5 minutes from query to simulator</span>
+          </div>
+        </div>
+      </div>
+      <div class="codeblock">
+        <div class="codeblock__bar">
+          <span class="codeblock__btn codeblock__btn--r"></span>
+          <span class="codeblock__btn codeblock__btn--a"></span>
+          <span class="codeblock__btn codeblock__btn--g"></span>
+          <span class="codeblock__fn">train_pipeline.py</span>
+        </div>
+        <pre><span class="t-kw">import</span> <span class="t-fn">imagineo</span>
+
+<span class="t-cmt"># Initialise client</span>
+client = <span class="t-fn">imagineo</span>.<span class="t-fn">Client</span>(api_key=<span class="t-str">"YOUR_API_KEY"</span>)
+
+<span class="t-cmt"># Query sim-ready environments</span>
+envs = client.<span class="t-fn">environments</span>.<span class="t-fn">query</span>(
+    category=<span class="t-str">"kitchen"</span>,
+    sim_ready=<span class="t-kw">True</span>,
+    export_format=<span class="t-str">"usd"</span>
+)
+
+<span class="t-cmt"># Generate 10,000× variations</span>
+batch = client.<span class="t-fn">generate</span>(
+    environment_id=envs[<span class="t-num">0</span>].id,
+    count=<span class="t-num">10_000</span>,
+    params={
+        <span class="t-key">"lighting"</span>: <span class="t-str">"randomized"</span>,
+        <span class="t-key">"layout"</span>:   <span class="t-str">"parametric"</span>,
+        <span class="t-key">"materials"</span>: <span class="t-str">"varied"</span>,
+    }
+)
+
+<span class="t-cmt"># Export to NVIDIA Isaac Sim</span>
+client.<span class="t-fn">export</span>(batch, target=<span class="t-str">"isaac_sim"</span>)
+<span class="t-cmt"># ✓ Ready in &lt; 5 minutes</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     8. PIPELINE
+═══════════════════════════════════════════════════════ -->
+<section class="pipeline">
+  <div class="wrap">
+    <div class="pipeline__hd">
+      <span class="kicker">How it works</span>
+      <h2 class="pipeline__h2">From structured data to sim-ready environments in five steps</h2>
+    </div>
+    <div class="pipeline__grid">
+      <div class="pipeline__step">
+        <div class="pipeline__num">Step 01</div>
+        <h3 class="pipeline__title">Ingest</h3>
+        <p class="pipeline__desc">Structured product data enters via API, batch upload, or direct integration with your existing catalogue systems.</p>
+      </div>
+      <div class="pipeline__step">
+        <div class="pipeline__num">Step 02</div>
+        <h3 class="pipeline__title">Normalise</h3>
+        <p class="pipeline__desc">Every asset is normalised to a unified product graph — geometry, semantics, physics, and 150+ metadata attributes.</p>
+      </div>
+      <div class="pipeline__step">
+        <div class="pipeline__num">Step 03</div>
+        <h3 class="pipeline__title">Augment</h3>
+        <p class="pipeline__desc">Parametric variation engine generates up to 10,000× variants per environment across lighting, material, and layout.</p>
+      </div>
+      <div class="pipeline__step">
+        <div class="pipeline__num">Step 04</div>
+        <h3 class="pipeline__title">Validate</h3>
+        <p class="pipeline__desc">Every output passes physics integrity checks, collision validation, and semantic labelling verification.</p>
+      </div>
+      <div class="pipeline__step">
+        <div class="pipeline__num">Step 05</div>
+        <h3 class="pipeline__title">Deploy</h3>
+        <p class="pipeline__desc">Export to Isaac Sim, MuJoCo, Unreal, or OpenUSD. Load time under 5 minutes. No manual scene setup.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     9. STATS
+═══════════════════════════════════════════════════════ -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats__header">
+      <span class="kicker" style="color:#a04020">
+        <span style="background:#a04020; display:inline-block; width:20px; height:2px; border-radius:2px; vertical-align:middle; margin-right:8px;"></span>
+        By the numbers
+      </span>
+      <h2 class="stats__h2">Scale and quality that frontier teams depend on</h2>
+    </div>
+    <div class="stats__grid">
+      <div class="stat-cell">
+        <div class="stat-cell__num">1<em>M+</em></div>
+        <p class="stat-cell__label">Outputs per month</p>
+        <p class="stat-cell__desc">10× more than the nearest competitor. Production infrastructure running since 2018.</p>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell__num">10<em>K×</em></div>
+        <p class="stat-cell__label">Variation multiplier</p>
+        <p class="stat-cell__desc">One structured environment → up to 10,000 unique training variants via parametric control.</p>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell__num">150<em>+</em></div>
+        <p class="stat-cell__label">Metadata attributes</p>
+        <p class="stat-cell__desc">Geometry, semantics, physics, collision, instance IDs, and parent-child hierarchies — fully tagged.</p>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell__num">&lt;<em>5</em></div>
+        <p class="stat-cell__label">Minutes to Isaac Sim</p>
+        <p class="stat-cell__desc">From API query to simulator-ready environment. No manual scene setup. No format conversion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     10. USE CASE SPLIT
+═══════════════════════════════════════════════════════ -->
+<section class="usecase">
+  <div class="wrap">
+    <div class="usecase__hd">
+      <span class="kicker">Built for your team</span>
+      <h2 class="usecase__h2">Whether you're training robots or foundation models</h2>
+    </div>
+    <div class="usecase__split">
+
+      <!-- Robotics -->
+      <div class="uc-panel uc-panel--accent">
+        <span class="uc-badge uc-badge--accent">Robotics Teams</span>
+        <h3 class="uc-title">Train manipulation, navigation, and perception policies faster</h3>
+        <p class="uc-desc">Get physics-accurate environments with collision meshes, joint limits, and multi-body articulation — ready for sim-to-real transfer without the hand-tuning.</p>
+        <div class="uc-list">
+          <div class="uc-item"><span class="uc-check">✓</span><span>USD Physics joints, mass, density, and friction properties</span></div>
+          <div class="uc-item"><span class="uc-check">✓</span><span>Native Isaac Sim, MuJoCo, and Gazebo export</span></div>
+          <div class="uc-item"><span class="uc-check">✓</span><span>Parametric scene variation for domain randomisation</span></div>
+          <div class="uc-item"><span class="uc-check">✓</span><span>100K+ labeled frames per environment included</span></div>
+          <div class="uc-item"><span class="uc-check">✓</span><span>Perception, Navigation, and Manipulation task environments</span></div>
+        </div>
+        <div class="uc-cta">
+          <a href="#" class="btn btn-primary">Explore Robotics Data →</a>
+        </div>
+      </div>
+
+      <!-- Foundation Models -->
+      <div class="uc-panel uc-panel--plain">
+        <span class="uc-badge uc-badge--plain">Foundation Model Teams</span>
+        <h3 class="uc-title">Build world models on structured, semantically-rich scene data</h3>
+        <p class="uc-desc">Semantically-dense environments with instance segmentation, object hierarchies, and 30+ class labels per scene — the structured input your world models need at scale.</p>
+        <div class="uc-list">
+          <div class="uc-item"><span class="uc-check">✓</span><span>30+ semantic classes per scene with instance IDs</span></div>
+          <div class="uc-item"><span class="uc-check">✓</span><span>Parent-child object hierarchies for relational reasoning</span></div>
+          <div class="uc-item"><span class="uc-check">✓</span><span>10K+ lighting and material combinations per environment</span></div>
+          <div class="uc-item"><span class="uc-check">✓</span><span>OpenUSD and JSON export with full metadata</span></div>
+          <div class="uc-item"><span class="uc-check">✓</span><span>Structured product graph — not scanning, not procedural noise</span></div>
+        </div>
+        <div class="uc-cta">
+          <a href="#" class="btn btn-ghost">Explore Foundation Model Data →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     11. VALIDATION SHOWCASE
+═══════════════════════════════════════════════════════ -->
+<section class="validation">
+  <div class="wrap">
+    <div class="validation__inner">
+      <div class="validation__sticky">
+        <span class="kicker">Quality at Scale</span>
+        <h2 class="validation__h2">Every asset. Every variant. Validated.</h2>
+        <p class="validation__p">imagine.io doesn't just generate data — it validates it. Every environment and variant passes physics integrity checks, semantic labelling verification, and collision mesh validation before entering your pipeline.</p>
+        <div class="v-stats">
+          <div class="v-stat">
+            <span class="v-stat__num">5K+</span>
+            <span class="v-stat__txt">Fully tagged structured environments ready for sim</span>
+          </div>
+          <div class="v-stat">
+            <span class="v-stat__num">30+</span>
+            <span class="v-stat__txt">Semantic classes per scene with instance-level annotations</span>
+          </div>
+          <div class="v-stat">
+            <span class="v-stat__num">100K+</span>
+            <span class="v-stat__txt">Labeled frames included per environment</span>
+          </div>
+          <div class="v-stat">
+            <span class="v-stat__num">150+</span>
+            <span class="v-stat__txt">Metadata attributes on every object in every scene</span>
+          </div>
+        </div>
+      </div>
+      <div class="validation__cards">
+        <div class="v-card">
+          <div class="v-card__img ph"></div>
+          <div class="v-card__body">
+            <div class="v-card__row">
+              <span class="v-card__label">Kitchen — Counter Manipulation</span>
+              <span class="v-card__count">3,831+ variants</span>
+            </div>
+            <div class="v-card__tags">
+              <span class="v-tag">USD Physics</span>
+              <span class="v-tag">Collision Mesh</span>
+              <span class="v-tag">Semantics</span>
+              <span class="v-tag">Isaac Sim Ready</span>
+            </div>
+          </div>
+        </div>
+        <div class="v-card">
+          <div class="v-card__img ph"></div>
+          <div class="v-card__body">
+            <div class="v-card__row">
+              <span class="v-card__label">Warehouse — Shelf Pick Task</span>
+              <span class="v-card__count">2,853+ variants</span>
+            </div>
+            <div class="v-card__tags">
+              <span class="v-tag">USD Physics</span>
+              <span class="v-tag">Multi-body</span>
+              <span class="v-tag">Semantics</span>
+              <span class="v-tag">MuJoCo Ready</span>
+            </div>
+          </div>
+        </div>
+        <div class="v-card">
+          <div class="v-card__img ph"></div>
+          <div class="v-card__body">
+            <div class="v-card__row">
+              <span class="v-card__label">Office — Desk Manipulation</span>
+              <span class="v-card__count">2,410+ variants</span>
+            </div>
+            <div class="v-card__tags">
+              <span class="v-tag">USD Physics</span>
+              <span class="v-tag">Collision Mesh</span>
+              <span class="v-tag">30+ Classes</span>
+              <span class="v-tag">OpenUSD</span>
+            </div>
+          </div>
+        </div>
+        <div class="v-card">
+          <div class="v-card__img ph"></div>
+          <div class="v-card__body">
+            <div class="v-card__row">
+              <span class="v-card__label">Industrial — Assembly Line</span>
+              <span class="v-card__count">1,920+ variants</span>
+            </div>
+            <div class="v-card__tags">
+              <span class="v-tag">Multi-body</span>
+              <span class="v-tag">Joint Limits</span>
+              <span class="v-tag">Physics</span>
+              <span class="v-tag">Isaac Sim Ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     12. APPLICATION TIERS
+═══════════════════════════════════════════════════════ -->
+<section class="tiers">
+  <div class="wrap">
+    <div class="tiers__hd">
+      <span class="kicker">Capability Roadmap</span>
+      <h2 class="tiers__h2">Built for every stage of your Physical AI pipeline</h2>
+      <p class="tiers__sub">The only data provider with a published capability roadmap. Know exactly what you can build today — and what's coming next.</p>
+    </div>
+    <div class="tiers__grid">
+
+      <div class="tier tier--active">
+        <span class="tier__status tier__status--ready">
+          <span class="tier__status-dot"></span>Available Now
+        </span>
+        <p class="tier__num">Tier 01</p>
+        <h3 class="tier__title">Perception</h3>
+        <p class="tier__desc">Object detection, instance segmentation, and visual recognition training. Dense, structured environments with 30+ semantic classes.</p>
+        <div class="tier__feats">
+          <div class="tier__feat"><span class="tier__feat-dot"></span><span>30+ semantic class labels per scene</span></div>
+          <div class="tier__feat"><span class="tier__feat-dot"></span><span>Instance IDs and parent-child hierarchies</span></div>
+          <div class="tier__feat"><span class="tier__feat-dot"></span><span>100K+ labeled frames per environment</span></div>
+          <div class="tier__feat"><span class="tier__feat-dot"></span><span>10K+ lighting and material variations</span></div>
+        </div>
+      </div>
+
+      <div class="tier tier--active">
+        <span class="tier__status tier__status--ready">
+          <span class="tier__status-dot"></span>Available Now
+        </span>
+        <p class="tier__num">Tier 02</p>
+        <h3 class="tier__title">Navigation</h3>
+        <p class="tier__desc">Mobile robot navigation across structured indoor and outdoor environments with traversability and obstacle metadata.</p>
+        <div class="tier__feats">
+          <div class="tier__feat"><span class="tier__feat-dot"></span><span>Collision meshes and traversability maps</span></div>
+          <div class="tier__feat"><span class="tier__feat-dot"></span><span>Occupancy grids and floor plan annotations</span></div>
+          <div class="tier__feat"><span class="tier__feat-dot"></span><span>Parametric obstacle placement and density</span></div>
+          <div class="tier__feat"><span class="tier__feat-dot"></span><span>Isaac Sim and Gazebo ready out of the box</span></div>
+        </div>
+      </div>
+
+      <div class="tier">
+        <span class="tier__status tier__status--soon">
+          <span class="tier__status-dot"></span>On Roadmap
+        </span>
+        <p class="tier__num">Tier 03</p>
+        <h3 class="tier__title">Manipulation</h3>
+        <p class="tier__desc">Full contact-rich manipulation data — articulated objects, grasping surfaces, deformable materials, and dexterous task environments.</p>
+        <div class="tier__feats">
+          <div class="tier__feat"><span class="tier__feat-dot"></span><span>USD Physics articulated joint parameters</span></div>
+          <div class="tier__feat"><span class="tier__feat-dot"></span><span>Mass, density, friction, and contact geometry</span></div>
+          <div class="tier__feat tier__feat--dim"><span class="tier__feat-dot"></span><span>Deformable object support — coming soon</span></div>
+          <div class="tier__feat tier__feat--dim"><span class="tier__feat-dot"></span><span>Grasping surface annotations — coming soon</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     13. TRUST
+═══════════════════════════════════════════════════════ -->
+<section class="trust">
+  <div class="wrap">
+    <div class="trust__inner">
+      <div>
+        <span class="kicker kicker--muted">Trust &amp; Compliance</span>
+        <h2 class="trust__h2">Six years in production. Enterprise-grade from day one.</h2>
+        <p class="trust__p">imagine.io has been processing structured product data and generating simulation environments since 2018 — building the production infrastructure, data quality systems, and compliance frameworks that enterprise robotics teams require.</p>
+        <div class="trust__badges">
+          <span class="tbadge"><span class="tbadge-icon">✓</span>SOC 2 Type II Certified</span>
+          <span class="tbadge"><span class="tbadge-icon">✓</span>Not a research project</span>
+          <span class="tbadge"><span class="tbadge-icon">✓</span>NVIDIA Ecosystem Partner</span>
+          <span class="tbadge"><span class="tbadge-icon">✓</span>Physics validation on every asset</span>
+          <span class="tbadge"><span class="tbadge-icon">✓</span>Enterprise SLA available</span>
+        </div>
+      </div>
+      <div class="trust__quad">
+        <div class="t-stat">
+          <div class="t-stat__num">6+</div>
+          <p class="t-stat__label">Years in production</p>
+          <p class="t-stat__sub">Running since 2018</p>
+        </div>
+        <div class="t-stat">
+          <div class="t-stat__num">1M+</div>
+          <p class="t-stat__label">Outputs per month</p>
+          <p class="t-stat__sub">At scale, continuously</p>
+        </div>
+        <div class="t-stat">
+          <div class="t-stat__num">25K+</div>
+          <p class="t-stat__label">Structured products</p>
+          <p class="t-stat__sub">In the product graph</p>
+        </div>
+        <div class="t-stat">
+          <div class="t-stat__num">5K+</div>
+          <p class="t-stat__label">Tagged environments</p>
+          <p class="t-stat__sub">Validated and sim-ready</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     14. FINAL CTA
+═══════════════════════════════════════════════════════ -->
+<section class="cta-sec">
+  <div class="wrap">
+    <div class="cta-sec__inner">
+      <div class="cta-sec__content">
+        <span class="kicker" style="color:#a04020; justify-content:center;">
+          <span style="background:#a04020; display:inline-block; width:20px; height:2px; border-radius:2px;"></span>
+          Get started
+        </span>
+        <h2 class="cta-sec__h2">Join the teams building Physical AI on real data infrastructure</h2>
+        <p class="cta-sec__sub">Get access to 25,000+ structured environments, the Python SDK, and a dedicated onboarding session with the imagine.io team.</p>
+        <div class="cta-sec__btns">
+          <a href="#" class="btn btn-primary btn-lg">Request Access</a>
+          <a href="#" class="btn btn-ghost btn-lg">Talk to Sales</a>
+        </div>
+        <p class="cta-sec__teams">Trusted by teams at</p>
+        <div class="cta-sec__logos">
+          <span class="cta-sec__logo">NVIDIA</span>
+          <span class="cta-sec__logo">Amazon</span>
+          <span class="cta-sec__logo">Boston Dynamics</span>
+          <span class="cta-sec__logo">Microsoft</span>
+          <span class="cta-sec__logo">Figure AI</span>
+          <span class="cta-sec__logo">1X Technologies</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div>
+        <div class="footer__logo">
+          <img src="../assets/logos/Horizontal Light.svg" alt="imagine.io">
+        </div>
+        <p class="footer__tagline">The data layer for Physical AI. Structured environments for robotics and foundation model teams.</p>
+      </div>
+      <div>
+        <p class="footer__col-hd">Products</p>
+        <ul class="footer__links">
+          <li><a href="#">Robotics Data</a></li>
+          <li><a href="#">Foundation Model Data</a></li>
+          <li><a href="#">API &amp; SDK</a></li>
+          <li><a href="#">Simulation Exports</a></li>
+          <li><a href="#">Enterprise</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-hd">Use Cases</p>
+        <ul class="footer__links">
+          <li><a href="#">Manipulation</a></li>
+          <li><a href="#">Navigation</a></li>
+          <li><a href="#">Perception</a></li>
+          <li><a href="#">World Models</a></li>
+          <li><a href="#">Domain Randomisation</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-hd">Company</p>
+        <ul class="footer__links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__legal">© 2026 imagine.io. All rights reserved.</p>
+      <div class="footer__bot-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>

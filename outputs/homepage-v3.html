@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>imagine.io — The data layer for Physical AI</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+  <style>
+
+    /* ═══════════════════════════════════════════════════════
+       BASE
+    ═══════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:          #ffffff;
+      --bg-warm:     #f4f2ee;
+      --bg-subtle:   #faf9f7;
+      --border:      #e8e6e1;
+      --text-head:   #111111;
+      --text-body:   #555550;
+      --text-muted:  #999990;
+      --accent:      #ec4e0b;
+      --accent-dark: #bd3e09;
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   20px;
+      --section-y:   120px;
+    }
+
+    body {
+      font-family: var(--font), sans-serif;
+      background: var(--bg);
+      color: var(--text-body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 80px;
+    }
+
+    /* ─── Buttons ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font), sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      letter-spacing: 0.1px;
+    }
+    .btn-lg { padding: 11px 26px; font-size: 15px; }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-head);
+      border-color: var(--border);
+    }
+    .btn-ghost:hover { border-color: #aaa; background: var(--bg-subtle); }
+
+    /* ─── Bordered pill badge (replaces colored kickers) ─── */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    /* ─── Placeholder image ─── */
+    .ph {
+      background: var(--grey-100, #e5e5e5);
+      display: block;
+    }
+
+    /* ─── Material icon ─── */
+    .icon {
+      font-family: 'Material Symbols Outlined';
+      font-size: 20px;
+      font-style: normal;
+      line-height: 1;
+      user-select: none;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       1. NAVBAR
+    ═══════════════════════════════════════════════════════ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 40px;
+    }
+    .nav__logo img { height: 21px; width: auto; }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+    .nav__links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.15s;
+    }
+    .nav__links a:hover { color: var(--text-head); }
+    .nav__cta { display: flex; align-items: center; gap: 10px; }
+    .nav__cta .btn { padding: 9px 20px; font-size: 14px; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       2. HERO
+    ═══════════════════════════════════════════════════════ */
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 80px 0;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-warm);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, #c8c4bc 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, transparent, var(--bg-warm));
+      pointer-events: none;
+    }
+    .hero__content { position: relative; z-index: 1; max-width: 960px; }
+
+    /* Social proof above headline */
+    .hero__proof {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+    .hero__avatars {
+      display: flex;
+      align-items: center;
+    }
+    .hero__avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--bg-warm);
+      background: #ccc;
+      margin-left: -8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .hero__avatar:first-child { margin-left: 0; }
+    .hero__avatar--a { background: linear-gradient(135deg, #d4a882, #a87856); }
+    .hero__avatar--b { background: linear-gradient(135deg, #8ba4c8, #5674a0); }
+    .hero__avatar--c { background: linear-gradient(135deg, #a8c8a0, #6a9e64); }
+    .hero__avatar--d { background: linear-gradient(135deg, #c8a8d4, #9264a8); }
+    .hero__proof-txt {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-body);
+    }
+    .hero__proof-txt strong { color: var(--text-head); font-weight: 600; }
+
+    .hero__h1 {
+      font-size: clamp(56px, 7.5vw, 88px);
+      font-weight: 400;
+      line-height: 1.04;
+      letter-spacing: -3px;
+      color: var(--text-head);
+      margin-bottom: 28px;
+    }
+    .hero__h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero__sub {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-body);
+      max-width: 580px;
+      margin: 0 auto 44px;
+    }
+    .hero__cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 80px;
+    }
+    .hero__stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg);
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+    .hero__stat {
+      padding: 20px 40px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .hero__stat:last-child { border-right: none; }
+    .hero__stat-val {
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--text-head);
+      letter-spacing: -0.5px;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .hero__stat-lbl {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       3. PAIN MARQUEE
+    ═══════════════════════════════════════════════════════ */
+    .pain {
+      background: var(--bg);
+      padding: 26px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .pain__track-wrap { display: flex; overflow: hidden; }
+    .pain__track {
+      display: flex;
+      gap: 0;
+      animation: roll-left 55s linear infinite;
+      will-change: transform;
+      flex-shrink: 0;
+    }
+    .pain__pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 40px 0 0;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .pain__dot {
+      width: 16px;
+      height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+    @keyframes roll-left {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes roll-right {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       4. LOGO STRIP
+    ═══════════════════════════════════════════════════════ */
+    .proof {
+      background: var(--bg);
+      padding: 72px 0;
+    }
+    .proof__label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+    .proof__logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 56px;
+      flex-wrap: wrap;
+    }
+    .proof__logo {
+      font-size: 17px;
+      font-weight: 600;
+      color: #c0bdb5;
+      letter-spacing: -0.2px;
+      transition: color 0.2s;
+    }
+    .proof__logo:hover { color: #888; }
+    .proof__logo span { font-weight: 300; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       5. ASSET SHOWCASE MARQUEE
+    ═══════════════════════════════════════════════════════ */
+    .showcase {
+      background: var(--bg-warm);
+      padding: var(--section-y) 0;
+      overflow: hidden;
+    }
+    .showcase__header {
+      text-align: center;
+      margin-bottom: 64px;
+      padding: 0 80px;
+    }
+    .showcase__h2 {
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 400;
+      letter-spacing: -1.5px;
+      color: var(--text-head);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.1;
+    }
+    .showcase__rows { display: flex; flex-direction: column; gap: 16px; }
+    .mq { display: flex; overflow: hidden; }
+    .mq__track {
+      display: flex;
+      gap: 16px;
+      flex-shrink: 0;
+      animation: roll-left 38s linear infinite;
+      will-change: transform;
+    }
+    .mq__track--rev { animation: roll-right 42s linear infinite; }
+
+    /* Asset card — image-first with overlay labels */
+    .asset-card {
+      flex-shrink: 0;
+      width: 280px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.08);
+      position: relative;
+    }
+    .asset-card__img {
+      width: 280px;
+      height: 200px;
+      display: block;
+    }
+    /* Overlay labels on top of image */
+    .asset-card__overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 10px 14px;
+      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .asset-card__label {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.92);
+    }
+    .asset-card__count {
+      font-size: 11px;
+      color: rgba(255,255,255,0.65);
+      white-space: nowrap;
+    }
+    /* Verified badge top-right */
+    .asset-card__verified {
+      position: absolute;
+      top: 10px; right: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      padding: 3px 9px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #86efac;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .asset-card__verified-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #86efac;
+    }
+    /* Sim-ready badge top-left */
+    .asset-card__sim {
+      position: absolute;
+      top: 10px; left: 10px;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       6. MISSION
+    ═══════════════════════════════════════════════════════ */
+    .mission {
+      background: var(--bg);
+      padding: var(--section-y) 0;
+    }
+    .mission__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .mission__quote {
+      font-size: clamp(32px, 3.2vw, 44px);
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      color: var(--text-head);
+      position: sticky;
+      top: 100px;
+    }
+    .mission__quote em { font-style: normal; color: var(--accent); }
+    .mission__right { display: flex; flex-direction: column; gap: 28px; }
+    .mission__p { font-size: 17px; line-height: 1.75; color: var(--text-body); }
+    .mission__list { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+    .mission__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.55;
+    }
+    .mission__item .icon {
+      font-size: 18px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       7. CODE + ASSET — LAYERED SECTION
+    ═══════════════════════════════════════════════════════ */
+    .code-layer {
+      position: relative;
+      background: #0d0d0d;
+      overflow: hidden;
+      padding: var(--section-y) 0;
+    }
+    /* Full-bleed asset grid in background */
+    .code-layer__bg {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 3px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .code-layer__bg-tile { background: #1a1a1a; }
+    .code-layer__bg-tile:nth-child(odd) { background: #161616; }
+    /* Dark overlay gradient */
+    .code-layer__veil {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,0.7) 100%);
+      pointer-events: none;
+    }
+    .code-layer__inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 56px;
+    }
+    .code-layer__hd {
+      text-align: center;
+      max-width: 680px;
+    }
+    .code-layer__h2 {
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 400;
+      letter-spacing: -1.5px;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .code-layer__sub {
+      font-size: 17px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.55);
+    }
+    /* Code block */
+    .codeblock {
+      background: #161616;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+      width: 100%;
+      max-width: 680px;
+    }
+    .codeblock__bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 16px;
+      background: #1e1e1e;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .codeblock__btn { width: 10px; height: 10px; border-radius: 50%; }
+    .codeblock__btn--r { background: #ff5f57; }
+    .codeblock__btn--a { background: #febc2e; }
+    .codeblock__btn--g { background: #28c840; }
+    .codeblock__fn {
+      margin-left: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      font-family: 'SF Mono', 'IBM Plex Mono', monospace;
+    }
+    .codeblock pre {
+      padding: 28px;
+      font-family: 'SF Mono', 'IBM Plex Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.7);
+      overflow-x: auto;
+    }
+    .t-kw  { color: #c084fc; }
+    .t-str { color: #86efac; }
+    .t-cmt { color: rgba(255,255,255,0.22); font-style: italic; }
+    .t-fn  { color: #7dd3fc; }
+    .t-num { color: #fcd34d; }
+    .t-key { color: #fda4af; }
+    /* Feature grid below code */
+    .code-layer__feats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 4px;
+    }
+    .code-layer__feat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 0;
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .code-layer__feat:nth-child(odd) {
+      padding-right: 24px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .code-layer__feat:nth-child(even) {
+      padding-left: 24px;
+    }
+    .code-layer__feat .icon { font-size: 16px; color: var(--accent); flex-shrink: 0; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       8. PIPELINE INTRO (chapter title)
+    ═══════════════════════════════════════════════════════ */
+    .pipeline-intro {
+      background: var(--bg);
+      padding: var(--section-y) 0 60px;
+      text-align: center;
+    }
+    .pipeline-intro__h2 {
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 400;
+      letter-spacing: -2px;
+      color: var(--text-head);
+      line-height: 1.08;
+      max-width: 800px;
+      margin: 0 auto 20px;
+    }
+    .pipeline-intro__sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .pipeline-intro__sub em {
+      font-style: normal;
+      color: var(--text-body);
+      font-weight: 500;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       9. PIPELINE — VERTICAL STACKED ROWS
+    ═══════════════════════════════════════════════════════ */
+    .pipeline {
+      background: var(--bg);
+      padding: 0 0 var(--section-y);
+    }
+    .pipeline__list { border-top: 1px solid var(--border); }
+    .pipeline__row {
+      display: grid;
+      grid-template-columns: 80px 1fr 2fr;
+      gap: 0 60px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      transition: opacity 0.2s;
+    }
+    /* Progressive opacity — sequence effect */
+    .pipeline__row:nth-child(1) { opacity: 1; }
+    .pipeline__row:nth-child(2) { opacity: 0.72; }
+    .pipeline__row:nth-child(3) { opacity: 0.50; }
+    .pipeline__row:nth-child(4) { opacity: 0.33; }
+    .pipeline__row:nth-child(5) { opacity: 0.18; }
+    .pipeline__row:hover { opacity: 1 !important; }
+    .pipeline__num {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--accent);
+      padding-top: 4px;
+    }
+    .pipeline__title {
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--text-head);
+      letter-spacing: -0.3px;
+      padding-top: 2px;
+    }
+    .pipeline__desc {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-body);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       10. STATS
+    ═══════════════════════════════════════════════════════ */
+    .stats {
+      background: var(--bg-warm);
+      padding: var(--section-y) 0;
+    }
+    .stats__header {
+      margin-bottom: 72px;
+    }
+    .stats__h2 {
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 400;
+      letter-spacing: -1.5px;
+      color: var(--text-head);
+      max-width: 560px;
+      line-height: 1.1;
+      margin-top: 8px;
+    }
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .stat-cell {
+      padding: 48px 40px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-cell__num {
+      font-size: clamp(44px, 4vw, 60px);
+      font-weight: 300;
+      letter-spacing: -2px;
+      color: var(--text-head);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .stat-cell__num em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .stat-cell__label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-head);
+      margin-bottom: 8px;
+      letter-spacing: -0.1px;
+    }
+    .stat-cell__desc {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       11. USE CASE — IMAGE-FIRST CARDS
+    ═══════════════════════════════════════════════════════ */
+    .usecase {
+      background: var(--bg);
+      padding: var(--section-y) 0;
+    }
+    .usecase__hd {
+      max-width: 600px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+    .usecase__h2 {
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 400;
+      letter-spacing: -1.5px;
+      color: var(--text-head);
+      line-height: 1.1;
+    }
+    .usecase__cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .uc-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .uc-card__img {
+      width: 100%;
+      height: 480px;
+      display: block;
+    }
+    /* Bottom overlay on image card */
+    .uc-card__overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px 36px;
+      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+    }
+    .uc-card__type {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+    .uc-card__name {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      line-height: 1.15;
+    }
+    .uc-card__name .icon {
+      font-size: 24px;
+      color: rgba(255,255,255,0.5);
+      flex-shrink: 0;
+    }
+    /* Hover: subtle lift */
+    .uc-card:hover .uc-card__img { filter: brightness(1.08); }
+    .uc-card:hover .uc-card__name .icon { color: rgba(255,255,255,0.9); }
+    .uc-card__img { transition: filter 0.3s ease; }
+    /* Feature list below cards */
+    .usecase__details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .uc-detail {
+      background: var(--bg-warm);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 36px;
+    }
+    .uc-detail__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-head);
+      margin-bottom: 16px;
+      letter-spacing: -0.1px;
+    }
+    .uc-detail__list { display: flex; flex-direction: column; gap: 10px; }
+    .uc-detail__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.5;
+    }
+    .uc-detail__item .icon {
+      font-size: 16px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .uc-detail__cta { margin-top: 24px; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       12. VALIDATION SHOWCASE
+    ═══════════════════════════════════════════════════════ */
+    .validation {
+      background: var(--bg-warm);
+      padding: var(--section-y) 0;
+    }
+    .validation__inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .validation__sticky {
+      position: sticky;
+      top: 100px;
+    }
+    .validation__h2 {
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      letter-spacing: -1px;
+      color: var(--text-head);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .validation__p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text-body);
+      margin-bottom: 40px;
+    }
+    .v-stats { display: flex; flex-direction: column; gap: 20px; }
+    .v-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .v-stat__num {
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: -1px;
+      color: var(--text-head);
+      white-space: nowrap;
+    }
+    .v-stat__txt { font-size: 14px; color: var(--text-body); line-height: 1.5; }
+
+    /* Validation cards — image-first with overlay */
+    .validation__cards { display: flex; flex-direction: column; gap: 12px; }
+    .v-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.08);
+      position: relative;
+    }
+    .v-card__img {
+      width: 100%;
+      height: 200px;
+      display: block;
+    }
+    .v-card__overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+    }
+    .v-card__row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .v-card__label {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.92);
+    }
+    .v-card__count {
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      white-space: nowrap;
+    }
+    .v-card__tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .v-tag {
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 4px;
+      padding: 3px 8px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    /* Verified badge */
+    .v-card__verified {
+      position: absolute;
+      top: 12px; left: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(134,239,172,0.35);
+      border-radius: 100px;
+      padding: 4px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #86efac;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .v-card__verified .icon { font-size: 12px; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       13. APPLICATION TIERS — FLUSH RULED CARDS
+    ═══════════════════════════════════════════════════════ */
+    .tiers {
+      background: var(--bg);
+      padding: var(--section-y) 0;
+    }
+    .tiers__hd {
+      max-width: 640px;
+      margin: 0 auto 80px;
+      text-align: center;
+    }
+    .tiers__h2 {
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 400;
+      letter-spacing: -1.5px;
+      color: var(--text-head);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .tiers__sub {
+      font-size: 17px;
+      color: var(--text-body);
+      line-height: 1.65;
+    }
+    /* Flush ruled strip */
+    .tiers__strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .tier {
+      padding: 44px 40px;
+      border-right: 1px solid var(--border);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .tier:last-child { border-right: none; }
+    .tier__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .tier__num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .tier__arrow { color: var(--text-muted); }
+    .tier__arrow .icon { font-size: 20px; }
+    .tier__status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+    .tier__status--ready { background: #dcfce7; color: #166534; }
+    .tier__status--soon  { background: #fef9c3; color: #854d0e; }
+    .tier__status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+    .tier__title {
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      color: var(--text-head);
+      margin-bottom: 12px;
+    }
+    .tier__desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-body);
+      margin-bottom: 32px;
+      flex: 1;
+    }
+    .tier__feats { display: flex; flex-direction: column; gap: 10px; }
+    .tier__feat {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-body);
+    }
+    .tier__feat .icon { font-size: 16px; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+    .tier__feat--dim { color: #bbb; }
+    .tier__feat--dim .icon { color: #ccc; }
+    /* Bottom proof badge */
+    .tier__badge {
+      margin-top: 32px;
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      width: fit-content;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       14. TRUST
+    ═══════════════════════════════════════════════════════ */
+    .trust {
+      background: var(--bg-warm);
+      padding: var(--section-y) 0;
+    }
+    .trust__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .trust__h2 {
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      letter-spacing: -1px;
+      color: var(--text-head);
+      margin: 16px 0 20px;
+      line-height: 1.15;
+    }
+    .trust__p { font-size: 16px; line-height: 1.75; color: var(--text-body); margin-bottom: 32px; }
+    .trust__badges { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tbadge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-body);
+    }
+    .tbadge .icon { font-size: 16px; color: #22c55e; }
+    .trust__quad {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .t-stat {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+    }
+    .t-stat__num {
+      font-size: 44px;
+      font-weight: 300;
+      letter-spacing: -2px;
+      color: var(--text-head);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .t-stat__label { font-size: 14px; font-weight: 500; color: var(--text-body); }
+    .t-stat__sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       15. FINAL CTA — ASYMMETRIC TEXT LEFT + IMAGE RIGHT
+    ═══════════════════════════════════════════════════════ */
+    .cta-sec {
+      background: var(--bg);
+      padding: var(--section-y) 0;
+      overflow: hidden;
+    }
+    .cta-sec__inner {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      align-items: center;
+      min-height: 520px;
+    }
+    /* Left — text */
+    .cta-sec__left {
+      padding-right: 80px;
+    }
+    .cta-sec__h2 {
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 400;
+      letter-spacing: -2px;
+      color: var(--text-head);
+      line-height: 1.08;
+      margin-bottom: 20px;
+    }
+    .cta-sec__sub {
+      font-size: 17px;
+      color: var(--text-body);
+      max-width: 400px;
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+    .cta-sec__btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+    }
+    .cta-sec__trust {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .cta-sec__logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px 32px;
+      align-items: center;
+    }
+    .cta-sec__logo {
+      font-size: 15px;
+      font-weight: 600;
+      color: #ccc;
+      letter-spacing: -0.2px;
+    }
+    /* Right — edge-bleeding image grid */
+    .cta-sec__right {
+      /* Extend to right edge — no right padding constraint */
+      margin-right: -80px; /* offset .wrap padding */
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 220px);
+      gap: 8px;
+    }
+    .cta-img {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .cta-img:first-child { border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+    .cta-img__ph {
+      background: var(--grey-100, #e5e5e5);
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .cta-img:nth-child(even) .cta-img__ph { background: var(--grey-200, #cccccc); }
+    .cta-img:nth-child(3n) .cta-img__ph  { background: var(--grey-50, #f6f6f6); }
+    /* Verified badge on CTA image */
+    .cta-img__verified {
+      position: absolute;
+      top: 10px; left: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(134,239,172,0.3);
+      border-radius: 100px;
+      padding: 3px 9px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #86efac;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .cta-img__verified .icon { font-size: 11px; }
+    /* Overlay count + label */
+    .cta-img__overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 10px 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    }
+    .cta-img__label { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.75); }
+    .cta-img__count { font-size: 10px; color: rgba(255,255,255,0.45); }
+
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════ */
+    .footer {
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border);
+      padding: 72px 0 40px;
+    }
+    .footer__main {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 64px;
+    }
+    .footer__logo img { height: 19px; margin-bottom: 16px; }
+    .footer__tagline { font-size: 14px; color: var(--text-muted); line-height: 1.65; max-width: 240px; }
+    .footer__col-hd {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .footer__links { display: flex; flex-direction: column; gap: 10px; }
+    .footer__links a { font-size: 14px; color: var(--text-muted); transition: color 0.15s; }
+    .footer__links a:hover { color: var(--text-head); }
+    .footer__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .footer__legal { font-size: 12px; color: var(--text-muted); }
+    .footer__bot-links { display: flex; gap: 24px; }
+    .footer__bot-links a { font-size: 12px; color: var(--text-muted); transition: color 0.15s; }
+    .footer__bot-links a:hover { color: var(--text-head); }
+
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .wrap { padding: 0 40px; }
+      .hero { padding: 80px 40px 0; }
+      .showcase__header { padding: 0 40px; }
+      .stats__grid { grid-template-columns: 1fr 1fr; }
+      .tiers__strip { grid-template-columns: 1fr; }
+      .tier { border-right: none; border-bottom: 1px solid var(--border); }
+      .tier:last-child { border-bottom: none; }
+      .cta-sec__inner { grid-template-columns: 1fr; gap: 60px; }
+      .cta-sec__left { padding-right: 0; }
+      .cta-sec__right { margin-right: -40px; grid-template-rows: repeat(2, 180px); }
+      .footer__main { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      :root { --section-y: 80px; }
+      .wrap { padding: 0 24px; }
+      .hero { padding: 72px 24px 0; }
+      .hero__stats { flex-direction: column; }
+      .hero__stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .nav__links { display: none; }
+      .mission__inner,
+      .validation__inner,
+      .trust__inner { grid-template-columns: 1fr; gap: 48px; }
+      .mission__quote { position: static; }
+      .validation__sticky { position: static; }
+      .stats__grid { grid-template-columns: 1fr 1fr; }
+      .stat-cell { border-right: none; border-bottom: 1px solid var(--border); }
+      .pipeline__row { grid-template-columns: 60px 1fr; grid-template-rows: auto auto; }
+      .pipeline__desc { grid-column: 1 / -1; padding-top: 8px; }
+      .usecase__cards,
+      .usecase__details { grid-template-columns: 1fr; }
+      .uc-card__img { height: 320px; }
+      .cta-sec__inner { grid-template-columns: 1fr; }
+      .cta-sec__right { display: none; }
+      .footer__main { grid-template-columns: 1fr; gap: 36px; }
+      .footer__bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .showcase__header { padding: 0 24px; }
+      .cta-sec__btns { flex-direction: column; align-items: flex-start; }
+    }
+
+  </style>
+</head>
+<body>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     1. NAVBAR
+═══════════════════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="wrap">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#">
+        <img src="../assets/logos/Horizontal Light.svg" alt="imagine.io">
+      </a>
+      <ul class="nav__links">
+        <li><a href="#">Robotics</a></li>
+        <li><a href="#">Foundation Models</a></li>
+        <li><a href="#">Data</a></li>
+        <li><a href="#">Company</a></li>
+      </ul>
+      <div class="nav__cta">
+        <a href="#" class="btn btn-ghost">Talk to Sales</a>
+        <a href="#" class="btn btn-primary">Request Access</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     2. HERO — social proof ABOVE headline
+═══════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__content">
+
+    <!-- Social proof — pre-headline trust signal -->
+    <div class="hero__proof">
+      <div class="hero__avatars">
+        <div class="hero__avatar hero__avatar--a"></div>
+        <div class="hero__avatar hero__avatar--b"></div>
+        <div class="hero__avatar hero__avatar--c"></div>
+        <div class="hero__avatar hero__avatar--d"></div>
+      </div>
+      <span class="hero__proof-txt"><strong>187+ teams</strong> building Physical AI on imagine.io</span>
+    </div>
+
+    <h1 class="hero__h1">The data layer for<br><em>Physical AI.</em></h1>
+    <p class="hero__sub">imagine.io turns structured product data into simulation-ready environments — at scale, in minutes, with the metadata your models need.</p>
+    <div class="hero__cta">
+      <a href="#" class="btn btn-primary btn-lg">Request Access</a>
+      <a href="#" class="btn btn-ghost btn-lg">Talk to Sales</a>
+    </div>
+  </div>
+  <div class="wrap" style="width:100%; position:relative; z-index:1;">
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <div class="hero__stat-val">6+</div>
+        <div class="hero__stat-lbl">Years in Production</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-val">1M+</div>
+        <div class="hero__stat-lbl">Outputs / Month</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-val">25K+</div>
+        <div class="hero__stat-lbl">Structured Products</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-val">10,000×</div>
+        <div class="hero__stat-lbl">Variation Multiplier</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-val">SOC 2</div>
+        <div class="hero__stat-lbl">Type II Certified</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     3. PAIN MARQUEE
+═══════════════════════════════════════════════════════ -->
+<div class="pain">
+  <div class="pain__track-wrap">
+    <div class="pain__track">
+      <span class="pain__pill"><span class="pain__dot"></span>Simulation environments take months to build manually</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Sim-to-real gap invalidates months of training</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Physics-inaccurate assets break policy generalisation</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Manual annotation at scale is cost-prohibitive</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Proprietary CAD files aren't sim-ready out of the box</span>
+      <span class="pain__pill"><span class="pain__dot"></span>No structured variation means overfitted policies</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Real-world data collection is slow and expensive</span>
+      <span class="pain__pill"><span class="pain__dot"></span>No metadata means no reproducible training runs</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Scene setup slows every iteration cycle</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="pain__pill"><span class="pain__dot"></span>Simulation environments take months to build manually</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Sim-to-real gap invalidates months of training</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Physics-inaccurate assets break policy generalisation</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Manual annotation at scale is cost-prohibitive</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Proprietary CAD files aren't sim-ready out of the box</span>
+      <span class="pain__pill"><span class="pain__dot"></span>No structured variation means overfitted policies</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Real-world data collection is slow and expensive</span>
+      <span class="pain__pill"><span class="pain__dot"></span>No metadata means no reproducible training runs</span>
+      <span class="pain__pill"><span class="pain__dot"></span>Scene setup slows every iteration cycle</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     4. LOGO STRIP
+═══════════════════════════════════════════════════════ -->
+<section class="proof">
+  <div class="wrap">
+    <p class="proof__label">Works seamlessly with your stack</p>
+    <div class="proof__logos">
+      <span class="proof__logo">NVIDIA</span>
+      <span class="proof__logo">Isaac<span> Sim</span></span>
+      <span class="proof__logo">Open<span>USD</span></span>
+      <span class="proof__logo">MuJoCo</span>
+      <span class="proof__logo">Unreal<span> Engine</span></span>
+      <span class="proof__logo">Unity</span>
+      <span class="proof__logo">Gazebo</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     5. ASSET SHOWCASE MARQUEE — image-first overlay cards
+═══════════════════════════════════════════════════════ -->
+<section class="showcase">
+  <div class="showcase__header">
+    <span class="pill">Asset Library</span>
+    <h2 class="showcase__h2">25,000+ structured environments. Ready for simulation.</h2>
+  </div>
+  <div class="showcase__rows">
+
+    <!-- Row 1 → left -->
+    <div class="mq">
+      <div class="mq__track">
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%201.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Residential Interiors</span><span class="asset-card__count">5,200+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Coffee%20Table%20lfs%201.png') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Living Room Scenes</span><span class="asset-card__count">3,400+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Foundry%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Office Spaces</span><span class="asset-card__count">2,900+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Coat%20Lifestyle%201.png') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Outdoor / Urban</span><span class="asset-card__count">4,100+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Console%20lfs%201.png') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Entryway & Hallways</span><span class="asset-card__count">1,900+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Purse%20lfs%201.png') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Retail Spaces</span><span class="asset-card__count">2,600+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Basra%20Floor%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Hotel & Lounge Spaces</span><span class="asset-card__count">1,700+ scenes</span></div></div>
+        <!-- Duplicate set -->
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%201.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Residential Interiors</span><span class="asset-card__count">5,200+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Coffee%20Table%20lfs%201.png') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Living Room Scenes</span><span class="asset-card__count">3,400+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Foundry%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Office Spaces</span><span class="asset-card__count">2,900+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Coat%20Lifestyle%201.png') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Outdoor / Urban</span><span class="asset-card__count">4,100+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Console%20lfs%201.png') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Entryway & Hallways</span><span class="asset-card__count">1,900+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Purse%20lfs%201.png') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Retail Spaces</span><span class="asset-card__count">2,600+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Basra%20Floor%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Hotel & Lounge Spaces</span><span class="asset-card__count">1,700+ scenes</span></div></div>
+      </div>
+    </div>
+
+    <!-- Row 2 → right -->
+    <div class="mq">
+      <div class="mq__track mq__track--rev">
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2010.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Beauty Renders</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Residential Interiors</span><span class="asset-card__count">3,800+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Aspen%20Chair_Image%202.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Dining Environments</span><span class="asset-card__count">2,200+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Kessler%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Bedroom Environments</span><span class="asset-card__count">1,400+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/F2-frt.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Living Environments</span><span class="asset-card__count">1,800+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Blouse%20Lifestyle%201.png') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Outdoor Gardens</span><span class="asset-card__count">2,100+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Lorenzo%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Beauty Renders</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Hospitality & Hotels</span><span class="asset-card__count">1,600+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Marilyn%20Chandelier_Image%201.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Premium Interiors</span><span class="asset-card__count">1,100+ scenes</span></div></div>
+        <!-- Duplicate -->
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2010.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Beauty Renders</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Residential Interiors</span><span class="asset-card__count">3,800+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Aspen%20Chair_Image%202.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Dining Environments</span><span class="asset-card__count">2,200+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Kessler%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Bedroom Environments</span><span class="asset-card__count">1,400+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/F2-frt.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Living Environments</span><span class="asset-card__count">1,800+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Blouse%20Lifestyle%201.png') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Outdoor Gardens</span><span class="asset-card__count">2,100+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Lorenzo%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Beauty Renders</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Hospitality & Hotels</span><span class="asset-card__count">1,600+ scenes</span></div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Marilyn%20Chandelier_Image%201.jpg') center/cover no-repeat;"></div><span class="asset-card__sim">Sim Ready</span><span class="asset-card__verified"><span class="asset-card__verified-dot"></span>Verified</span><div class="asset-card__overlay"><span class="asset-card__label">Premium Interiors</span><span class="asset-card__count">1,100+ scenes</span></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     6. MISSION
+═══════════════════════════════════════════════════════ -->
+<section class="mission">
+  <div class="wrap">
+    <div class="mission__inner">
+      <h2 class="mission__quote">Physical AI is <em>data-limited,</em> not model-limited.<br>We built imagine.io to fix that.</h2>
+      <div class="mission__right">
+        <p class="mission__p">Robotics and foundation model teams don't need better architectures — they need better data. Data that is physics-accurate, richly annotated, and ready to load into your simulator in under five minutes.</p>
+        <p class="mission__p">imagine.io has been building this infrastructure for six years. Not a research project. A production system processing over one million outputs every month for the teams pushing Physical AI forward.</p>
+        <div class="mission__list">
+          <div class="mission__item">
+            <span class="icon">schema</span>
+            <span>Structured product graph — not scanning, not procedural generation</span>
+          </div>
+          <div class="mission__item">
+            <span class="icon">tag</span>
+            <span>150+ metadata attributes per object: physics, semantics, geometry</span>
+          </div>
+          <div class="mission__item">
+            <span class="icon">auto_awesome_mosaic</span>
+            <span>One environment generates 10,000+ training variants via parametric control</span>
+          </div>
+          <div class="mission__item">
+            <span class="icon">verified_user</span>
+            <span>SOC 2 Type II certified — enterprise-grade security from day one</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     7. CODE DEMO LAYERED OVER ASSET GRID
+═══════════════════════════════════════════════════════ -->
+<section class="code-layer">
+  <!-- Background asset tile grid -->
+  <div class="code-layer__bg">
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+  </div>
+  <div class="code-layer__veil"></div>
+
+  <div class="wrap">
+    <div class="code-layer__inner">
+      <div class="code-layer__hd">
+        <span class="pill" style="border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.4);">Developer API</span>
+        <h2 class="code-layer__h2">Integrate in minutes.<br>Train at scale.</h2>
+        <p class="code-layer__sub">Query any environment, generate thousands of variations, and export directly to your simulator — all from a single Python call.</p>
+      </div>
+
+      <div class="codeblock">
+        <div class="codeblock__bar">
+          <span class="codeblock__btn codeblock__btn--r"></span>
+          <span class="codeblock__btn codeblock__btn--a"></span>
+          <span class="codeblock__btn codeblock__btn--g"></span>
+          <span class="codeblock__fn">train_pipeline.py</span>
+        </div>
+        <pre><span class="t-kw">import</span> <span class="t-fn">imagineo</span>
+
+<span class="t-cmt"># Initialise client</span>
+client = <span class="t-fn">imagineo</span>.<span class="t-fn">Client</span>(api_key=<span class="t-str">"YOUR_API_KEY"</span>)
+
+<span class="t-cmt"># Query sim-ready environments</span>
+envs = client.<span class="t-fn">environments</span>.<span class="t-fn">query</span>(
+    category=<span class="t-str">"kitchen"</span>,
+    sim_ready=<span class="t-kw">True</span>,
+    export_format=<span class="t-str">"usd"</span>
+)
+
+<span class="t-cmt"># Generate 10,000× variations</span>
+batch = client.<span class="t-fn">generate</span>(
+    environment_id=envs[<span class="t-num">0</span>].id,
+    count=<span class="t-num">10_000</span>,
+    params={
+        <span class="t-key">"lighting"</span>: <span class="t-str">"randomized"</span>,
+        <span class="t-key">"layout"</span>:   <span class="t-str">"parametric"</span>,
+        <span class="t-key">"materials"</span>: <span class="t-str">"varied"</span>,
+    }
+)
+
+<span class="t-cmt"># Export to NVIDIA Isaac Sim</span>
+client.<span class="t-fn">export</span>(batch, target=<span class="t-str">"isaac_sim"</span>)
+<span class="t-cmt"># ✓ Ready in &lt; 5 minutes</span></pre>
+      </div>
+
+      <div class="code-layer__feats">
+        <span class="code-layer__feat"><span class="icon">bolt</span>Python SDK with async batch support</span>
+        <span class="code-layer__feat"><span class="icon">settings_input_component</span>Native Isaac Sim, MuJoCo &amp; OpenUSD export</span>
+        <span class="code-layer__feat"><span class="icon">tune</span>Parametric variation — lighting, layout, physics</span>
+        <span class="code-layer__feat"><span class="icon">schedule</span>Environments ready in &lt; 5 minutes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     8. PIPELINE INTRO — chapter title
+═══════════════════════════════════════════════════════ -->
+<section class="pipeline-intro">
+  <div class="wrap">
+    <span class="pill">Solution</span>
+    <h2 class="pipeline-intro__h2">One platform. Every step of the pipeline.</h2>
+    <p class="pipeline-intro__sub">
+      <em>Ingest → normalise → augment → validate → deploy.</em>
+      End-to-end data infrastructure, purpose-built for Physical AI training workflows.
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     9. PIPELINE — vertical stacked rows
+═══════════════════════════════════════════════════════ -->
+<section class="pipeline">
+  <div class="wrap">
+    <div class="pipeline__list">
+
+      <div class="pipeline__row">
+        <span class="pipeline__num">01</span>
+        <h3 class="pipeline__title">Ingest</h3>
+        <p class="pipeline__desc">Structured product data enters via API, batch upload, or direct integration with your existing catalogue systems. Proprietary CAD, GLTF, FBX — all accepted.</p>
+      </div>
+
+      <div class="pipeline__row">
+        <span class="pipeline__num">02</span>
+        <h3 class="pipeline__title">Normalise</h3>
+        <p class="pipeline__desc">Every asset is normalised to a unified product graph — geometry, semantics, physics, and 150+ metadata attributes. Consistent, structured, reproducible.</p>
+      </div>
+
+      <div class="pipeline__row">
+        <span class="pipeline__num">03</span>
+        <h3 class="pipeline__title">Augment</h3>
+        <p class="pipeline__desc">Parametric variation engine generates up to 10,000× variants per environment across lighting, material, layout, and scene composition.</p>
+      </div>
+
+      <div class="pipeline__row">
+        <span class="pipeline__num">04</span>
+        <h3 class="pipeline__title">Validate</h3>
+        <p class="pipeline__desc">Every output passes physics integrity checks, collision validation, and semantic labelling verification before it enters your pipeline. Zero manual QA.</p>
+      </div>
+
+      <div class="pipeline__row">
+        <span class="pipeline__num">05</span>
+        <h3 class="pipeline__title">Deploy</h3>
+        <p class="pipeline__desc">Export to Isaac Sim, MuJoCo, Unreal, or OpenUSD. Load time under 5 minutes. No manual scene setup. No format conversion. Just data.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     10. STATS
+═══════════════════════════════════════════════════════ -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats__header">
+      <span class="pill">By the numbers</span>
+      <h2 class="stats__h2">Scale and quality that frontier teams depend on.</h2>
+    </div>
+    <div class="stats__grid">
+      <div class="stat-cell">
+        <div class="stat-cell__num">1<em>M+</em></div>
+        <p class="stat-cell__label">Outputs per month</p>
+        <p class="stat-cell__desc">10× more than the nearest competitor. Production infrastructure running since 2018.</p>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell__num">10<em>K×</em></div>
+        <p class="stat-cell__label">Variation multiplier</p>
+        <p class="stat-cell__desc">One structured environment → up to 10,000 unique training variants via parametric control.</p>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell__num">150<em>+</em></div>
+        <p class="stat-cell__label">Metadata attributes</p>
+        <p class="stat-cell__desc">Geometry, semantics, physics, collision, instance IDs, and parent-child hierarchies — fully tagged.</p>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell__num">&lt;<em>5</em></div>
+        <p class="stat-cell__label">Minutes to Isaac Sim</p>
+        <p class="stat-cell__desc">From API query to simulator-ready environment. No manual scene setup. No format conversion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     11. USE CASE — image-first cards
+═══════════════════════════════════════════════════════ -->
+<section class="usecase">
+  <div class="wrap">
+    <div class="usecase__hd">
+      <span class="pill">Built for your team</span>
+      <h2 class="usecase__h2">Whether you're training robots or foundation models.</h2>
+    </div>
+
+    <div class="usecase__cards">
+      <!-- Robotics card -->
+      <div class="uc-card">
+        <div class="uc-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%205.jpg') center/cover no-repeat;"></div>
+        <div class="uc-card__overlay">
+          <span class="uc-card__type">Use Case</span>
+          <h3 class="uc-card__name">Robotics Teams <span class="icon">arrow_forward</span></h3>
+        </div>
+      </div>
+      <!-- Foundation Models card -->
+      <div class="uc-card">
+        <div class="uc-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%201.png') center/cover no-repeat;"></div>
+        <div class="uc-card__overlay">
+          <span class="uc-card__type">Use Case</span>
+          <h3 class="uc-card__name">Foundation Models <span class="icon">arrow_forward</span></h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature details below cards -->
+    <div class="usecase__details">
+      <div class="uc-detail">
+        <p class="uc-detail__title">For Robotics Teams</p>
+        <div class="uc-detail__list">
+          <div class="uc-detail__item"><span class="icon">check_circle</span><span>USD Physics joints, mass, density, and friction properties</span></div>
+          <div class="uc-detail__item"><span class="icon">check_circle</span><span>Native Isaac Sim, MuJoCo, and Gazebo export</span></div>
+          <div class="uc-detail__item"><span class="icon">check_circle</span><span>Parametric scene variation for domain randomisation</span></div>
+          <div class="uc-detail__item"><span class="icon">check_circle</span><span>100K+ labeled frames per environment included</span></div>
+          <div class="uc-detail__item"><span class="icon">check_circle</span><span>Perception, Navigation, and Manipulation task environments</span></div>
+        </div>
+        <div class="uc-detail__cta">
+          <a href="#" class="btn btn-primary">Explore Robotics Data</a>
+        </div>
+      </div>
+      <div class="uc-detail">
+        <p class="uc-detail__title">For Foundation Model Teams</p>
+        <div class="uc-detail__list">
+          <div class="uc-detail__item"><span class="icon">check_circle</span><span>30+ semantic classes per scene with instance IDs</span></div>
+          <div class="uc-detail__item"><span class="icon">check_circle</span><span>Parent-child object hierarchies for relational reasoning</span></div>
+          <div class="uc-detail__item"><span class="icon">check_circle</span><span>10K+ lighting and material combinations per environment</span></div>
+          <div class="uc-detail__item"><span class="icon">check_circle</span><span>OpenUSD and JSON export with full metadata</span></div>
+          <div class="uc-detail__item"><span class="icon">check_circle</span><span>Structured product graph — not scanning, not procedural noise</span></div>
+        </div>
+        <div class="uc-detail__cta">
+          <a href="#" class="btn btn-ghost">Explore Foundation Model Data</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     12. VALIDATION SHOWCASE
+═══════════════════════════════════════════════════════ -->
+<section class="validation">
+  <div class="wrap">
+    <div class="validation__inner">
+      <div class="validation__sticky">
+        <span class="pill">Quality at Scale</span>
+        <h2 class="validation__h2">Every asset. Every variant. Validated.</h2>
+        <p class="validation__p">imagine.io doesn't just generate data — it validates it. Every environment and variant passes physics integrity checks, semantic labelling verification, and collision mesh validation before entering your pipeline.</p>
+        <div class="v-stats">
+          <div class="v-stat">
+            <span class="v-stat__num">5K+</span>
+            <span class="v-stat__txt">Fully tagged structured environments ready for sim</span>
+          </div>
+          <div class="v-stat">
+            <span class="v-stat__num">30+</span>
+            <span class="v-stat__txt">Semantic classes per scene with instance-level annotations</span>
+          </div>
+          <div class="v-stat">
+            <span class="v-stat__num">100K+</span>
+            <span class="v-stat__txt">Labeled frames included per environment</span>
+          </div>
+          <div class="v-stat">
+            <span class="v-stat__num">150+</span>
+            <span class="v-stat__txt">Metadata attributes on every object in every scene</span>
+          </div>
+        </div>
+      </div>
+      <div class="validation__cards">
+
+        <div class="v-card">
+          <div class="v-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Coffee%20Table%20Det%201.png') center/cover no-repeat;"></div>
+          <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
+          <div class="v-card__overlay">
+            <div class="v-card__row">
+              <span class="v-card__label">Living Room — Object Manipulation</span>
+              <span class="v-card__count">3,831+ variants</span>
+            </div>
+            <div class="v-card__tags">
+              <span class="v-tag">USD Physics</span>
+              <span class="v-tag">Collision Mesh</span>
+              <span class="v-tag">Semantics</span>
+              <span class="v-tag">Isaac Sim Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="v-card">
+          <div class="v-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Console%20Silo%20frt.png') center/cover no-repeat;"></div>
+          <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
+          <div class="v-card__overlay">
+            <div class="v-card__row">
+              <span class="v-card__label">Entryway — Navigation Task</span>
+              <span class="v-card__count">2,853+ variants</span>
+            </div>
+            <div class="v-card__tags">
+              <span class="v-tag">USD Physics</span>
+              <span class="v-tag">Multi-body</span>
+              <span class="v-tag">Semantics</span>
+              <span class="v-tag">MuJoCo Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="v-card">
+          <div class="v-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Foundry%20Table%20Lamp_Image%203.jpg') center/cover no-repeat;"></div>
+          <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
+          <div class="v-card__overlay">
+            <div class="v-card__row">
+              <span class="v-card__label">Office — Desk Manipulation</span>
+              <span class="v-card__count">2,410+ variants</span>
+            </div>
+            <div class="v-card__tags">
+              <span class="v-tag">USD Physics</span>
+              <span class="v-tag">Collision Mesh</span>
+              <span class="v-tag">30+ Classes</span>
+              <span class="v-tag">OpenUSD</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="v-card">
+          <div class="v-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Chair%20Silo%20frt.png') center/cover no-repeat;"></div>
+          <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
+          <div class="v-card__overlay">
+            <div class="v-card__row">
+              <span class="v-card__label">Furniture — Grasping Task</span>
+              <span class="v-card__count">1,920+ variants</span>
+            </div>
+            <div class="v-card__tags">
+              <span class="v-tag">Multi-body</span>
+              <span class="v-tag">Joint Limits</span>
+              <span class="v-tag">Physics</span>
+              <span class="v-tag">Isaac Sim Ready</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     13. APPLICATION TIERS — flush ruled cards
+═══════════════════════════════════════════════════════ -->
+<section class="tiers">
+  <div class="wrap">
+    <div class="tiers__hd">
+      <span class="pill">Capability Roadmap</span>
+      <h2 class="tiers__h2">Built for every stage of your Physical AI pipeline.</h2>
+      <p class="tiers__sub">The only data provider with a published capability roadmap. Know exactly what you can build today — and what's coming next.</p>
+    </div>
+
+    <div class="tiers__strip">
+
+      <div class="tier">
+        <div class="tier__top">
+          <span class="tier__num">01. Tier</span>
+          <span class="tier__arrow"><span class="icon">arrow_outward</span></span>
+        </div>
+        <span class="tier__status tier__status--ready"><span class="tier__status-dot"></span>Available Now</span>
+        <h3 class="tier__title">Perception</h3>
+        <p class="tier__desc">Object detection, instance segmentation, and visual recognition training. Dense, structured environments with 30+ semantic classes.</p>
+        <div class="tier__feats">
+          <div class="tier__feat"><span class="icon">check</span><span>30+ semantic class labels per scene</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>Instance IDs and parent-child hierarchies</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>100K+ labeled frames per environment</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>10K+ lighting and material variations</span></div>
+        </div>
+        <span class="tier__badge">Fully structured</span>
+      </div>
+
+      <div class="tier">
+        <div class="tier__top">
+          <span class="tier__num">02. Tier</span>
+          <span class="tier__arrow"><span class="icon">arrow_outward</span></span>
+        </div>
+        <span class="tier__status tier__status--ready"><span class="tier__status-dot"></span>Available Now</span>
+        <h3 class="tier__title">Navigation</h3>
+        <p class="tier__desc">Mobile robot navigation across structured indoor and outdoor environments with traversability and obstacle metadata.</p>
+        <div class="tier__feats">
+          <div class="tier__feat"><span class="icon">check</span><span>Collision meshes and traversability maps</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>Occupancy grids and floor plan annotations</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>Parametric obstacle placement and density</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>Isaac Sim and Gazebo ready out of the box</span></div>
+        </div>
+        <span class="tier__badge">Fully validated</span>
+      </div>
+
+      <div class="tier">
+        <div class="tier__top">
+          <span class="tier__num">03. Tier</span>
+          <span class="tier__arrow"><span class="icon">arrow_outward</span></span>
+        </div>
+        <span class="tier__status tier__status--soon"><span class="tier__status-dot"></span>On Roadmap</span>
+        <h3 class="tier__title">Manipulation</h3>
+        <p class="tier__desc">Full contact-rich manipulation data — articulated objects, grasping surfaces, deformable materials, and dexterous task environments.</p>
+        <div class="tier__feats">
+          <div class="tier__feat"><span class="icon">check</span><span>USD Physics articulated joint parameters</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>Mass, density, friction, and contact geometry</span></div>
+          <div class="tier__feat tier__feat--dim"><span class="icon">schedule</span><span>Deformable object support — coming soon</span></div>
+          <div class="tier__feat tier__feat--dim"><span class="icon">schedule</span><span>Grasping surface annotations — coming soon</span></div>
+        </div>
+        <span class="tier__badge">In development</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     14. TRUST
+═══════════════════════════════════════════════════════ -->
+<section class="trust">
+  <div class="wrap">
+    <div class="trust__inner">
+      <div>
+        <span class="pill">Trust &amp; Compliance</span>
+        <h2 class="trust__h2">Six years in production. Enterprise-grade from day one.</h2>
+        <p class="trust__p">imagine.io has been processing structured product data and generating simulation environments since 2018 — building the production infrastructure, data quality systems, and compliance frameworks that enterprise robotics teams require.</p>
+        <div class="trust__badges">
+          <span class="tbadge"><span class="icon">verified_user</span>SOC 2 Type II Certified</span>
+          <span class="tbadge"><span class="icon">factory</span>Not a research project</span>
+          <span class="tbadge"><span class="icon">hub</span>NVIDIA Ecosystem Partner</span>
+          <span class="tbadge"><span class="icon">rule</span>Physics validation on every asset</span>
+          <span class="tbadge"><span class="icon">support_agent</span>Enterprise SLA available</span>
+        </div>
+      </div>
+      <div class="trust__quad">
+        <div class="t-stat">
+          <div class="t-stat__num">6+</div>
+          <p class="t-stat__label">Years in production</p>
+          <p class="t-stat__sub">Running since 2018</p>
+        </div>
+        <div class="t-stat">
+          <div class="t-stat__num">1M+</div>
+          <p class="t-stat__label">Outputs per month</p>
+          <p class="t-stat__sub">At scale, continuously</p>
+        </div>
+        <div class="t-stat">
+          <div class="t-stat__num">25K+</div>
+          <p class="t-stat__label">Structured products</p>
+          <p class="t-stat__sub">In the product graph</p>
+        </div>
+        <div class="t-stat">
+          <div class="t-stat__num">5K+</div>
+          <p class="t-stat__label">Tagged environments</p>
+          <p class="t-stat__sub">Validated and sim-ready</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     15. FINAL CTA — asymmetric text left + image grid right
+═══════════════════════════════════════════════════════ -->
+<section class="cta-sec">
+  <div class="wrap">
+    <div class="cta-sec__inner">
+
+      <!-- Left: text -->
+      <div class="cta-sec__left">
+        <span class="pill">Get Started</span>
+        <h2 class="cta-sec__h2">Get the training data your models need.</h2>
+        <p class="cta-sec__sub">Access 25,000+ structured environments, the Python SDK, and a dedicated onboarding session with the imagine.io team.</p>
+        <div class="cta-sec__btns">
+          <a href="#" class="btn btn-primary btn-lg">Request Access</a>
+          <a href="#" class="btn btn-ghost btn-lg">Talk to Sales</a>
+        </div>
+        <p class="cta-sec__trust">Trusted by teams at</p>
+        <div class="cta-sec__logos">
+          <span class="cta-sec__logo">NVIDIA</span>
+          <span class="cta-sec__logo">Amazon</span>
+          <span class="cta-sec__logo">Boston Dynamics</span>
+          <span class="cta-sec__logo">Microsoft</span>
+          <span class="cta-sec__logo">Figure AI</span>
+          <span class="cta-sec__logo">1X Technologies</span>
+        </div>
+      </div>
+
+      <!-- Right: edge-bleeding image grid -->
+      <div class="cta-sec__right">
+        <div class="cta-img">
+          <div class="cta-img__ph" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%202.jpg') center/cover no-repeat;"></div>
+          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
+          <div class="cta-img__overlay"><p class="cta-img__label">Living Room Manipulation</p><p class="cta-img__count">3,831+ variants</p></div>
+        </div>
+        <div class="cta-img">
+          <div class="cta-img__ph" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Basra%20Floor%20Lamp_Image%203.jpg') center/cover no-repeat;"></div>
+          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
+          <div class="cta-img__overlay"><p class="cta-img__label">Residential Navigation</p><p class="cta-img__count">2,853+ variants</p></div>
+        </div>
+        <div class="cta-img">
+          <div class="cta-img__ph" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Kessler%20Table%20Lamp_Image%203.jpg') center/cover no-repeat;"></div>
+          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
+          <div class="cta-img__overlay"><p class="cta-img__label">Office Navigation</p><p class="cta-img__count">2,410+ variants</p></div>
+        </div>
+        <div class="cta-img">
+          <div class="cta-img__ph" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2011.jpg') center/cover no-repeat;"></div>
+          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
+          <div class="cta-img__overlay"><p class="cta-img__label">Residential Interiors</p><p class="cta-img__count">3,800+ scenes</p></div>
+        </div>
+        <div class="cta-img">
+          <div class="cta-img__ph" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Coat%20Lifestyle%202.png') center/cover no-repeat;"></div>
+          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
+          <div class="cta-img__overlay"><p class="cta-img__label">Outdoor Perception</p><p class="cta-img__count">1,920+ variants</p></div>
+        </div>
+        <div class="cta-img">
+          <div class="cta-img__ph" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Blouse%20Lifestyle%203.png') center/cover no-repeat;"></div>
+          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
+          <div class="cta-img__overlay"><p class="cta-img__label">Outdoor / Urban</p><p class="cta-img__count">4,100+ scenes</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div>
+        <div class="footer__logo">
+          <img src="../assets/logos/Horizontal Light.svg" alt="imagine.io">
+        </div>
+        <p class="footer__tagline">The data layer for Physical AI. Structured environments for robotics and foundation model teams.</p>
+      </div>
+      <div>
+        <p class="footer__col-hd">Products</p>
+        <ul class="footer__links">
+          <li><a href="#">Robotics Data</a></li>
+          <li><a href="#">Foundation Model Data</a></li>
+          <li><a href="#">API &amp; SDK</a></li>
+          <li><a href="#">Simulation Exports</a></li>
+          <li><a href="#">Enterprise</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-hd">Use Cases</p>
+        <ul class="footer__links">
+          <li><a href="#">Manipulation</a></li>
+          <li><a href="#">Navigation</a></li>
+          <li><a href="#">Perception</a></li>
+          <li><a href="#">World Models</a></li>
+          <li><a href="#">Domain Randomisation</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-hd">Company</p>
+        <ul class="footer__links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__legal">© 2026 imagine.io. All rights reserved.</p>
+      <div class="footer__bot-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>
