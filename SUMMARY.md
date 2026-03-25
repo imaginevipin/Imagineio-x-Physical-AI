@@ -125,9 +125,38 @@ These were discovered and locked in during v4 polish — apply in all future wor
 
 ---
 
-## Known Issues / Pending Items
+## GitHub Repository
 
-None outstanding. v4 is complete and reviewed.
+- **Repo:** `github.com/imaginevipin/Imagineio-x-Physical-AI` — **private**
+- **Auth:** GitHub CLI (`gh`) authenticated as `imaginevipin` (vipin.meena@imagine.io)
+- **Git identity:** `git config --global user.name "imaginevipin"` / `user.email "vipin.meena@imagine.io"`
+- **Remote:** `https://github.com/imaginevipin/Imagineio-x-Physical-AI.git`
+- **Branch:** `main`
+- **What's in the repo:**
+  - `outputs/` — homepage v1–v4
+  - `assets/fonts/` — PP Neue Montreal (6 OTF weights)
+  - `assets/logos/` — all imagine.io SVG variants
+  - `research/` — content gap analysis, design reference
+  - `tokens.css`, `CLAUDE.md`, `PLAN.md`, `SUMMARY.md`, `prism-design-system.md`
+
+**To push updates:**
+```bash
+git add .
+git commit -m "your message"
+git push
+```
+
+---
+
+## Vercel Deployment — Plan
+
+- **Goal:** deploy final version as a live URL (Vercel)
+- **Status:** Not yet connected — pending homepage final approval
+- **Setup needed:**
+  1. Connect `imaginevipin/Imagineio-x-Physical-AI` repo to Vercel (vercel.com → Import Project)
+  2. Set deploy root to project root (Vercel auto-detects static HTML)
+  3. Every push to `main` will auto-deploy
+- **Note:** Vercel free (Hobby) plan supports private repos via GitHub OAuth — no paid plan needed
 
 ---
 
@@ -141,7 +170,13 @@ All product images are served from the `library-assets` GitHub repo via jsDelivr
 
 ---
 
+## Known Issues / Pending Items
+
+None outstanding. v4 is complete and reviewed.
+
+---
+
 ## Next Steps
 
-1. Review completed v4 with user — get final approval
+1. Connect repo to Vercel for live deployment
 2. After homepage approved: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
