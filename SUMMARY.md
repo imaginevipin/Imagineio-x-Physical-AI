@@ -71,6 +71,8 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-25 | Hero h1 updated: two-liner with accent on last phrase | Old: `Physical AI.` (accent, isolated). New: `Structured data / for Physical AI.` — "Physical AI." is the only accent-colored text. |
 | 2026-03-25 | Badge shapes unified — no border-radius: 100px anywhere | All capsule/pill shapes replaced with rectangular badges (4–6px radius). Affected: tier status tags (Ready Now / Near-Ready / Roadmap), Verified badges on all image cards (marquee, validation, CTA grid), GTC "Live Event" badge. |
 | 2026-03-25 | Hero stats bar: SOC 2 replaced with 150+ Metadata Attributes | SOC 2 is a compliance badge, not a number — doesn't belong in a numeric proof strip. Replaced with a product-specific differentiator. |
+| 2026-03-25 | Orange `<em>` accent added to every section h2 headline | All section h2s now have one orange word/phrase via `h2 em { color: var(--accent) }`. Applied to both `homepage-v4.html` and `index.html`. See Design Rule #8 below. |
+| 2026-03-25 | Specific word-level orange highlights refined per visual review | Validation: "asset." + "variant." orange; Tiers: "Perception", "Navigation", "Manipulation" each individually orange; Ecosystem: "run the simulation." orange. |
 
 ---
 
@@ -115,13 +117,14 @@ See `research/design-reference.md` for the living visual design reference — up
 
 These were discovered and locked in during v4 polish — apply in all future work:
 
-1. **Accent color (papaya)** — used in exactly 2 places only: primary CTA buttons, and one `<em>` phrase in the hero h1. Nothing else.
+1. **Accent color (papaya)** — used in exactly 3 places: primary CTA buttons, one `<em>` phrase in the hero h1, and one `<em>` word/phrase in each section h2 headline.
 2. **Icons** — always `var(--text-muted)` on light sections, `rgba(255,255,255,0.35)` on dark sections. Never accent-colored.
 3. **Section label badges (`.pill`)** — `background: rgba(0,0,0,0.06); color: var(--text-muted); border-radius: 6px`. On dark sections: `background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.45)`.
 4. **Badge shapes** — no `border-radius: 100px` anywhere. All badges/tags: 4–6px radius. Capsule/pill shape is banned.
 5. **Stat numbers** — no accent coloring on `em` suffixes (+, ×, etc.). Use `var(--text-head)`.
 6. **Step/sequence numbers** — muted, not accent.
 7. **Button sizing** — `.btn-lg`: `padding: 9px 22px; font-size: 14px` (matches nav button proportions).
+8. **Section h2 orange highlights** — every section h2 has exactly one `<em>`-wrapped word or phrase in orange. Rule: `h2 em { font-style: normal; color: var(--accent); }` — a single global CSS rule handles all sections. Each highlight is chosen to emphasise the most specific/differentiating phrase in the headline, not the whole sentence.
 
 ---
 
