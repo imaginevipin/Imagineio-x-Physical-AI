@@ -150,14 +150,13 @@
        2. HERO
     ═══════════════════════════════════════════════════════ */
     .hero {
-      min-height: 88vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       text-align: center;
-      padding: 100px 80px 0;
+      padding: 100px 0 0;
       position: relative;
+      z-index: 1;
       overflow: hidden;
       background: var(--bg-warm);
     }
@@ -170,15 +169,13 @@
       opacity: 0.35;
       pointer-events: none;
     }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 200px;
-      background: linear-gradient(to bottom, transparent, var(--bg-warm));
-      pointer-events: none;
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      padding: 0 80px;
+      width: 100%;
     }
-    .hero__content { position: relative; z-index: 1; max-width: 960px; }
 
     /* Social proof above headline */
     .hero__proof {
@@ -247,39 +244,285 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-      margin-bottom: 80px;
+      margin-bottom: 0;
     }
-    .hero__stats {
+
+    /* ─── Hero editor wrap ─── */
+    .hero__editor-wrap {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1100px;
+      padding: 0 40px;
+      margin-top: 56px;
+    }
+    .hero__editor {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 24px 72px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+
+    /* Editor top bar */
+    .editor-bar {
       display: flex;
       align-items: center;
-      justify-content: center;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      background: var(--bg);
-      overflow: hidden;
+      padding: 10px 16px;
+      background: #f5f5f5;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      min-height: 44px;
+      gap: 16px;
+    }
+    .editor-bar__dots { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+    .editor-bar__dot { width: 10px; height: 10px; border-radius: 50%; }
+    .editor-bar__dot--r { background: #ff5f57; }
+    .editor-bar__dot--a { background: #febc2e; }
+    .editor-bar__dot--g { background: #28c840; }
+    .editor-bar__tabs { display: flex; align-items: center; gap: 2px; flex: 1; }
+    .editor-tab {
+      padding: 5px 13px;
+      font-family: var(--font), sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .editor-tab:hover { background: rgba(0,0,0,0.05); color: var(--text-body); }
+    .editor-tab--active {
+      background: #fff;
+      color: var(--text-head);
+      border-color: rgba(0,0,0,0.1);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .editor-bar__right { display: flex; align-items: center; gap: 10px; margin-left: auto; flex-shrink: 0; }
+    .editor-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 9px; border-radius: 4px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    .editor-badge--green { background: #dcfce7; color: #166534; }
+    .editor-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+    .editor-filename { font-size: 11px; color: var(--text-muted); font-family: 'SF Mono', 'IBM Plex Mono', monospace; }
+
+    /* Editor body */
+    .editor-body { display: flex; height: 340px; }
+
+    /* Left sidebar */
+    .editor-sidebar {
+      width: 210px; flex-shrink: 0;
+      border-right: 1px solid rgba(0,0,0,0.07);
+      display: flex; flex-direction: column;
+      background: #fafafa;
+    }
+    .editor-search {
+      display: flex; align-items: center; gap: 7px;
+      padding: 9px 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .editor-search .icon { font-size: 14px; color: var(--text-muted); }
+    .editor-search__ph { font-size: 12px; color: var(--text-muted); }
+    .editor-cats {
+      display: flex; gap: 4px; padding: 8px 10px; flex-wrap: wrap;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .editor-cat {
+      padding: 3px 9px;
+      font-family: var(--font), sans-serif; font-size: 11px; font-weight: 500;
+      color: var(--text-muted); background: transparent;
+      border: 1px solid transparent; border-radius: 4px; cursor: pointer; transition: all 0.15s;
+    }
+    .editor-cat--active { background: #fff; color: var(--text-head); border-color: rgba(0,0,0,0.1); }
+    .editor-asset-list {
+      flex: 1; overflow-y: auto; padding: 6px;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .editor-asset {
+      display: flex; align-items: center; gap: 9px;
+      padding: 7px 8px; border-radius: 6px; cursor: pointer; transition: background 0.15s;
+    }
+    .editor-asset:hover { background: rgba(0,0,0,0.04); }
+    .editor-asset--selected { background: rgba(236,78,11,0.07); }
+    .editor-asset__thumb {
+      width: 34px; height: 34px; border-radius: 4px; flex-shrink: 0;
+      background: var(--grey-100, #e5e5e5);
+    }
+    .editor-asset__info { flex: 1; min-width: 0; }
+    .editor-asset__name {
+      font-size: 11px; font-weight: 500; color: var(--text-head);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      display: block; margin-bottom: 2px;
+    }
+    .editor-asset__status { font-size: 10px; color: var(--text-muted); }
+    .editor-asset__check { font-size: 14px; color: var(--accent); flex-shrink: 0; }
+
+    /* Right main panel */
+    .editor-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .editor-main__header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 11px 16px; border-bottom: 1px solid rgba(0,0,0,0.07); gap: 16px;
+    }
+    .editor-main__title { font-size: 12px; font-weight: 600; color: var(--text-head); }
+    .editor-chips { display: flex; align-items: center; gap: 6px; }
+    .editor-chip {
+      display: inline-flex; align-items: center; padding: 2px 8px;
+      border: 1px solid rgba(0,0,0,0.1); border-radius: 4px;
+      font-size: 10px; font-weight: 600; color: var(--text-muted);
+      background: rgba(0,0,0,0.03);
+    }
+    .editor-chip--green { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+
+    /* Scene canvas — floor plan */
+    .editor-canvas {
+      flex: 1;
+      background: #f7f6f4;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      position: relative; overflow: hidden;
+    }
+    .fp-room {
+      position: absolute; top: 14px; left: 14px; right: 14px; bottom: 14px;
+      border: 1.5px solid rgba(0,0,0,0.1); border-radius: 2px;
+      background: rgba(255,255,255,0.45);
+    }
+    .fp-item {
+      position: absolute; border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .fp-item--sofa {
+      background: rgba(236,78,11,0.1); border: 1.5px solid rgba(236,78,11,0.28);
+      width: 26%; height: 13%; top: 44%; left: 32%;
+    }
+    .fp-item--table {
+      background: rgba(0,0,0,0.05); border: 1.5px solid rgba(0,0,0,0.12);
+      width: 11%; height: 9%; top: 48%; left: 46%;
+    }
+    .fp-item--chair-a {
+      background: rgba(0,0,0,0.04); border: 1.5px solid rgba(0,0,0,0.1);
+      width: 9%; height: 9%; top: 26%; left: 14%;
+    }
+    .fp-item--chair-b {
+      background: rgba(0,0,0,0.04); border: 1.5px solid rgba(0,0,0,0.1);
+      width: 9%; height: 9%; top: 26%; left: 26%;
+    }
+    .fp-item--lamp {
+      background: rgba(254,188,46,0.12); border: 1.5px solid rgba(254,188,46,0.35);
+      width: 5%; height: 8%; top: 18%; right: 20%; border-radius: 50%;
+    }
+    .fp-item--rug {
+      background: rgba(100,150,200,0.07); border: 1.5px dashed rgba(100,150,200,0.22);
+      width: 34%; height: 26%; top: 38%; left: 28%;
+    }
+    .fp-label { font-size: 8px; font-family: var(--font), sans-serif; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+    .fp-selected-ring {
+      position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px;
+      border: 2px solid var(--accent); border-radius: 5px; pointer-events: none;
+    }
+
+    /* Properties bar */
+    .editor-props {
+      border-top: 1px solid rgba(0,0,0,0.07); padding: 9px 16px;
+      display: flex; gap: 16px; align-items: center;
+      background: #f5f5f5; flex-wrap: wrap;
+    }
+    .editor-prop { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+    .editor-prop__label { color: var(--text-muted); white-space: nowrap; }
+    .editor-prop__value { display: flex; align-items: center; gap: 5px; font-weight: 500; color: var(--text-head); }
+    .editor-prop__swatch { width: 12px; height: 12px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.1); flex-shrink: 0; }
+    .editor-prop__sep { width: 1px; height: 14px; background: rgba(0,0,0,0.1); }
+
+    /* ─── Hero strips ─── */
+    .hero__strips {
       position: relative;
       z-index: 1;
+      width: 100%;
+      margin-top: -100px;
+      padding-top: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow: hidden;
     }
-    .hero__stat {
-      padding: 20px 40px;
+    .hero__strips::before,
+    .hero__strips::after {
+      content: '';
+      position: absolute;
+      top: 100px; bottom: 0;
+      width: 100px; z-index: 2; pointer-events: none;
+    }
+    .hero__strips::before { left: 0; background: linear-gradient(to right, var(--bg-warm), transparent); }
+    .hero__strips::after  { right: 0; background: linear-gradient(to left, var(--bg-warm), transparent); }
+
+    /* Hero strip card */
+    .hs-card {
+      flex-shrink: 0;
+      width: 240px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.07);
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .hs-card__img { width: 240px; height: 170px; display: block; }
+    .hs-card__tag {
+      position: absolute; top: 9px; left: 9px;
+      background: rgba(255,255,255,0.92); border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 4px; padding: 3px 8px;
+      font-size: 9px; font-weight: 700; color: var(--text-body);
+      letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    .hs-card__overlay {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.12) 70%, transparent 100%);
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 8px;
+    }
+    .hs-card__info { flex: 1; min-width: 0; }
+    .hs-card__title {
+      display: block; font-size: 12px; font-weight: 600; color: #fff;
+      margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .hs-card__tags { display: flex; gap: 4px; overflow: hidden; }
+    .hs-tag {
+      font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 3px; padding: 1px 5px; white-space: nowrap;
+    }
+    .hs-card__count {
+      flex-shrink: 0; font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.9);
+      background: rgba(0,0,0,0.32); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 4px; padding: 3px 7px; white-space: nowrap;
+    }
+
+    /* ─── Hero stats bar (below hero section) ─── */
+    .hero-stats-bar {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-stats-bar__inner {
+      display: flex;
+      align-items: center;
+    }
+    .hstat {
+      flex: 1;
+      padding: 18px 24px;
       border-right: 1px solid var(--border);
       text-align: center;
     }
-    .hero__stat:last-child { border-right: none; }
-    .hero__stat-val {
-      font-size: 26px;
-      font-weight: 600;
-      color: var(--text-head);
-      letter-spacing: -0.5px;
-      line-height: 1;
-      margin-bottom: 5px;
+    .hstat:last-child { border-right: none; }
+    .hstat__val {
+      font-size: 20px; font-weight: 600; color: var(--text-head);
+      letter-spacing: -0.5px; line-height: 1; margin-bottom: 4px;
     }
-    .hero__stat-lbl {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--text-muted);
+    .hstat__lbl {
+      font-size: 10px; font-weight: 500; letter-spacing: 1.4px;
+      text-transform: uppercase; color: var(--text-muted);
     }
 
 
@@ -1478,7 +1721,9 @@
 
     @media (max-width: 1024px) {
       .wrap { padding: 0 40px; }
-      .hero { padding: 80px 40px 0; }
+      .hero { padding: 80px 0 0; }
+      .hero__content { padding: 0 40px; }
+      .hero__editor-wrap { padding: 0 24px; margin-top: 48px; }
       .showcase__header { padding: 0 40px; }
       .stats__grid { grid-template-columns: 1fr 1fr; }
       .tiers__strip { grid-template-columns: 1fr; }
@@ -1492,9 +1737,18 @@
     @media (max-width: 768px) {
       :root { --section-y: 80px; }
       .wrap { padding: 0 24px; }
-      .hero { padding: 72px 24px 0; }
-      .hero__stats { flex-direction: column; }
-      .hero__stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .hero { padding: 72px 0 0; }
+      .hero__content { padding: 0 24px; }
+      .hero__editor-wrap { padding: 0 16px; margin-top: 40px; }
+      /* Remove overlap on mobile — stack layout */
+      .hero__strips { margin-top: 24px; padding-top: 0; }
+      .hero__strips::before,
+      .hero__strips::after { display: none; }
+      .editor-sidebar { display: none; }
+      .editor-bar__right { display: none; }
+      .hero-stats-bar__inner { flex-wrap: wrap; }
+      .hstat { flex: 0 0 50%; border-bottom: 1px solid var(--border); }
+      .hstat:last-child { flex: 0 0 100%; border-right: none; border-bottom: none; }
       .nav__links { display: none; }
       .mission__inner,
       .validation__inner,
@@ -1545,16 +1799,15 @@
 
 
 <!-- ═══════════════════════════════════════════════════════
-     2. HERO — social proof ABOVE headline
+     2. HERO — 3-layer: copy | editor | strip
 ═══════════════════════════════════════════════════════ -->
 <section class="hero">
-  <div class="hero__content">
 
-    <!-- Social proof — pre-headline trust signal -->
+  <!-- LAYER 1 — Headline + CTA (centered) -->
+  <div class="hero__content">
     <div class="hero__proof">
       <span class="hero__proof-txt"><strong>Production infrastructure</strong>, not a research project &nbsp;·&nbsp; SOC 2 Type II</span>
     </div>
-
     <h1 class="hero__h1">Structured data<br>for <em>Physical AI.</em></h1>
     <p class="hero__sub">Structured product data for simulation-ready world generation.</p>
     <p class="hero__body">imagine.io turns structured product representations into valid environments for physical AI — preserving geometry, semantics, articulation, constraints, and variation from the start.</p>
@@ -1562,27 +1815,215 @@
       <a href="#" class="btn btn-primary btn-lg">Book a Technical Discussion →</a>
     </div>
   </div>
-  <div class="wrap" style="width:100%; position:relative; z-index:1;">
-    <div class="hero__stats">
-      <div class="hero__stat">
-        <div class="hero__stat-val">6+</div>
-        <div class="hero__stat-lbl">Years in Production</div>
+
+  <!-- LAYER 2 — Editor / Scene Configurator (light mode, primary visual anchor) -->
+  <div class="hero__editor-wrap">
+    <div class="hero__editor">
+
+      <!-- Window chrome + tab bar -->
+      <div class="editor-bar">
+        <div class="editor-bar__dots">
+          <span class="editor-bar__dot editor-bar__dot--r"></span>
+          <span class="editor-bar__dot editor-bar__dot--a"></span>
+          <span class="editor-bar__dot editor-bar__dot--g"></span>
+        </div>
+        <div class="editor-bar__tabs">
+          <button class="editor-tab editor-tab--active">Scene Builder</button>
+          <button class="editor-tab">Products</button>
+          <button class="editor-tab">Validation</button>
+          <button class="editor-tab">Export</button>
+        </div>
+        <div class="editor-bar__right">
+          <span class="editor-badge editor-badge--green"><span class="editor-badge-dot"></span>Sim-ready</span>
+          <span class="editor-filename">scene_4082.usd</span>
+        </div>
       </div>
-      <div class="hero__stat">
-        <div class="hero__stat-val">1M+</div>
-        <div class="hero__stat-lbl">Outputs / Month</div>
+
+      <!-- Editor body — sidebar + main -->
+      <div class="editor-body">
+
+        <!-- Left: asset browser -->
+        <div class="editor-sidebar">
+          <div class="editor-search">
+            <span class="icon">search</span>
+            <span class="editor-search__ph">Search assets…</span>
+          </div>
+          <div class="editor-cats">
+            <button class="editor-cat editor-cat--active">Furniture</button>
+            <button class="editor-cat">Lighting</button>
+            <button class="editor-cat">Materials</button>
+          </div>
+          <div class="editor-asset-list">
+            <div class="editor-asset editor-asset--selected">
+              <div class="editor-asset__thumb" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%201.jpg') center/cover no-repeat;"></div>
+              <div class="editor-asset__info">
+                <span class="editor-asset__name">Kingston Sofa</span>
+                <span class="editor-asset__status">Sim-ready · 24 variants</span>
+              </div>
+              <span class="icon editor-asset__check">check_circle</span>
+            </div>
+            <div class="editor-asset">
+              <div class="editor-asset__thumb" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Coffee%20Table%20lfs%201.png') center/cover no-repeat;"></div>
+              <div class="editor-asset__info">
+                <span class="editor-asset__name">Coffee Table</span>
+                <span class="editor-asset__status">Sim-ready · 8 variants</span>
+              </div>
+            </div>
+            <div class="editor-asset">
+              <div class="editor-asset__thumb" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2010.jpg') center/cover no-repeat;"></div>
+              <div class="editor-asset__info">
+                <span class="editor-asset__name">Lounge Chair</span>
+                <span class="editor-asset__status">Sim-ready · 12 variants</span>
+              </div>
+            </div>
+            <div class="editor-asset">
+              <div class="editor-asset__thumb" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Console%20lfs%201.png') center/cover no-repeat;"></div>
+              <div class="editor-asset__info">
+                <span class="editor-asset__name">Console Table</span>
+                <span class="editor-asset__status">Sim-ready · 6 variants</span>
+              </div>
+            </div>
+            <div class="editor-asset">
+              <div class="editor-asset__thumb" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Foundry%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div>
+              <div class="editor-asset__info">
+                <span class="editor-asset__name">Foundry Lamp</span>
+                <span class="editor-asset__status">Beauty · 4 variants</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: scene canvas + properties -->
+        <div class="editor-main">
+          <div class="editor-main__header">
+            <span class="editor-main__title">Living Room — Scene #4082</span>
+            <div class="editor-chips">
+              <span class="editor-chip">12 objects</span>
+              <span class="editor-chip">3 variants</span>
+              <span class="editor-chip editor-chip--green">Sim-ready</span>
+            </div>
+          </div>
+
+          <!-- Top-down floor plan canvas -->
+          <div class="editor-canvas">
+            <div class="fp-room"></div>
+            <div class="fp-item fp-item--rug"></div>
+            <div class="fp-item fp-item--sofa">
+              <span class="fp-label">Sofa</span>
+              <div class="fp-selected-ring"></div>
+            </div>
+            <div class="fp-item fp-item--table"><span class="fp-label">Table</span></div>
+            <div class="fp-item fp-item--chair-a"><span class="fp-label">Chair</span></div>
+            <div class="fp-item fp-item--chair-b"><span class="fp-label">Chair</span></div>
+            <div class="fp-item fp-item--lamp"></div>
+          </div>
+
+          <!-- Properties bar -->
+          <div class="editor-props">
+            <div class="editor-prop">
+              <span class="editor-prop__label">Material</span>
+              <div class="editor-prop__value">
+                <span class="editor-prop__swatch" style="background:#8B7355;"></span>
+                Walnut Natural
+              </div>
+            </div>
+            <div class="editor-prop__sep"></div>
+            <div class="editor-prop">
+              <span class="editor-prop__label">Variant</span>
+              <div class="editor-prop__value">3 of 24</div>
+            </div>
+            <div class="editor-prop__sep"></div>
+            <div class="editor-prop">
+              <span class="editor-prop__label">Joint</span>
+              <div class="editor-prop__value">hinge · 0°–110°</div>
+            </div>
+            <div class="editor-prop__sep"></div>
+            <div class="editor-prop">
+              <span class="editor-prop__label">Label</span>
+              <div class="editor-prop__value">sofa_01 · 0x2A4</div>
+            </div>
+          </div>
+        </div><!-- /editor-main -->
+
+      </div><!-- /editor-body -->
+    </div><!-- /hero__editor -->
+  </div><!-- /hero__editor-wrap -->
+
+  <!-- LAYER 3 — Visual strips (tucked behind editor via negative margin + z-index) -->
+  <div class="hero__strips">
+
+    <!-- Strip 1: left → right -->
+    <div class="mq">
+      <div class="mq__track">
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%201.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Living Room</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Residential</span></div></div><span class="hs-card__count">5,200+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Coffee%20Table%20lfs%201.png') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Dining Room</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Dining</span></div></div><span class="hs-card__count">3,400+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Foundry%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Verified</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Office Space</span><div class="hs-card__tags"><span class="hs-tag">Commercial</span><span class="hs-tag">Office</span></div></div><span class="hs-card__count">2,900+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2010.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Lounge Area</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Lounge</span></div></div><span class="hs-card__count">3,800+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Console%20lfs%201.png') center/cover no-repeat;"></div><span class="hs-card__tag">Verified</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Entryway</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Hallway</span></div></div><span class="hs-card__count">1,900+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Purse%20lfs%201.png') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Retail Space</span><div class="hs-card__tags"><span class="hs-tag">Commercial</span><span class="hs-tag">Retail</span></div></div><span class="hs-card__count">2,600+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Basra%20Floor%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Verified</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Hotel Lobby</span><div class="hs-card__tags"><span class="hs-tag">Hospitality</span><span class="hs-tag">Lounge</span></div></div><span class="hs-card__count">1,700+</span></div></div>
+        <!-- duplicate for loop -->
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%201.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Living Room</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Residential</span></div></div><span class="hs-card__count">5,200+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Coffee%20Table%20lfs%201.png') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Dining Room</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Dining</span></div></div><span class="hs-card__count">3,400+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Foundry%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Verified</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Office Space</span><div class="hs-card__tags"><span class="hs-tag">Commercial</span><span class="hs-tag">Office</span></div></div><span class="hs-card__count">2,900+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2010.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Lounge Area</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Lounge</span></div></div><span class="hs-card__count">3,800+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Console%20lfs%201.png') center/cover no-repeat;"></div><span class="hs-card__tag">Verified</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Entryway</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Hallway</span></div></div><span class="hs-card__count">1,900+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Purse%20lfs%201.png') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Retail Space</span><div class="hs-card__tags"><span class="hs-tag">Commercial</span><span class="hs-tag">Retail</span></div></div><span class="hs-card__count">2,600+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Basra%20Floor%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Verified</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Hotel Lobby</span><div class="hs-card__tags"><span class="hs-tag">Hospitality</span><span class="hs-tag">Lounge</span></div></div><span class="hs-card__count">1,700+</span></div></div>
       </div>
-      <div class="hero__stat">
-        <div class="hero__stat-val">25K+</div>
-        <div class="hero__stat-lbl">Structured Products</div>
+    </div>
+
+    <!-- Strip 2: right → left -->
+    <div class="mq">
+      <div class="mq__track mq__track--rev">
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Aspen%20Chair_Image%202.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Dining Env.</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Dining</span></div></div><span class="hs-card__count">2,200+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Kessler%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Verified</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Bedroom</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Bedroom</span></div></div><span class="hs-card__count">1,400+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/F2-frt.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Living Env.</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Residential</span></div></div><span class="hs-card__count">1,800+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Blouse%20Lifestyle%201.png') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Outdoor Garden</span><div class="hs-card__tags"><span class="hs-tag">Exterior</span><span class="hs-tag">Garden</span></div></div><span class="hs-card__count">2,100+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Lorenzo%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Verified</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Hospitality</span><div class="hs-card__tags"><span class="hs-tag">Hotel</span><span class="hs-tag">Lounge</span></div></div><span class="hs-card__count">1,600+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Marilyn%20Chandelier_Image%201.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Premium Interior</span><div class="hs-card__tags"><span class="hs-tag">Luxury</span><span class="hs-tag">Interior</span></div></div><span class="hs-card__count">1,100+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Coat%20Lifestyle%201.png') center/cover no-repeat;"></div><span class="hs-card__tag">Verified</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Outdoor / Urban</span><div class="hs-card__tags"><span class="hs-tag">Exterior</span><span class="hs-tag">Urban</span></div></div><span class="hs-card__count">4,100+</span></div></div>
+        <!-- duplicate for loop -->
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Aspen%20Chair_Image%202.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Dining Env.</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Dining</span></div></div><span class="hs-card__count">2,200+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Kessler%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Verified</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Bedroom</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Bedroom</span></div></div><span class="hs-card__count">1,400+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/F2-frt.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Living Env.</span><div class="hs-card__tags"><span class="hs-tag">Interior</span><span class="hs-tag">Residential</span></div></div><span class="hs-card__count">1,800+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Blouse%20Lifestyle%201.png') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Outdoor Garden</span><div class="hs-card__tags"><span class="hs-tag">Exterior</span><span class="hs-tag">Garden</span></div></div><span class="hs-card__count">2,100+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Lorenzo%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Verified</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Hospitality</span><div class="hs-card__tags"><span class="hs-tag">Hotel</span><span class="hs-tag">Lounge</span></div></div><span class="hs-card__count">1,600+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Marilyn%20Chandelier_Image%201.jpg') center/cover no-repeat;"></div><span class="hs-card__tag">Sim-ready</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Premium Interior</span><div class="hs-card__tags"><span class="hs-tag">Luxury</span><span class="hs-tag">Interior</span></div></div><span class="hs-card__count">1,100+</span></div></div>
+        <div class="hs-card"><div class="hs-card__img" style="background:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Coat%20Lifestyle%201.png') center/cover no-repeat;"></div><span class="hs-card__tag">Verified</span><div class="hs-card__overlay"><div class="hs-card__info"><span class="hs-card__title">Outdoor / Urban</span><div class="hs-card__tags"><span class="hs-tag">Exterior</span><span class="hs-tag">Urban</span></div></div><span class="hs-card__count">4,100+</span></div></div>
       </div>
-      <div class="hero__stat">
-        <div class="hero__stat-val">10,000×</div>
-        <div class="hero__stat-lbl">Variation Multiplier</div>
+    </div>
+
+  </div><!-- /hero__strips -->
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     STATS BAR — repositioned from hero
+═══════════════════════════════════════════════════════ -->
+<section class="hero-stats-bar">
+  <div class="wrap">
+    <div class="hero-stats-bar__inner">
+      <div class="hstat">
+        <div class="hstat__val">6+</div>
+        <div class="hstat__lbl">Years in Production</div>
       </div>
-      <div class="hero__stat">
-        <div class="hero__stat-val">150+</div>
-        <div class="hero__stat-lbl">Metadata Attributes</div>
+      <div class="hstat">
+        <div class="hstat__val">1M+</div>
+        <div class="hstat__lbl">Outputs / Month</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat__val">25K+</div>
+        <div class="hstat__lbl">Structured Products</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat__val">10,000×</div>
+        <div class="hstat__lbl">Variation Multiplier</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat__val">150+</div>
+        <div class="hstat__lbl">Metadata Attributes</div>
       </div>
     </div>
   </div>
