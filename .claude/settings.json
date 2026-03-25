@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"/Users/vipinmeena/Desktop/01 Projects/07 Imagineio-Physical AI\" && git add -A && git diff --cached --quiet || git commit -m \"Auto-save: WIP snapshot $(date '+%Y-%m-%d %H:%M')\" && git push origin HEAD 2>&1 || true",
+            "timeout": 60,
+            "statusMessage": "Auto-saving progress to git..."
+          }
+        ]
+      }
+    ]
+  }
+}
