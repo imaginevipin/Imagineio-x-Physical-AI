@@ -9,6 +9,7 @@
 - **Client / Brand:** imagine.io
 - **Project:** Physical AI (name TBD)
 - **Design System:** Prism — tokens in `tokens.css`, fonts in `assets/fonts/`, logos in `assets/logos/`
+- **Figma File:** [Imagine.io x Physical AI](https://www.figma.com/design/1aL836P4R3p09gOwE5TVQz/Imagine.io-x-Physical-AI?node-id=0-1) — primary design file for this project (fileKey: `1aL836P4R3p09gOwE5TVQz`)
 
 ---
 
@@ -91,6 +92,7 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-25 | v6 bug fix — background:url() → background-image:url() | Inline `background:` shorthand was overriding `background-size: cover` and `background-position: center` from CSS class, causing images to not fill card frames. Fixed all 45 occurrences to use `background-image:` instead. |
 | 2026-03-25 | index.html updated to v6 — now live on Vercel | `cp outputs/homepage-v6.html index.html` + pushed to main. Vercel auto-deployed. CSS cache at `?v=7`. |
 | 2026-03-26 | Homepage v7 created — section reorder | v6 duplicated to `outputs/homepage-v7.html` + `css/homepage-v7.css`. One change: "Asset Library" (`.showcase`) section moved from above the Proof section to directly after the Deliverables section. No internal changes to either section. |
+| 2026-03-26 | Figma design file added to project | Imagine.io x Physical AI — fileKey: `1aL836P4R3p09gOwE5TVQz`. This is the primary Figma file designers will use for this project. |
 
 ---
 
