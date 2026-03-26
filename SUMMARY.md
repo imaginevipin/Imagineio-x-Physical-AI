@@ -90,6 +90,7 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-25 | v6 asset cards — Apparel images replaced with Kitchen + Bath | All 4 Apparel image references removed. Replaced with: `Kitchen/Dutch Oven_Image 1.jpg` ("Kitchen Environments"), `Bath/Walnut Vanity_Image 1.jpg` ("Bathroom Spaces"), `Kitchen/Kitchen Faucet_Image 1.jpg` ("Kitchen & Bath Fixtures"), `Bath/Bathtub_Image 1.jpg` ("Spa & Wellness"). Categories now: Furniture, Lighting, Kitchen, Bath only. |
 | 2026-03-25 | v6 bug fix — background:url() → background-image:url() | Inline `background:` shorthand was overriding `background-size: cover` and `background-position: center` from CSS class, causing images to not fill card frames. Fixed all 45 occurrences to use `background-image:` instead. |
 | 2026-03-25 | index.html updated to v6 — now live on Vercel | `cp outputs/homepage-v6.html index.html` + pushed to main. Vercel auto-deployed. CSS cache at `?v=7`. |
+| 2026-03-26 | Homepage v7 created — section reorder | v6 duplicated to `outputs/homepage-v7.html` + `css/homepage-v7.css`. One change: "Asset Library" (`.showcase`) section moved from above the Proof section to directly after the Deliverables section. No internal changes to either section. |
 
 ---
 
@@ -104,6 +105,7 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-25 | Homepage v4 — complete | `outputs/homepage-v4.html` | Content aligned with PM site + full UI polish pass. See section map and design decisions below. |
 | 2026-03-25 | Homepage v5 — hero refactor (WIP) | `outputs/homepage-v5.html` + `css/homepage-v5.css` | 3-layer hero: headline → dark code editor → animated asset strips. Stats bar below hero. First version with external CSS file. |
 | 2026-03-25 | Homepage v6 — complete, live on Vercel | `outputs/homepage-v6.html` + `css/homepage-v6.css` (CSS cache `?v=7`) | White hero bg, light Scene Builder UI editor (460px tall), h1 = "Structured product data for simulation-ready world generation." (orange on "simulation-ready"), glassmorphic navbar, `.logo-strip` partner section, refactored asset cards (`aspect-ratio: 4/3`, full-bleed image + gradient overlay, `.asset-badge` pills, Furniture/Lighting/Kitchen/Bath images). Copied to `index.html` and deployed. |
+| 2026-03-26 | Homepage v7 — WIP | `outputs/homepage-v7.html` + `css/homepage-v7.css` (CSS cache `?v=1`) | v6 base. Section reorder: Asset Library now sits after Deliverables. Active version being edited. |
 
 ---
 
@@ -208,12 +210,14 @@ All product images are served from the `library-assets` GitHub repo via jsDelivr
 ## Known Issues / Pending Items
 
 - `homepage-v6` is the current live version — `index.html` = v6, deployed on Vercel.
-- CSS cache bust is at `?v=7` — increment to `?v=8` next time CSS changes in v6.
+- `homepage-v7` is the active WIP version — do NOT copy to `index.html` until approved.
+- v7 CSS cache is at `?v=1` — increment each time `homepage-v7.css` is changed.
 - `com.apple.provenance` extended attribute appears on all files in the `css/` folder (macOS behavior) — does NOT block writes; file is writable by owner.
 
 ---
 
 ## Next Steps
 
-1. Review v6 live on Vercel — full page audit below the hero (mission, platform, tiers, GTC sections)
-2. When ready: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
+1. Continue iterating on `homepage-v7.html` + `css/homepage-v7.css`
+2. When v7 is approved: `cp outputs/homepage-v7.html index.html` and push to deploy
+3. When ready: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
