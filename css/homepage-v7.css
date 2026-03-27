@@ -1128,114 +1128,6 @@
 
 
     /* ═══════════════════════════════════════════════════════
-       11. USE CASE — IMAGE-FIRST CARDS
-    ═══════════════════════════════════════════════════════ */
-    .usecase {
-      background: var(--bg);
-      padding: var(--section-y) 0;
-    }
-    .usecase__hd {
-      max-width: 600px;
-      margin: 0 auto 64px;
-      text-align: center;
-    }
-    .usecase__h2 {
-      font-size: clamp(32px, 3.5vw, 48px);
-      font-weight: 400;
-      letter-spacing: -1.5px;
-      color: var(--text-head);
-      line-height: 1.1;
-    }
-    .usecase__cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .uc-card {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .uc-card__img {
-      width: 100%;
-      height: 480px;
-      display: block;
-    }
-    /* Bottom overlay on image card */
-    .uc-card__overlay {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 32px 36px;
-      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
-    }
-    .uc-card__type {
-      display: block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 8px;
-    }
-    .uc-card__name {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 26px;
-      font-weight: 500;
-      letter-spacing: -0.5px;
-      color: #ffffff;
-      line-height: 1.15;
-    }
-    .uc-card__name .icon {
-      font-size: 24px;
-      color: rgba(255,255,255,0.5);
-      flex-shrink: 0;
-    }
-    /* Hover: subtle lift */
-    .uc-card:hover .uc-card__img { filter: brightness(1.08); }
-    .uc-card:hover .uc-card__name .icon { color: rgba(255,255,255,0.9); }
-    .uc-card__img { transition: filter 0.3s ease; }
-    /* Feature list below cards */
-    .usecase__details {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 16px;
-    }
-    .uc-detail {
-      background: var(--bg-warm);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 32px 36px;
-    }
-    .uc-detail__title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-head);
-      margin-bottom: 16px;
-      letter-spacing: -0.1px;
-    }
-    .uc-detail__list { display: flex; flex-direction: column; gap: 10px; }
-    .uc-detail__item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--text-body);
-      line-height: 1.5;
-    }
-    .uc-detail__item .icon {
-      font-size: 16px;
-      color: var(--text-muted);
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .uc-detail__cta { margin-top: 24px; }
-
-
-    /* ═══════════════════════════════════════════════════════
        12. VALIDATION SHOWCASE
     ═══════════════════════════════════════════════════════ */
     .validation {
@@ -1889,9 +1781,7 @@
       .ps-step__top            { opacity: 1; }
       .ps-step__desc           { max-height: none !important; opacity: 1 !important; margin-top: 10px !important; }
       .ps-variants-grid { grid-template-columns: repeat(2, 1fr); }
-      .usecase__cards,
-      .usecase__details { grid-template-columns: 1fr; }
-      .uc-card__img { height: 320px; }
+
       .cta-sec__inner { grid-template-columns: 1fr; }
       .cta-sec__right { display: none; }
       .footer__main { grid-template-columns: 1fr; gap: 36px; }
