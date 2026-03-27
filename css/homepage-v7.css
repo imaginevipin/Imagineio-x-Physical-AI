@@ -194,11 +194,12 @@
 
     .hero__h1 {
       font-size: clamp(32px, 3.5vw, 40px);
-      font-weight: 600;
+      font-weight: 500;
       line-height: 1.2;
       letter-spacing: -1px;
       color: var(--text-head);
-      margin-bottom: 20px;
+      max-width: 600px;
+      margin: 0 auto 20px;
     }
     .hero__h1 em {
       font-style: normal;
@@ -241,7 +242,7 @@
     .hero__editor {
       background: #fff;
       border: 1px solid rgba(0,0,0,0.1);
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-md);
       box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 24px 72px rgba(0,0,0,0.12);
       overflow: hidden;
     }
@@ -333,11 +334,11 @@
       width: 34px; height: 34px; border-radius: 4px; flex-shrink: 0;
       background: var(--grey-100, #e5e5e5);
     }
-    .editor-asset__info { flex: 1; min-width: 0; }
+    .editor-asset__info { flex: 1; min-width: 0; text-align: left; }
     .editor-asset__name {
       font-size: 11px; font-weight: 500; color: var(--text-head);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      display: block; margin-bottom: 2px;
+      display: block; margin-bottom: -2px;
     }
     .editor-asset__status { font-size: 10px; color: var(--text-muted); }
     .editor-asset__check { font-size: 14px; color: var(--accent); flex-shrink: 0; }
@@ -371,7 +372,7 @@
     .fp-room {
       position: absolute; top: 14px; left: 14px; right: 14px; bottom: 14px;
       border: 1.5px solid rgba(0,0,0,0.1); border-radius: 2px;
-      background: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.75);
     }
     .fp-item {
       position: absolute; border-radius: 3px;
@@ -379,23 +380,23 @@
     }
     .fp-item--sofa {
       background: rgba(236,78,11,0.1); border: 1.5px solid rgba(236,78,11,0.28);
-      width: 26%; height: 13%; top: 44%; left: 32%;
+      width: 26%; height: 13%; top: 20%; left: 32%;
     }
     .fp-item--table {
       background: rgba(0,0,0,0.05); border: 1.5px solid rgba(0,0,0,0.12);
-      width: 11%; height: 9%; top: 48%; left: 46%;
+      width: 11%; height: 9%; top: 46%; left: 40%;
     }
     .fp-item--chair-a {
       background: rgba(0,0,0,0.04); border: 1.5px solid rgba(0,0,0,0.1);
-      width: 9%; height: 9%; top: 26%; left: 14%;
+      width: 9%; height: 9%; top: 68%; left: 28%;
     }
     .fp-item--chair-b {
       background: rgba(0,0,0,0.04); border: 1.5px solid rgba(0,0,0,0.1);
-      width: 9%; height: 9%; top: 26%; left: 26%;
+      width: 9%; height: 9%; top: 68%; left: 53%;
     }
     .fp-item--lamp {
       background: rgba(254,188,46,0.12); border: 1.5px solid rgba(254,188,46,0.35);
-      width: 5%; height: 8%; top: 18%; right: 20%; border-radius: 50%;
+      width: 5%; height: 8%; top: 22%; left: 60%; border-radius: 50%;
     }
     .fp-item--rug {
       background: rgba(100,150,200,0.07); border: 1.5px dashed rgba(100,150,200,0.22);
@@ -497,11 +498,6 @@
       width: auto;
       object-fit: contain;
       flex-shrink: 0;
-      filter: grayscale(100%);
-      opacity: 0.7;
-      transition: opacity 0.2s ease, transform 0.2s ease, filter 0.2s ease;
-    }
-    .logo-strip__logos img:hover {
       filter: grayscale(0%);
       opacity: 1;
     }
@@ -674,7 +670,7 @@
     }
     .mission__item .icon {
       font-size: 18px;
-      color: var(--text-muted);
+      color: var(--accent);
       flex-shrink: 0;
       margin-top: 1px;
     }
@@ -799,7 +795,7 @@
     .code-layer__feat:nth-child(even) {
       padding-left: 24px;
     }
-    .code-layer__feat .icon { font-size: 16px; color: rgba(255,255,255,0.35); flex-shrink: 0; }
+    .code-layer__feat .icon { font-size: 16px; color: var(--accent-dark); flex-shrink: 0; }
 
 
     /* ═══════════════════════════════════════════════════════
@@ -1520,7 +1516,7 @@
     .del-card__icon {
       font-family: 'Material Symbols Outlined';
       font-size: 22px;
-      color: var(--text-muted);
+      color: var(--accent);
       display: block;
       margin-bottom: 16px;
     }
