@@ -906,21 +906,21 @@
       padding: 28px;
     }
 
-    /* Visuals are abs-positioned inside the stage */
+    /* Visuals are abs-positioned, vertically centred inside the stage */
     .ps-visual {
       position: absolute;
-      top: 28px;
+      top: 50%;
       left: 28px;
       right: 28px;
+      transform: translateY(calc(-50% + 18px));
       opacity: 0;
-      transform: translateY(18px);
       transition: opacity 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                   transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       pointer-events: none;
     }
     .ps-visual--active {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(-50%);
       pointer-events: auto;
     }
 
