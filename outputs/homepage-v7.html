@@ -6,7 +6,7 @@
   <title>imagine.io — Structured World Infrastructure for Physical AI</title>
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
-  <link rel="stylesheet" href="../css/homepage-v7.css?v=2">
+  <link rel="stylesheet" href="../css/homepage-v7.css?v=3">
 </head>
 <body>
 
@@ -322,232 +322,237 @@
      8–9. PIPELINE — sticky-scroll, 3 steps
 ═══════════════════════════════════════════════════════ -->
 <section class="pipeline-scroll">
-  <div class="wrap">
 
-    <!-- Section header -->
+  <!-- Header scrolls in normally, then track begins -->
+  <div class="wrap">
     <div class="pipeline-scroll__hd">
       <span class="pill">How It Works</span>
       <h2 class="pipeline-scroll__h2">The system that produced <em>what you just saw.</em></h2>
     </div>
+  </div>
 
-    <div class="pipeline-scroll__inner">
+  <!-- Tall track — creates scroll space for the sticky inner -->
+  <div class="pipeline-scroll__track">
+    <div class="pipeline-scroll__sticky">
+      <div class="wrap">
+        <div class="pipeline-scroll__grid">
 
-      <!-- Left: sticky step list -->
-      <div class="pipeline-scroll__left">
+          <!-- Left: step list -->
+          <div class="pipeline-scroll__left">
 
-        <div class="ps-step ps-step--active" data-step="1">
-          <span class="ps-step__num">01</span>
-          <div class="ps-step__body">
-            <h3 class="ps-step__title">Fully tagged scene graph — generated at creation</h3>
-            <p class="ps-step__desc">Every object carries its full identity from creation: semantic class, instance ID, dimensions, spatial transform. Not post-processed annotation — generated at creation from the product graph. Labels like <em>dishwasher</em>, <em>base_cabinet</em>, <em>countertop</em> — with instance IDs and parent-child hierarchies — are structural outputs, not afterthoughts.</p>
-          </div>
-        </div>
-
-        <div class="ps-step" data-step="2">
-          <span class="ps-step__num">02</span>
-          <div class="ps-step__body">
-            <h3 class="ps-step__title">Parameter-driven variation at dataset scale</h3>
-            <p class="ps-step__desc">Materials, lighting, layout permutation, object placement — all parameter-driven. Every variant is structurally valid. 1 base environment × 9 cabinet finishes × 4 countertop materials × 4 lighting conditions × 3 layout types = 432 unique valid environments — plus clutter and spatial randomisation → tens of thousands of training scenes. Available via API.</p>
-          </div>
-        </div>
-
-        <div class="ps-step" data-step="3">
-          <span class="ps-step__num">03</span>
-          <div class="ps-step__body">
-            <h3 class="ps-step__title">Perception training on physically accurate environments</h3>
-            <p class="ps-step__desc">Every surface has physically accurate PBR materials derived from structured product data. Every layout is dimensionally accurate and physically plausible. Every object is semantically labeled. Your models train on grounded environments — not procedural approximations or AI-synthesized scenes.</p>
-          </div>
-        </div>
-
-      </div><!-- /pipeline-scroll__left -->
-
-      <!-- Right: visuals, one per step -->
-      <div class="pipeline-scroll__right">
-
-        <!-- Visual 1: Scene graph tree view -->
-        <div class="ps-visual" data-step="1">
-          <div class="ps-card">
-            <div class="ps-card__bar">
-              <div class="ps-card__dots">
-                <span class="ps-card__dot"></span>
-                <span class="ps-card__dot"></span>
-                <span class="ps-card__dot"></span>
+            <div class="ps-step ps-step--active">
+              <div class="ps-step__top">
+                <div class="ps-step__icon"><span class="icon">account_tree</span></div>
+                <span class="ps-step__num">01</span>
+                <h3 class="ps-step__title">Fully tagged scene graph — generated at creation</h3>
               </div>
-              <span class="ps-card__fn">scene_graph.json</span>
+              <p class="ps-step__desc">Every object carries its full identity from creation: semantic class, instance ID, dimensions, spatial transform. Not post-processed annotation — generated from the product graph. Labels like <em>dishwasher</em>, <em>base_cabinet</em>, <em>countertop</em> — with instance IDs and parent-child hierarchies — are structural outputs, not afterthoughts.</p>
             </div>
-            <div class="ps-card__body">
-              <div class="ps-tree">
-                <div class="ps-tree__root">KitchenEnvironment</div>
-                <div class="ps-tree__branch">
-                  <div class="ps-tree__item">
-                    <span class="ps-tree__line">├─</span>
-                    <span class="ps-tree__key">Cabinet_01</span>
-                    <span class="ps-tree__tag ps-tree__tag--label">label: upper_cabinet</span>
-                    <span class="ps-tree__tag ps-tree__tag--id">id: 0x001</span>
+
+            <div class="ps-step">
+              <div class="ps-step__top">
+                <div class="ps-step__icon"><span class="icon">tune</span></div>
+                <span class="ps-step__num">02</span>
+                <h3 class="ps-step__title">Parameter-driven variation at dataset scale</h3>
+              </div>
+              <p class="ps-step__desc">Materials, lighting, layout permutation, object placement — all parameter-driven. Every variant is structurally valid. 1 base environment × 9 finishes × 4 lighting × 3 layouts = 432 valid environments — plus clutter and spatial randomisation → tens of thousands of training scenes.</p>
+            </div>
+
+            <div class="ps-step">
+              <div class="ps-step__top">
+                <div class="ps-step__icon"><span class="icon">visibility</span></div>
+                <span class="ps-step__num">03</span>
+                <h3 class="ps-step__title">Perception training on physically accurate environments</h3>
+              </div>
+              <p class="ps-step__desc">Every surface has physically accurate PBR materials derived from structured product data. Every layout is dimensionally accurate and physically plausible. Every object is semantically labeled. Your models train on grounded environments — not procedural approximations or AI-synthesized scenes.</p>
+            </div>
+
+          </div><!-- /pipeline-scroll__left -->
+
+          <!-- Right: one visual shown at a time, JS swaps on scroll -->
+          <div class="pipeline-scroll__right">
+
+            <!-- Visual 01: Scene graph tree -->
+            <div class="ps-visual ps-visual--active">
+              <div class="ps-card">
+                <div class="ps-card__bar">
+                  <div class="ps-card__dots">
+                    <span class="ps-card__dot ps-card__dot--r"></span>
+                    <span class="ps-card__dot ps-card__dot--a"></span>
+                    <span class="ps-card__dot ps-card__dot--g"></span>
                   </div>
-                  <div class="ps-tree__sub">
-                    <div class="ps-tree__item">
-                      <span class="ps-tree__line">│ ├─</span>
-                      <span class="ps-tree__key ps-tree__key--joint">Door_Left</span>
-                      <span class="ps-tree__tag ps-tree__tag--joint">hinge · 0°–110°</span>
+                  <span class="ps-card__fn">scene_graph.json</span>
+                </div>
+                <div class="ps-card__body">
+                  <div class="ps-tree">
+                    <div class="ps-tree__root"><span class="icon ps-tree__ri">folder_open</span>KitchenEnvironment</div>
+                    <div class="ps-tree__branch">
+                      <div class="ps-tree__item">
+                        <span class="ps-tree__line">├─</span>
+                        <span class="ps-tree__key">Cabinet_01</span>
+                        <span class="ps-tree__tag ps-tree__tag--label">label: upper_cabinet</span>
+                        <span class="ps-tree__tag ps-tree__tag--id">id: 0x001</span>
+                      </div>
+                      <div class="ps-tree__sub">
+                        <div class="ps-tree__item">
+                          <span class="ps-tree__line">│ ├─</span>
+                          <span class="ps-tree__key ps-tree__key--joint">Door_Left</span>
+                          <span class="ps-tree__tag ps-tree__tag--joint">hinge · 0°–110°</span>
+                        </div>
+                        <div class="ps-tree__item">
+                          <span class="ps-tree__line">│ └─</span>
+                          <span class="ps-tree__key ps-tree__key--joint">Door_Right</span>
+                          <span class="ps-tree__tag ps-tree__tag--joint">hinge · 0°–110°</span>
+                        </div>
+                      </div>
+                      <div class="ps-tree__item">
+                        <span class="ps-tree__line">├─</span>
+                        <span class="ps-tree__key">Refrigerator</span>
+                        <span class="ps-tree__tag ps-tree__tag--label">label: refrigerator</span>
+                        <span class="ps-tree__tag ps-tree__tag--id">id: 0x004</span>
+                      </div>
+                      <div class="ps-tree__sub">
+                        <div class="ps-tree__item">
+                          <span class="ps-tree__line">│ └─</span>
+                          <span class="ps-tree__key ps-tree__key--joint">Door</span>
+                          <span class="ps-tree__tag ps-tree__tag--joint">articulated · 0°–90°</span>
+                        </div>
+                      </div>
+                      <div class="ps-tree__item">
+                        <span class="ps-tree__line">├─</span>
+                        <span class="ps-tree__key">Dishwasher</span>
+                        <span class="ps-tree__tag ps-tree__tag--label">label: dishwasher</span>
+                        <span class="ps-tree__tag ps-tree__tag--id">id: 0x007</span>
+                      </div>
+                      <div class="ps-tree__sub">
+                        <div class="ps-tree__item">
+                          <span class="ps-tree__line">│ └─</span>
+                          <span class="ps-tree__key ps-tree__key--joint">Drawer</span>
+                          <span class="ps-tree__tag ps-tree__tag--joint">prismatic · 0–520mm</span>
+                        </div>
+                      </div>
+                      <div class="ps-tree__item">
+                        <span class="ps-tree__line">└─</span>
+                        <span class="ps-tree__key">Countertop</span>
+                        <span class="ps-tree__tag ps-tree__tag--label">label: countertop</span>
+                        <span class="ps-tree__tag ps-tree__tag--mat">material: granite_01</span>
+                      </div>
                     </div>
-                    <div class="ps-tree__item">
-                      <span class="ps-tree__line">│ └─</span>
-                      <span class="ps-tree__key ps-tree__key--joint">Door_Right</span>
-                      <span class="ps-tree__tag ps-tree__tag--joint">hinge · 0°–110°</span>
+                  </div>
+                  <div class="ps-card__tags">
+                    <span class="ps-ctag"><span class="icon">label</span>Semantic Labels</span>
+                    <span class="ps-ctag"><span class="icon">tag</span>Instance IDs</span>
+                    <span class="ps-ctag"><span class="icon">account_tree</span>Hierarchies</span>
+                    <span class="ps-ctag"><span class="icon">settings_ethernet</span>Joints</span>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /ps-visual 1 -->
+
+            <!-- Visual 02: Variation image grid -->
+            <div class="ps-visual">
+              <div class="ps-card">
+                <div class="ps-card__bar">
+                  <div class="ps-card__dots">
+                    <span class="ps-card__dot ps-card__dot--r"></span>
+                    <span class="ps-card__dot ps-card__dot--a"></span>
+                    <span class="ps-card__dot ps-card__dot--g"></span>
+                  </div>
+                  <span class="ps-card__fn">variation_set · 432 configs</span>
+                </div>
+                <div class="ps-card__body">
+                  <div class="ps-variants-grid">
+                    <div class="ps-variant-card">
+                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Dutch%20Oven_Image%201.jpg')"></div>
+                      <div class="ps-variant-card__info">
+                        <span class="ps-variant-card__name">Dutch Oven</span>
+                        <span class="ps-variant-card__meta">mat: matte_black · light: warm</span>
+                      </div>
+                    </div>
+                    <div class="ps-variant-card">
+                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Kitchen%20Faucet_Image%201.jpg')"></div>
+                      <div class="ps-variant-card__info">
+                        <span class="ps-variant-card__name">Kitchen Faucet</span>
+                        <span class="ps-variant-card__meta">mat: chrome · light: neutral</span>
+                      </div>
+                    </div>
+                    <div class="ps-variant-card">
+                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%201.jpg')"></div>
+                      <div class="ps-variant-card__info">
+                        <span class="ps-variant-card__name">Kingston Sofa</span>
+                        <span class="ps-variant-card__meta">mat: linen_grey · light: cool</span>
+                      </div>
+                    </div>
+                    <div class="ps-variant-card">
+                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2010.jpg')"></div>
+                      <div class="ps-variant-card__info">
+                        <span class="ps-variant-card__name">Lounge Chair</span>
+                        <span class="ps-variant-card__meta">mat: velvet_olive · light: warm</span>
+                      </div>
+                    </div>
+                    <div class="ps-variant-card">
+                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Bath/Walnut%20Vanity_Image%201.jpg')"></div>
+                      <div class="ps-variant-card__info">
+                        <span class="ps-variant-card__name">Walnut Vanity</span>
+                        <span class="ps-variant-card__meta">mat: walnut_dark · light: neutral</span>
+                      </div>
+                    </div>
+                    <div class="ps-variant-card">
+                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Bath/Bathtub_Image%201.jpg')"></div>
+                      <div class="ps-variant-card__info">
+                        <span class="ps-variant-card__name">Bathtub</span>
+                        <span class="ps-variant-card__meta">mat: ceramic_white · light: cool</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="ps-tree__item">
-                    <span class="ps-tree__line">├─</span>
-                    <span class="ps-tree__key">Refrigerator</span>
-                    <span class="ps-tree__tag ps-tree__tag--label">label: refrigerator</span>
-                    <span class="ps-tree__tag ps-tree__tag--id">id: 0x004</span>
-                  </div>
-                  <div class="ps-tree__sub">
-                    <div class="ps-tree__item">
-                      <span class="ps-tree__line">│ └─</span>
-                      <span class="ps-tree__key ps-tree__key--joint">Door</span>
-                      <span class="ps-tree__tag ps-tree__tag--joint">articulated · 0°–90°</span>
-                    </div>
-                  </div>
-                  <div class="ps-tree__item">
-                    <span class="ps-tree__line">├─</span>
-                    <span class="ps-tree__key">Dishwasher</span>
-                    <span class="ps-tree__tag ps-tree__tag--label">label: dishwasher</span>
-                    <span class="ps-tree__tag ps-tree__tag--id">id: 0x007</span>
-                  </div>
-                  <div class="ps-tree__sub">
-                    <div class="ps-tree__item">
-                      <span class="ps-tree__line">│ └─</span>
-                      <span class="ps-tree__key ps-tree__key--joint">Drawer</span>
-                      <span class="ps-tree__tag ps-tree__tag--joint">prismatic · 0–520mm</span>
-                    </div>
-                  </div>
-                  <div class="ps-tree__item">
-                    <span class="ps-tree__line">└─</span>
-                    <span class="ps-tree__key">Countertop</span>
-                    <span class="ps-tree__tag ps-tree__tag--label">label: countertop</span>
-                    <span class="ps-tree__tag ps-tree__tag--mat">material: granite_01</span>
+                  <div class="ps-card__footer">
+                    <span class="ps-card__stat">1 base env</span>
+                    <span class="ps-card__sep">×</span>
+                    <span class="ps-card__stat">9 finishes</span>
+                    <span class="ps-card__sep">×</span>
+                    <span class="ps-card__stat">4 lighting</span>
+                    <span class="ps-card__sep">×</span>
+                    <span class="ps-card__stat">3 layouts</span>
+                    <span class="ps-card__sep">=</span>
+                    <span class="ps-card__stat ps-card__stat--total">432 valid environments</span>
                   </div>
                 </div>
               </div>
-              <div class="ps-card__tags">
-                <span class="ps-ctag"><span class="icon">label</span>Semantic Labels</span>
-                <span class="ps-ctag"><span class="icon">tag</span>Instance IDs</span>
-                <span class="ps-ctag"><span class="icon">account_tree</span>Hierarchies</span>
-                <span class="ps-ctag"><span class="icon">settings_ethernet</span>Joints</span>
-              </div>
-            </div>
-          </div>
-        </div><!-- /ps-visual 1 -->
+            </div><!-- /ps-visual 2 -->
 
-        <!-- Visual 2: Parameter variation image grid -->
-        <div class="ps-visual" data-step="2">
-          <div class="ps-card">
-            <div class="ps-card__bar">
-              <div class="ps-card__dots">
-                <span class="ps-card__dot"></span>
-                <span class="ps-card__dot"></span>
-                <span class="ps-card__dot"></span>
-              </div>
-              <span class="ps-card__fn">variation_set · 432 configs</span>
-            </div>
-            <div class="ps-card__body">
-              <div class="ps-variants-grid">
-                <div class="ps-variant-card">
-                  <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Dutch%20Oven_Image%201.jpg')"></div>
-                  <div class="ps-variant-card__info">
-                    <span class="ps-variant-card__name">Dutch Oven</span>
-                    <span class="ps-variant-card__meta">mat: matte_black · light: warm</span>
+            <!-- Visual 03: Labeled scene -->
+            <div class="ps-visual">
+              <div class="ps-card">
+                <div class="ps-card__bar">
+                  <div class="ps-card__dots">
+                    <span class="ps-card__dot ps-card__dot--r"></span>
+                    <span class="ps-card__dot ps-card__dot--a"></span>
+                    <span class="ps-card__dot ps-card__dot--g"></span>
                   </div>
+                  <span class="ps-card__fn">perception_frame_0047.png</span>
                 </div>
-                <div class="ps-variant-card">
-                  <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Kitchen%20Faucet_Image%201.jpg')"></div>
-                  <div class="ps-variant-card__info">
-                    <span class="ps-variant-card__name">Kitchen Faucet</span>
-                    <span class="ps-variant-card__meta">mat: chrome · light: neutral</span>
+                <div class="ps-card__body ps-card__body--img">
+                  <div class="ps-labeled-env">
+                    <div class="ps-labeled-env__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%202.jpg')"></div>
+                    <div class="ps-label-box ps-label-box--1"><span class="ps-label-tag">sofa · 0x010</span></div>
+                    <div class="ps-label-box ps-label-box--2"><span class="ps-label-tag">coffee_table · 0x011</span></div>
+                    <div class="ps-label-box ps-label-box--3"><span class="ps-label-tag">floor_lamp · 0x014</span></div>
                   </div>
-                </div>
-                <div class="ps-variant-card">
-                  <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%201.jpg')"></div>
-                  <div class="ps-variant-card__info">
-                    <span class="ps-variant-card__name">Kingston Sofa</span>
-                    <span class="ps-variant-card__meta">mat: linen_grey · light: cool</span>
-                  </div>
-                </div>
-                <div class="ps-variant-card">
-                  <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2010.jpg')"></div>
-                  <div class="ps-variant-card__info">
-                    <span class="ps-variant-card__name">Lounge Chair</span>
-                    <span class="ps-variant-card__meta">mat: velvet_olive · light: warm</span>
-                  </div>
-                </div>
-                <div class="ps-variant-card">
-                  <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Bath/Walnut%20Vanity_Image%201.jpg')"></div>
-                  <div class="ps-variant-card__info">
-                    <span class="ps-variant-card__name">Walnut Vanity</span>
-                    <span class="ps-variant-card__meta">mat: walnut_dark · light: neutral</span>
-                  </div>
-                </div>
-                <div class="ps-variant-card">
-                  <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Bath/Bathtub_Image%201.jpg')"></div>
-                  <div class="ps-variant-card__info">
-                    <span class="ps-variant-card__name">Bathtub</span>
-                    <span class="ps-variant-card__meta">mat: ceramic_white · light: cool</span>
+                  <div class="ps-card__tags">
+                    <span class="ps-ctag"><span class="icon">view_in_ar</span>PBR Materials</span>
+                    <span class="ps-ctag"><span class="icon">label</span>Per-object Labels</span>
+                    <span class="ps-ctag"><span class="icon">straighten</span>Dimensionally Accurate</span>
                   </div>
                 </div>
               </div>
-              <div class="ps-card__footer">
-                <span class="ps-card__stat">1 base env</span>
-                <span class="ps-card__sep">×</span>
-                <span class="ps-card__stat">9 finishes</span>
-                <span class="ps-card__sep">×</span>
-                <span class="ps-card__stat">4 lighting</span>
-                <span class="ps-card__sep">×</span>
-                <span class="ps-card__stat">3 layouts</span>
-                <span class="ps-card__sep">=</span>
-                <span class="ps-card__stat ps-card__stat--total">432 valid environments</span>
-              </div>
-            </div>
-          </div>
-        </div><!-- /ps-visual 2 -->
+            </div><!-- /ps-visual 3 -->
 
-        <!-- Visual 3: Labeled environment -->
-        <div class="ps-visual" data-step="3">
-          <div class="ps-card">
-            <div class="ps-card__bar">
-              <div class="ps-card__dots">
-                <span class="ps-card__dot"></span>
-                <span class="ps-card__dot"></span>
-                <span class="ps-card__dot"></span>
-              </div>
-              <span class="ps-card__fn">perception_frame_0047.png</span>
-            </div>
-            <div class="ps-card__body ps-card__body--img">
-              <div class="ps-labeled-env">
-                <div class="ps-labeled-env__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Dutch%20Oven_Image%201.jpg')"></div>
-                <div class="ps-label-box ps-label-box--1">
-                  <span class="ps-label-tag">dutch_oven · 0x012</span>
-                </div>
-                <div class="ps-label-box ps-label-box--2">
-                  <span class="ps-label-tag">countertop · 0x003</span>
-                </div>
-                <div class="ps-label-box ps-label-box--3">
-                  <span class="ps-label-tag">base_cabinet · 0x001</span>
-                </div>
-              </div>
-              <div class="ps-card__tags">
-                <span class="ps-ctag"><span class="icon">view_in_ar</span>PBR Materials</span>
-                <span class="ps-ctag"><span class="icon">label</span>Per-object Labels</span>
-                <span class="ps-ctag"><span class="icon">straighten</span>Dimensionally Accurate</span>
-              </div>
-            </div>
-          </div>
-        </div><!-- /ps-visual 3 -->
+          </div><!-- /pipeline-scroll__right -->
+        </div><!-- /pipeline-scroll__grid -->
+      </div><!-- /wrap -->
+    </div><!-- /pipeline-scroll__sticky -->
+  </div><!-- /pipeline-scroll__track -->
 
-      </div><!-- /pipeline-scroll__right -->
-    </div><!-- /pipeline-scroll__inner -->
-  </div><!-- /wrap -->
 </section>
 
 
@@ -1185,25 +1190,34 @@
 
 
 <script>
-/* ── Pipeline sticky-scroll: activate step on visual enter ── */
+/* ── Pipeline sticky-scroll: scroll-position-based step activation ── */
 (function () {
-  var visuals = document.querySelectorAll('.ps-visual');
+  var track   = document.querySelector('.pipeline-scroll__track');
   var steps   = document.querySelectorAll('.ps-step');
-  if (!visuals.length || !steps.length) return;
+  var visuals = document.querySelectorAll('.ps-visual');
+  var n = steps.length;
+  if (!track || !n) return;
 
-  function activate(stepNum) {
-    steps.forEach(function (s) {
-      s.classList.toggle('ps-step--active', s.dataset.step === stepNum);
-    });
+  var current = -1;
+
+  function setActive(i) {
+    if (i === current) return;
+    current = i;
+    steps.forEach(function (s, idx)   { s.classList.toggle('ps-step--active',   idx === i); });
+    visuals.forEach(function (v, idx) { v.classList.toggle('ps-visual--active', idx === i); });
   }
 
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) activate(entry.target.dataset.step);
-    });
-  }, { threshold: 0.4, rootMargin: '-5% 0px -35% 0px' });
+  function onScroll() {
+    var rect     = track.getBoundingClientRect();
+    var scrolled = -rect.top;                          // px scrolled past section top
+    var range    = rect.height - window.innerHeight;   // total scroll space
+    if (range <= 0) { setActive(0); return; }
+    var progress = Math.max(0, Math.min(1, scrolled / range));
+    setActive(Math.min(Math.floor(progress * n), n - 1));
+  }
 
-  visuals.forEach(function (v) { observer.observe(v); });
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // init on load
 }());
 </script>
 
