@@ -14,21 +14,50 @@
 <!-- ═══════════════════════════════════════════════════════
      1. NAVBAR
 ═══════════════════════════════════════════════════════ -->
-<nav class="nav">
-  <div class="wrap">
+<nav class="nav" id="nav">
+  <div class="nav__outer">
     <div class="nav__inner">
+
+      <!-- Logo -->
       <a class="nav__logo" href="#">
         <img src="../assets/logos/Horizontal Light.svg" alt="imagine.io">
       </a>
+
+      <!-- Desktop links — absolutely centred -->
       <ul class="nav__links">
         <li><a href="#platform">Platform</a></li>
         <li><a href="#tiers">Tiers</a></li>
         <li><a href="#ecosystem">Ecosystem</a></li>
         <li><a href="#gtc">GTC</a></li>
       </ul>
+
+      <!-- Desktop CTA -->
       <div class="nav__cta">
-        <a href="#" class="btn btn-primary">Talk to Sales</a>
+        <a href="#" class="btn btn-ghost nav__btn-ghost">Login</a>
+        <a href="#" class="btn btn-primary nav__btn-cta">Talk to Sales</a>
       </div>
+
+      <!-- Hamburger (mobile only) -->
+      <button class="nav__burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+        <span class="nav__burger-bar"></span>
+        <span class="nav__burger-bar"></span>
+        <span class="nav__burger-bar"></span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="nav__mobile" id="nav-mobile" aria-hidden="true">
+    <ul class="nav__mobile-links">
+      <li><a href="#platform">Platform</a></li>
+      <li><a href="#tiers">Tiers</a></li>
+      <li><a href="#ecosystem">Ecosystem</a></li>
+      <li><a href="#gtc">GTC</a></li>
+    </ul>
+    <div class="nav__mobile-cta">
+      <a href="#" class="btn btn-ghost">Login</a>
+      <a href="#" class="btn btn-primary">Talk to Sales</a>
     </div>
   </div>
 </nav>
@@ -81,18 +110,6 @@
 
   <!-- LAYER 1 — Headline + CTA (centered) -->
   <div class="hero__content">
-
-    <!-- Announcement badge -->
-    <a href="#ecosystem" class="hero__badge">
-      <span class="hero__badge-text">Now integrating with NVIDIA Isaac Sim</span>
-      <span class="hero__badge-divider"></span>
-      <span class="hero__badge-arrow">
-        <span class="hero__badge-arrow-inner">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </span>
-    </a>
 
     <h1 class="hero__h1 hero__animate hero__animate--1">Structured product data for <em>simulation-ready</em> world generation.</h1>
     <p class="hero__body hero__animate hero__animate--2">imagine.io turns structured product representations into valid environments for physical AI — preserving geometry, semantics, articulation, constraints, and variation from the start.</p>
@@ -1193,6 +1210,44 @@
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll(); // init on load
+}());
+</script>
+
+<!-- NAV: scroll shrink + hamburger -->
+<script>
+(function () {
+  var nav    = document.getElementById('nav');
+  var burger = document.getElementById('nav-burger');
+  var mobile = document.getElementById('nav-mobile');
+
+  // Scroll — add .nav--scrolled after 60px
+  function onNavScroll() {
+    if (window.scrollY > 60) {
+      nav.classList.add('nav--scrolled');
+    } else {
+      nav.classList.remove('nav--scrolled');
+    }
+  }
+  window.addEventListener('scroll', onNavScroll, { passive: true });
+  onNavScroll();
+
+  // Hamburger toggle
+  burger.addEventListener('click', function () {
+    var isOpen = mobile.classList.toggle('is-open');
+    burger.classList.toggle('is-open', isOpen);
+    burger.setAttribute('aria-expanded', String(isOpen));
+    mobile.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Close drawer when a mobile link is clicked
+  mobile.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      mobile.classList.remove('is-open');
+      burger.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      mobile.setAttribute('aria-hidden', 'true');
+    });
+  });
 }());
 </script>
 
