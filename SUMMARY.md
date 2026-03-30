@@ -113,7 +113,8 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-25 | Homepage v5 — hero refactor (WIP) | `outputs/homepage-v5.html` + `css/homepage-v5.css` | 3-layer hero: headline → dark code editor → animated asset strips. Stats bar below hero. First version with external CSS file. |
 | 2026-03-25 | Homepage v6 — complete, live on Vercel | `outputs/homepage-v6.html` + `css/homepage-v6.css` (CSS cache `?v=7`) | White hero bg, light Scene Builder UI editor (460px tall), h1 = "Structured product data for simulation-ready world generation." (orange on "simulation-ready"), glassmorphic navbar, `.logo-strip` partner section, refactored asset cards (`aspect-ratio: 4/3`, full-bleed image + gradient overlay, `.asset-badge` pills, Furniture/Lighting/Kitchen/Bath images). Copied to `index.html` and deployed. |
 | 2026-03-26 | Homepage v7 — WIP | `outputs/homepage-v7.html` + `css/homepage-v7.css` (CSS cache `?v=1`) | v6 base. Section reorder: Asset Library now sits after Deliverables. Active version being edited. |
-| 2026-03-30 | Homepage v7 — complete, live on Vercel | `outputs/homepage-v7.html` + `css/homepage-v7.css` (CSS cache `?v=6`) | Major changes from v6: (1) Pipeline rebuilt as sticky-scroll (physicl.ai reference) — 200vh track, sticky inner, 3 steps with animated descriptions, 3 absolutely-positioned visuals inside warm container stage; (2) "Built for your team" use cases section removed; (3) copied to `index.html` and deployed to Vercel. |
+| 2026-03-30 | Homepage v7 — complete, live on Vercel | `outputs/homepage-v7.html` + `css/homepage-v7.css` | Major changes from v6: (1) Pipeline rebuilt as sticky-scroll (physicl.ai reference) — 200vh track, sticky inner, 3 steps with animated descriptions, 3 absolutely-positioned visuals inside warm container stage; (2) "Built for your team" use cases section removed; (3) copied to `index.html` and deployed to Vercel. **v7 is now locked — do not edit.** |
+| 2026-03-30 | Homepage v8 — setup | `outputs/homepage-v8.html` + `css/homepage-v8.css` | Duplicated from v7. Active working version. |
 
 ---
 
@@ -223,7 +224,7 @@ All product images are served from the `library-assets` GitHub repo via jsDelivr
 
 ## Known Issues / Pending Items
 
-- `homepage-v7` is the current live version — `index.html` = v7, deployed on Vercel. ✅
+- `homepage-v8` is the active working version. `homepage-v7` is locked — live on Vercel via `index.html`. ✅
 - `com.apple.provenance` extended attribute appears on all files in the `css/` folder (macOS behavior) — does NOT block writes; file is writable by owner.
 - **Pending decision:** Add a Moat section to v7 (or v8)? PM site has one between Product Graph and Pipeline: *"This model comes from years of production use in configurable product and scene generation. Built from production product infrastructure, not hand-authored scenes."*
 - **CSS compliance:** `homepage-v7.css` still contains some hardcoded hex values and px sizes that should be migrated to PDS tokens in the next pass (v8).
@@ -232,6 +233,6 @@ All product images are served from the `library-assets` GitHub repo via jsDelivr
 
 ## Next Steps
 
-1. Decide whether to add the Moat section to v7 (between Product Graph and Pipeline)
-2. Start `homepage-v8.html` for the next round of changes (if any)
+1. Decide what changes go into v8 (Moat section? PDS token audit? New sections?)
+2. When v8 is approved, copy to `index.html` and push to deploy
 3. When ready: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
