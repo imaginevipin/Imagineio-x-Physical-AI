@@ -151,6 +151,49 @@
       overflow: hidden;
       background: #ffffff;
     }
+
+    /* ─── Ethereal shadow background ─── */
+    .hero__ethereal {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    /* The stage is inset by the displacement scale so
+       edge-warping doesn't bleed outside the hero */
+    .hero__ethereal-stage {
+      position: absolute;
+      inset: -65px;
+      filter: url(#ethereal-filter) blur(6px);
+    }
+    .hero__ethereal-blob {
+      position: absolute;
+      mask-size: cover;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-image: url('https://framerusercontent.com/images/ceBGguIpUU8luwByxuQz79t7To.png');
+      -webkit-mask-image: url('https://framerusercontent.com/images/ceBGguIpUU8luwByxuQz79t7To.png');
+      -webkit-mask-size: cover;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+    }
+    /* Main blob — large, centered, very subtle papaya */
+    .hero__ethereal-blob--a {
+      background-color: rgba(236, 78, 11, 0.11);
+      width: 75%;
+      height: 90%;
+      top: -5%;
+      left: 12%;
+    }
+    /* Secondary blob — smaller, offset right, even lighter warm tone */
+    .hero__ethereal-blob--b {
+      background-color: rgba(244, 149, 109, 0.07);
+      width: 55%;
+      height: 65%;
+      bottom: -10%;
+      right: 0%;
+    }
     .hero__content {
       position: relative;
       z-index: 1;

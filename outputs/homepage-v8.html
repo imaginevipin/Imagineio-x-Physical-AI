@@ -39,6 +39,46 @@
 ═══════════════════════════════════════════════════════ -->
 <section class="hero">
 
+  <!-- ETHEREAL SHADOW BACKGROUND -->
+  <div class="hero__ethereal" aria-hidden="true">
+
+    <!-- Hidden SVG: filter definition only, no render -->
+    <svg width="0" height="0" style="position:absolute;">
+      <defs>
+        <filter id="ethereal-filter" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+          <feTurbulence
+            result="undulation"
+            numOctaves="2"
+            baseFrequency="0.0007,0.0026"
+            seed="2"
+            type="turbulence"
+          />
+          <feColorMatrix
+            id="ethereal-hue"
+            in="undulation"
+            type="hueRotate"
+            values="180"
+          />
+          <feColorMatrix
+            in="dist"
+            result="circulation"
+            type="matrix"
+            values="4 0 0 0 1  4 0 0 0 1  4 0 0 0 1  1 0 0 0 0"
+          />
+          <feDisplacementMap in="SourceGraphic" in2="circulation" scale="65" result="dist"/>
+          <feDisplacementMap in="dist" in2="undulation" scale="65" result="output"/>
+        </filter>
+      </defs>
+    </svg>
+
+    <!-- Animated layer — blobs inside the displaced container -->
+    <div class="hero__ethereal-stage">
+      <div class="hero__ethereal-blob hero__ethereal-blob--a"></div>
+      <div class="hero__ethereal-blob hero__ethereal-blob--b"></div>
+    </div>
+
+  </div>
+
   <!-- LAYER 1 — Headline + CTA (centered) -->
   <div class="hero__content">
     <h1 class="hero__h1">Structured product data for <em>simulation-ready</em> world generation.</h1>
@@ -1138,6 +1178,22 @@
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll(); // init on load
+}());
+</script>
+
+<!-- ETHEREAL SHADOW ANIMATION -->
+<script>
+(function () {
+  var hueEl = document.getElementById('ethereal-hue');
+  if (!hueEl) return;
+  var hue = 180;
+  var speed = 0.55; // degrees per frame at 60fps — slow, meditative
+  function tick() {
+    hue = (hue + speed) % 360;
+    hueEl.setAttribute('values', String(hue));
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 }());
 </script>
 
