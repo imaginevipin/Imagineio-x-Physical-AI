@@ -97,6 +97,7 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-30 | "Built for your team" Use Cases section removed from v7 | Entire `.usecase` section (HTML + CSS) deleted. Sections above and below adjusted. |
 | 2026-03-30 | PM site comparison done — one missing section identified | Fetched `imagine-site-kappa.vercel.app`. v7 is aligned with PM site except one gap: PM site has a **Moat section** between Product Graph and Pipeline ("This model comes from years of production use in configurable product and scene generation. Built from production product infrastructure, not hand-authored scenes."). v7 also has Asset Showcase marquee and Validation section which PM site does not have. Decision on adding Moat section is pending user input. |
 | 2026-03-30 | v7 promoted to index.html — now live on Vercel | `outputs/homepage-v7.html` copied to `index.html` (root) with all `../` path prefixes stripped. Committed and pushed to `main`. Vercel auto-deployed. v7 is now the live version. |
+| 2026-03-30 | Project folder cleaned up and reorganized | `outputs/v1–v6` + `css/v5–v6` moved to `archive/`. `partners-logos/` moved to `assets/partners-logos/`. `prism-design-system.md` removed from project root (duplicate of global `~/.claude/`). All `?v=N` cache busting removed from `homepage-v7.html` and `index.html`. References updated. |
 
 ---
 
@@ -167,12 +168,15 @@ These were discovered and locked in during v4 polish — apply in all future wor
 - **Remote:** `https://github.com/imaginevipin/Imagineio-x-Physical-AI.git`
 - **Branch:** `main`
 - **What's in the repo:**
-  - `outputs/` — homepage v1–v5 HTML files
-  - `css/` — per-version CSS files (v5 onwards): `homepage-v5.css`, `homepage-v6.css`, `homepage-v7.css`
+  - `outputs/` — current active version: `homepage-v7.html`
+  - `archive/outputs/` — v1–v6 HTML (history only)
+  - `archive/css/` — v5–v6 CSS (history only)
+  - `css/` — current: `homepage-v7.css`
   - `assets/fonts/` — PP Neue Montreal (6 OTF weights)
   - `assets/logos/` — all imagine.io SVG variants
+  - `assets/partners-logos/` — 5 partner PNGs (Logo-1 to Logo-5)
   - `research/` — content gap analysis, design reference
-  - `tokens.css`, `CLAUDE.md`, `PLAN.md`, `SUMMARY.md`, `prism-design-system.md`
+  - `tokens.css`, `CLAUDE.md`, `PLAN.md`, `SUMMARY.md`
   - `.claude/settings.json` — Stop hook: auto git commit + push on session end
 
 **To push updates:**
@@ -221,7 +225,8 @@ All product images are served from the `library-assets` GitHub repo via jsDelivr
 
 - `homepage-v7` is the current live version — `index.html` = v7, deployed on Vercel. ✅
 - `com.apple.provenance` extended attribute appears on all files in the `css/` folder (macOS behavior) — does NOT block writes; file is writable by owner.
-- **Pending decision:** Add a Moat section to v7? PM site has one between Product Graph and Pipeline: *"This model comes from years of production use in configurable product and scene generation. Built from production product infrastructure, not hand-authored scenes."*
+- **Pending decision:** Add a Moat section to v7 (or v8)? PM site has one between Product Graph and Pipeline: *"This model comes from years of production use in configurable product and scene generation. Built from production product infrastructure, not hand-authored scenes."*
+- **CSS compliance:** `homepage-v7.css` still contains some hardcoded hex values and px sizes that should be migrated to PDS tokens in the next pass (v8).
 
 ---
 
