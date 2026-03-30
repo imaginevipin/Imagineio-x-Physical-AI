@@ -504,7 +504,67 @@
 
 
     /* ═══════════════════════════════════════════════════════
-       5. ASSET SHOWCASE MARQUEE
+       5. PROBLEM
+    ═══════════════════════════════════════════════════════ */
+    .problem {
+      padding: var(--section-y) 0;
+      background: var(--bg);
+    }
+    .problem .pill { margin-bottom: var(--s-500); }
+    .problem h2 {
+      font-family: var(--font), sans-serif;
+      font-size: var(--text-h3-size);
+      line-height: var(--text-h3-lh);
+      letter-spacing: var(--text-h3-ls);
+      font-weight: 400;
+      color: var(--text-default-heading);
+      max-width: 560px;
+      margin-bottom: var(--s-1100);
+    }
+    .problem h2 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .problem__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--s-600);
+    }
+    .problem__card {
+      padding: var(--s-800) var(--s-700);
+      border: 1px solid var(--border-default-secondary);
+      border-radius: var(--br-200);
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-400);
+      background: var(--surface-page-secondary);
+      transition: border-color 0.2s ease;
+    }
+    .problem__card:hover {
+      border-color: var(--border-default-secondary);
+      background: var(--surface-default-secondary);
+    }
+    .problem__icon {
+      font-size: 22px;
+      color: var(--text-default-placeholder);
+    }
+    .problem__title {
+      font-family: var(--font), sans-serif;
+      font-size: var(--text-h6-size);
+      line-height: var(--text-h6-lh);
+      font-weight: 500;
+      color: var(--text-default-heading);
+    }
+    .problem__body {
+      font-family: var(--font), sans-serif;
+      font-size: var(--text-small-size);
+      line-height: 1.65;
+      color: var(--text-default-body);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       5b. ASSET SHOWCASE MARQUEE
     ═══════════════════════════════════════════════════════ */
     .showcase {
       background: var(--bg-subtle);
