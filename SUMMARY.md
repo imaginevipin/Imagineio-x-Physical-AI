@@ -153,6 +153,9 @@ These were discovered and locked in during v4 polish — apply in all future wor
 6. **Step/sequence numbers** — muted, not accent.
 7. **Button sizing** — `.btn-lg`: `padding: 9px 22px; font-size: 14px` (matches nav button proportions).
 8. **Section h2 orange highlights** — every section h2 has exactly one `<em>`-wrapped word or phrase in orange. Rule: `h2 em { font-style: normal; color: var(--accent); }` — a single global CSS rule handles all sections. Each highlight is chosen to emphasise the most specific/differentiating phrase in the headline, not the whole sentence.
+9. **No CSS cache busting** — never append `?v=N` query strings to CSS `<link>` hrefs. Each version pair (`homepage-vN.html` + `homepage-vN.css`) is the single source of truth. For significant changes, move to the next version (e.g. v7 → v8), not a cache bump.
+10. **Prism Design System is mandatory** — all colors, typography, spacing, and borders must use PDS tokens from `tokens.css`. Never hardcode hex values, px sizes, or arbitrary spacing. Exception only when a UI component requires something genuinely not covered by PDS — document the exception explicitly in SUMMARY.md.
+11. **Model usage** — Haiku for quick answers/small edits; Sonnet for most work (UI, coding, iteration); Opus for deep research, complex tasks, advanced coding. Always match model to task to manage token cost.
 
 ---
 
@@ -217,7 +220,6 @@ All product images are served from the `library-assets` GitHub repo via jsDelivr
 ## Known Issues / Pending Items
 
 - `homepage-v7` is the current live version — `index.html` = v7, deployed on Vercel. ✅
-- v7 CSS cache is at `?v=6` — increment each time `homepage-v7.css` is changed.
 - `com.apple.provenance` extended attribute appears on all files in the `css/` folder (macOS behavior) — does NOT block writes; file is writable by owner.
 - **Pending decision:** Add a Moat section to v7? PM site has one between Product Graph and Pipeline: *"This model comes from years of production use in configurable product and scene generation. Built from production product infrastructure, not hand-authored scenes."*
 

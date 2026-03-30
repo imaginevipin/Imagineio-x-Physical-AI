@@ -17,6 +17,11 @@ From `homepage-v5` onwards, every HTML file has a paired external CSS file:
 - The HTML file links to it as: `<link rel="stylesheet" href="../css/homepage-vN.css">`
 - `tokens.css` (global Prism design tokens) stays at the project root and is always linked separately as `../tokens.css`
 - Never write `<style>` blocks inside HTML files for v5 onwards — all styles go in the paired `.css` file
+- **No CSS cache busting** — do not append `?v=N` to CSS `<link>` hrefs. Each version pair (e.g. `homepage-v7.html` + `homepage-v7.css`) is the single source of truth for that version. For any significant change, increment to the next version (e.g. v8).
+
+## Design System
+
+All colors, typography, spacing, and border values **must use Prism Design System tokens** from `tokens.css`. Never hardcode hex values, px sizes, or arbitrary spacing. If a UI component requires something not covered by PDS tokens, document the exception — otherwise PDS is the only source of truth for all visual properties.
 
 ## Model Usage
 
