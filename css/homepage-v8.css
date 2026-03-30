@@ -1129,65 +1129,6 @@
 
 
     /* ═══════════════════════════════════════════════════════
-       10. STATS
-    ═══════════════════════════════════════════════════════ */
-    .stats {
-      background: var(--bg-warm);
-      padding: var(--section-y) 0;
-    }
-    .stats__header {
-      margin-bottom: 72px;
-    }
-    .stats__h2 {
-      font-size: clamp(32px, 3.5vw, 48px);
-      font-weight: 400;
-      letter-spacing: -1.5px;
-      color: var(--text-head);
-      max-width: 560px;
-      line-height: 1.1;
-      margin-top: 8px;
-    }
-    .stats__grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      background: var(--bg);
-    }
-    .stat-cell {
-      padding: 48px 40px;
-      border-right: 1px solid var(--border);
-    }
-    .stat-cell:last-child { border-right: none; }
-    .stat-cell__num {
-      font-size: clamp(44px, 4vw, 60px);
-      font-weight: 300;
-      letter-spacing: -2px;
-      color: var(--text-head);
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-    .stat-cell__num em {
-      font-style: normal;
-      color: var(--text-head);
-    }
-    .stat-cell__label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-head);
-      margin-bottom: 8px;
-      letter-spacing: -0.1px;
-    }
-    .stat-cell__desc {
-      font-size: 13px;
-      line-height: 1.65;
-      color: var(--text-muted);
-    }
-
-
-    /* ═══════════════════════════════════════════════════════
        12. VALIDATION SHOWCASE
     ═══════════════════════════════════════════════════════ */
     .validation {
@@ -1830,8 +1771,6 @@
       .trust__inner { grid-template-columns: 1fr; gap: 48px; }
       .mission__quote { position: static; }
       .validation__sticky { position: static; }
-      .stats__grid { grid-template-columns: 1fr 1fr; }
-      .stat-cell { border-right: none; border-bottom: 1px solid var(--border); }
       .pipeline-scroll__track  { height: auto; }
       .pipeline-scroll__sticky { position: static; height: auto; padding: 20px 0 60px; }
       .pipeline-scroll__grid   { grid-template-columns: 1fr; gap: 48px; }

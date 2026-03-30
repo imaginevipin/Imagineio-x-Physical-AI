@@ -21,9 +21,9 @@
         <img src="../assets/logos/Horizontal Light.svg" alt="imagine.io">
       </a>
       <ul class="nav__links">
-        <li><a href="#proof">Proof</a></li>
         <li><a href="#platform">Platform</a></li>
         <li><a href="#tiers">Tiers</a></li>
+        <li><a href="#ecosystem">Ecosystem</a></li>
         <li><a href="#gtc">GTC</a></li>
       </ul>
       <div class="nav__cta">
@@ -228,7 +228,40 @@
 
 
 <!-- ═══════════════════════════════════════════════════════
-     5. PROBLEM — 4 challenge cards
+     5. WHO WE ARE — positioning statement
+═══════════════════════════════════════════════════════ -->
+<section class="mission" id="proof">
+  <div class="wrap">
+    <div class="mission__inner">
+      <h2 class="mission__quote">Built as structured data.<br><em>Exported as simulation-ready worlds.</em></h2>
+      <div class="mission__right">
+        <p class="mission__p">Generated from structured product graphs and delivered as OpenUSD.<br>Hierarchy, semantics, articulation, and collision are preserved end-to-end so scenes load directly into simulation without rework.</p>
+        <div class="mission__list">
+          <div class="mission__item">
+            <span class="icon">inventory_2</span>
+            <span>OpenUSD export — hierarchy, semantics, and physics intact</span>
+          </div>
+          <div class="mission__item">
+            <span class="icon">radar</span>
+            <span>Collision + articulation — per-part meshes and joint limits</span>
+          </div>
+          <div class="mission__item">
+            <span class="icon">account_tree</span>
+            <span>Semantic scene graph — every object labeled at creation</span>
+          </div>
+          <div class="mission__item">
+            <span class="icon">verified_user</span>
+            <span>SimReady-aligned structure — production infrastructure, not a one-off scene build · SOC 2 Type II</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     6. WHAT WE SOLVE — 4 problem cards
 ═══════════════════════════════════════════════════════ -->
 <section class="problem">
   <div class="wrap">
@@ -260,39 +293,6 @@
         <p class="problem__body">Going from a handful of scenes to training volume requires months of manual work. There's no infrastructure — every new product or environment starts from zero.</p>
       </div>
 
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════
-     6. PROOF — "Built as structured data"
-═══════════════════════════════════════════════════════ -->
-<section class="mission" id="proof">
-  <div class="wrap">
-    <div class="mission__inner">
-      <h2 class="mission__quote">Built as structured data.<br><em>Exported as simulation-ready worlds.</em></h2>
-      <div class="mission__right">
-        <p class="mission__p">Generated from structured product graphs and delivered as OpenUSD.<br>Hierarchy, semantics, articulation, and collision are preserved end-to-end so scenes load directly into simulation withour rework.</p>
-        <div class="mission__list">
-          <div class="mission__item">
-            <span class="icon">inventory_2</span>
-            <span>OpenUSD export — hierarchy, semantics, and physics intact</span>
-          </div>
-          <div class="mission__item">
-            <span class="icon">radar</span>
-            <span>Collision + articulation — per-part meshes and joint limits</span>
-          </div>
-          <div class="mission__item">
-            <span class="icon">account_tree</span>
-            <span>Semantic scene graph — every object labeled at creation</span>
-          </div>
-          <div class="mission__item">
-            <span class="icon">verified_user</span>
-            <span>SimReady-aligned structure — production infrastructure, not a one-off scene build · SOC 2 Type II</span>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -717,42 +717,6 @@
 </section>
 
 
-<!-- ═══════════════════════════════════════════════════════
-     10. STATS
-═══════════════════════════════════════════════════════ -->
-<section class="stats">
-  <div class="wrap">
-    <div class="stats__header">
-      <span class="pill">Why This Is Different</span>
-      <h2 class="stats__h2">Not procedural. Not AI-synthesized.<br>Grounded in <em>structured product data.</em></h2>
-    </div>
-    <div class="stats__grid">
-      <div class="stat-cell">
-        <div class="stat-cell__num">100<em>K+</em></div>
-        <p class="stat-cell__label">Labeled frames per environment</p>
-        <p class="stat-cell__desc">Via Isaac Sim Synthetic Data Recorder — RGB, depth, and segmentation masks per environment.</p>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-cell__num">30<em>+</em></div>
-        <p class="stat-cell__label">Semantic object classes per scene</p>
-        <p class="stat-cell__desc">With instance IDs and parent-child hierarchies — generated at creation, not post-processed annotation.</p>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-cell__num">&lt;<em>5min</em></div>
-        <p class="stat-cell__label">Product graph → Isaac Sim load time</p>
-        <p class="stat-cell__desc">From structured product graph to simulator-ready environment. No manual scene setup required.</p>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-cell__num">10<em>K×</em></div>
-        <p class="stat-cell__label">Variations from one base environment</p>
-        <p class="stat-cell__desc">Billions of training frames from one structured environment via parameter-driven variation.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
 
 <!-- ═══════════════════════════════════════════════════════
      12. VALIDATION SHOWCASE
@@ -764,24 +728,6 @@
         <span class="pill">Quality at Scale</span>
         <h2 class="validation__h2">Every <em>asset.</em> Every <em>variant.</em> Validated.</h2>
         <p class="validation__p">imagine.io doesn't just generate data — it validates it. Every environment and variant passes physics integrity checks, semantic labelling verification, and collision mesh validation before entering your pipeline.</p>
-        <div class="v-stats">
-          <div class="v-stat">
-            <span class="v-stat__num">5K+</span>
-            <span class="v-stat__txt">Fully tagged structured environments ready for sim</span>
-          </div>
-          <div class="v-stat">
-            <span class="v-stat__num">30+</span>
-            <span class="v-stat__txt">Semantic classes per scene with instance-level annotations</span>
-          </div>
-          <div class="v-stat">
-            <span class="v-stat__num">100K+</span>
-            <span class="v-stat__txt">Labeled frames included per environment</span>
-          </div>
-          <div class="v-stat">
-            <span class="v-stat__num">150+</span>
-            <span class="v-stat__txt">Metadata attributes on every object in every scene</span>
-          </div>
-        </div>
       </div>
       <div class="validation__cards">
 
@@ -929,51 +875,7 @@
 
 
 <!-- ═══════════════════════════════════════════════════════
-     ECOSYSTEM — partner integrations
-═══════════════════════════════════════════════════════ -->
-<section class="ecosystem">
-  <div class="wrap">
-    <div class="ecosystem__hd">
-      <span class="pill">Ecosystem</span>
-      <h2 class="ecosystem__h2">We produce the environment layer. You <em>run the simulation.</em></h2>
-      <p class="ecosystem__sub">imagine.io integrates directly with the tools your team already uses.</p>
-    </div>
-    <div class="eco-grid">
-      <div class="eco-card">
-        <div class="eco-card__icon"><span class="icon">developer_board</span></div>
-        <div>
-          <p class="eco-card__name">NVIDIA Omniverse</p>
-          <p class="eco-card__desc">Structured environments and variation pipelines for physical AI simulation — native Omniverse integration.</p>
-        </div>
-      </div>
-      <div class="eco-card">
-        <div class="eco-card__icon"><span class="icon">precision_manufacturing</span></div>
-        <div>
-          <p class="eco-card__name">Isaac Sim</p>
-          <p class="eco-card__desc">USD export with semantics, collision, and physics for robot training. Load time under 5 minutes.</p>
-        </div>
-      </div>
-      <div class="eco-card">
-        <div class="eco-card__icon"><span class="icon">schema</span></div>
-        <div>
-          <p class="eco-card__name">OpenUSD / SimReady</p>
-          <p class="eco-card__desc">Native USD pipeline aligned with NVIDIA SimReady specifications — hierarchy and physics preserved end-to-end.</p>
-        </div>
-      </div>
-      <div class="eco-card">
-        <div class="eco-card__icon"><span class="icon">science</span></div>
-        <div>
-          <p class="eco-card__name">MuJoCo</p>
-          <p class="eco-card__desc">Structured scene export with collision and physics for manipulation research and policy training.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════
-     14. TRUST
+     WHY DIFFERENT — scale proof before connection
 ═══════════════════════════════════════════════════════ -->
 <section class="trust">
   <div class="wrap">
@@ -1010,6 +912,50 @@
           <div class="t-stat__num">5K+</div>
           <p class="t-stat__label">Sim-ready environments</p>
           <p class="t-stat__sub">Physics-validated, labeled</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     ECOSYSTEM — partner integrations
+═══════════════════════════════════════════════════════ -->
+<section class="ecosystem" id="ecosystem">
+  <div class="wrap">
+    <div class="ecosystem__hd">
+      <span class="pill">Ecosystem</span>
+      <h2 class="ecosystem__h2">We produce the environment layer. You <em>run the simulation.</em></h2>
+      <p class="ecosystem__sub">imagine.io integrates directly with the tools your team already uses.</p>
+    </div>
+    <div class="eco-grid">
+      <div class="eco-card">
+        <div class="eco-card__icon"><span class="icon">developer_board</span></div>
+        <div>
+          <p class="eco-card__name">NVIDIA Omniverse</p>
+          <p class="eco-card__desc">Structured environments and variation pipelines for physical AI simulation — native Omniverse integration.</p>
+        </div>
+      </div>
+      <div class="eco-card">
+        <div class="eco-card__icon"><span class="icon">precision_manufacturing</span></div>
+        <div>
+          <p class="eco-card__name">Isaac Sim</p>
+          <p class="eco-card__desc">USD export with semantics, collision, and physics for robot training. Load time under 5 minutes.</p>
+        </div>
+      </div>
+      <div class="eco-card">
+        <div class="eco-card__icon"><span class="icon">schema</span></div>
+        <div>
+          <p class="eco-card__name">OpenUSD / SimReady</p>
+          <p class="eco-card__desc">Native USD pipeline aligned with NVIDIA SimReady specifications — hierarchy and physics preserved end-to-end.</p>
+        </div>
+      </div>
+      <div class="eco-card">
+        <div class="eco-card__icon"><span class="icon">science</span></div>
+        <div>
+          <p class="eco-card__name">MuJoCo</p>
+          <p class="eco-card__desc">Structured scene export with collision and physics for manipulation research and policy training.</p>
         </div>
       </div>
     </div>
