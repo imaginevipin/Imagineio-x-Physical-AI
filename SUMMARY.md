@@ -93,6 +93,10 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-25 | index.html updated to v6 — now live on Vercel | `cp outputs/homepage-v6.html index.html` + pushed to main. Vercel auto-deployed. CSS cache at `?v=7`. |
 | 2026-03-26 | Homepage v7 created — section reorder | v6 duplicated to `outputs/homepage-v7.html` + `css/homepage-v7.css`. One change: "Asset Library" (`.showcase`) section moved from above the Proof section to directly after the Deliverables section. No internal changes to either section. |
 | 2026-03-26 | Figma design file added to project | Imagine.io x Physical AI — fileKey: `1aL836P4R3p09gOwE5TVQz`. This is the primary Figma file designers will use for this project. |
+| 2026-03-30 | v7 Pipeline / "How It Works" rebuilt as sticky-scroll | Replaced simple stacked rows with physicl.ai-style sticky-scroll pattern. Architecture: tall `.pipeline-scroll__track` (200vh) + `position: sticky; top: 0; height: 100vh` inner. Left panel: 3 `.ps-step` items (step number, title, description — no icons); opacity fades for inactive steps, description expands for active. Right panel: 3 `.ps-visual` items absolutely positioned inside a warm container stage (`background: #ede9e3; border-radius: 16px; padding: 28px`); only `.ps-visual--active` visible (opacity 1 + translateY(-50%)); inactive offset by `calc(-50% + 18px)` for smooth enter-from-below animation. JS activator: scroll progress maps to step index via `scrolled / (trackHeight - viewportHeight)`. CSS transition: `cubic-bezier(0.25, 0.46, 0.45, 0.94)` at 0.65s. Images pulled from jsDelivr CDN. Visual 3 uses `Lighting/Kessler Table Lamp_Image 3.jpg`. CSS cache bumped to `?v=6`. |
+| 2026-03-30 | "Built for your team" Use Cases section removed from v7 | Entire `.usecase` section (HTML + CSS) deleted. Sections above and below adjusted. |
+| 2026-03-30 | PM site comparison done — one missing section identified | Fetched `imagine-site-kappa.vercel.app`. v7 is aligned with PM site except one gap: PM site has a **Moat section** between Product Graph and Pipeline ("This model comes from years of production use in configurable product and scene generation. Built from production product infrastructure, not hand-authored scenes."). v7 also has Asset Showcase marquee and Validation section which PM site does not have. Decision on adding Moat section is pending user input. |
+| 2026-03-30 | v7 promoted to index.html — now live on Vercel | `outputs/homepage-v7.html` copied to `index.html` (root) with all `../` path prefixes stripped. Committed and pushed to `main`. Vercel auto-deployed. v7 is now the live version. |
 
 ---
 
@@ -108,6 +112,7 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-25 | Homepage v5 — hero refactor (WIP) | `outputs/homepage-v5.html` + `css/homepage-v5.css` | 3-layer hero: headline → dark code editor → animated asset strips. Stats bar below hero. First version with external CSS file. |
 | 2026-03-25 | Homepage v6 — complete, live on Vercel | `outputs/homepage-v6.html` + `css/homepage-v6.css` (CSS cache `?v=7`) | White hero bg, light Scene Builder UI editor (460px tall), h1 = "Structured product data for simulation-ready world generation." (orange on "simulation-ready"), glassmorphic navbar, `.logo-strip` partner section, refactored asset cards (`aspect-ratio: 4/3`, full-bleed image + gradient overlay, `.asset-badge` pills, Furniture/Lighting/Kitchen/Bath images). Copied to `index.html` and deployed. |
 | 2026-03-26 | Homepage v7 — WIP | `outputs/homepage-v7.html` + `css/homepage-v7.css` (CSS cache `?v=1`) | v6 base. Section reorder: Asset Library now sits after Deliverables. Active version being edited. |
+| 2026-03-30 | Homepage v7 — complete, live on Vercel | `outputs/homepage-v7.html` + `css/homepage-v7.css` (CSS cache `?v=6`) | Major changes from v6: (1) Pipeline rebuilt as sticky-scroll (physicl.ai reference) — 200vh track, sticky inner, 3 steps with animated descriptions, 3 absolutely-positioned visuals inside warm container stage; (2) "Built for your team" use cases section removed; (3) copied to `index.html` and deployed to Vercel. |
 
 ---
 
@@ -160,7 +165,7 @@ These were discovered and locked in during v4 polish — apply in all future wor
 - **Branch:** `main`
 - **What's in the repo:**
   - `outputs/` — homepage v1–v5 HTML files
-  - `css/` — per-version CSS files (v5 onwards): `homepage-v5.css`, `homepage-v6.css`
+  - `css/` — per-version CSS files (v5 onwards): `homepage-v5.css`, `homepage-v6.css`, `homepage-v7.css`
   - `assets/fonts/` — PP Neue Montreal (6 OTF weights)
   - `assets/logos/` — all imagine.io SVG variants
   - `research/` — content gap analysis, design reference
@@ -189,12 +194,12 @@ git push
 ### index.html Workflow
 
 - `index.html` lives at the **project root** — this is the live version Vercel serves
-- It is always a copy of the latest approved output (currently: **homepage-v6**)
+- It is always a copy of the latest approved output (currently: **homepage-v7**)
 - `outputs/` folder is untouched version history — never delete or overwrite files there
-- **To update the live site:** copy the new approved version over `index.html`, then push
+- **To update the live site:** copy the new approved version over `index.html`, strip `../` path prefixes (since `index.html` is at root, not in `outputs/`), then push
   ```bash
-  cp outputs/homepage-v6.html index.html
-  git add index.html && git commit -m "Update index.html — live version (homepage-v6)" && git push
+  sed 's|"\.\./|"|g' outputs/homepage-v7.html > index.html
+  git add index.html && git commit -m "vN promoted to index.html — now live on Vercel" && git push
   ```
 
 ---
@@ -211,15 +216,15 @@ All product images are served from the `library-assets` GitHub repo via jsDelivr
 
 ## Known Issues / Pending Items
 
-- `homepage-v6` is the current live version — `index.html` = v6, deployed on Vercel.
-- `homepage-v7` is the active WIP version — do NOT copy to `index.html` until approved.
-- v7 CSS cache is at `?v=1` — increment each time `homepage-v7.css` is changed.
+- `homepage-v7` is the current live version — `index.html` = v7, deployed on Vercel. ✅
+- v7 CSS cache is at `?v=6` — increment each time `homepage-v7.css` is changed.
 - `com.apple.provenance` extended attribute appears on all files in the `css/` folder (macOS behavior) — does NOT block writes; file is writable by owner.
+- **Pending decision:** Add a Moat section to v7? PM site has one between Product Graph and Pipeline: *"This model comes from years of production use in configurable product and scene generation. Built from production product infrastructure, not hand-authored scenes."*
 
 ---
 
 ## Next Steps
 
-1. Continue iterating on `homepage-v7.html` + `css/homepage-v7.css`
-2. When v7 is approved: `cp outputs/homepage-v7.html index.html` and push to deploy
+1. Decide whether to add the Moat section to v7 (between Product Graph and Pipeline)
+2. Start `homepage-v8.html` for the next round of changes (if any)
 3. When ready: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
