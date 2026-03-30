@@ -340,10 +340,10 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 45%;
-      background: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
+      height: 24%;
+      background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.82) 100%);
       pointer-events: none;
-      z-index: 2;
+      z-index: 0;
       border-radius: 0 0 var(--radius-md) var(--radius-md);
     }
 
@@ -376,18 +376,37 @@
     /* Main blob — large, centered, very subtle papaya */
     .hero__ethereal-blob--a {
       background-color: rgba(236, 78, 11, 0.11);
-      width: 75%;
-      height: 90%;
-      top: -5%;
-      left: 12%;
+      width: 130%;
+      height: 105%;
+      top: -10%;
+      left: -15%;
     }
     /* Secondary blob — smaller, offset right, even lighter warm tone */
     .hero__ethereal-blob--b {
       background-color: rgba(244, 149, 109, 0.07);
-      width: 55%;
-      height: 65%;
-      bottom: -10%;
-      right: 0%;
+      width: 92%;
+      height: 78%;
+      bottom: -16%;
+      right: -18%;
+    }
+
+    @media (min-width: 1700px) {
+      .hero__ethereal-stage {
+        inset: -90px;
+        filter: url(#ethereal-filter) blur(7px);
+      }
+      .hero__ethereal-blob--a {
+        width: 150%;
+        height: 112%;
+        top: -14%;
+        left: -24%;
+      }
+      .hero__ethereal-blob--b {
+        width: 108%;
+        height: 84%;
+        bottom: -20%;
+        right: -24%;
+      }
     }
     .hero__content {
       position: relative;
@@ -479,6 +498,8 @@
       margin-top: 56px;
     }
     .hero__editor {
+      position: relative;
+      z-index: 1;
       background: #fff;
       border: 1px solid rgba(0,0,0,0.1);
       border-radius: var(--radius-md);
@@ -1971,6 +1992,34 @@
     @media (max-width: 1024px) {
       .wrap { padding: 0 40px; }
       .hero { padding: 140px 0 60px; }
+      .hero::before {
+        width: 28rem;
+        height: 62rem;
+        left: -6rem;
+        transform: rotate(-45deg) translateY(-38%);
+      }
+      .hero::after {
+        width: 11rem;
+        height: 62rem;
+        left: -3.5rem;
+        transform: rotate(-45deg) translateY(-50%);
+      }
+      .hero__ethereal-stage {
+        inset: -36px;
+        filter: blur(5px);
+      }
+      .hero__ethereal-blob--a {
+        width: 88%;
+        height: 82%;
+        top: -6%;
+        left: 6%;
+      }
+      .hero__ethereal-blob--b {
+        width: 62%;
+        height: 58%;
+        right: -8%;
+        bottom: -14%;
+      }
       .hero__content { padding: 0 40px; }
       .hero__editor-wrap { padding: 0 24px; margin-top: 48px; }
       .showcase__header { padding: 0 40px; }
@@ -1996,6 +2045,32 @@
       :root { --section-y: 80px; }
       .wrap { padding: 0 24px; }
       .hero { padding: 130px 0 56px; }
+      .hero::before {
+        width: 20rem;
+        height: 45rem;
+        left: -8rem;
+        transform: rotate(-42deg) translateY(-42%);
+        opacity: 0.75;
+      }
+      .hero::after {
+        width: 9rem;
+        height: 42rem;
+        left: -7rem;
+        transform: rotate(-42deg) translateY(-50%);
+        opacity: 0.6;
+      }
+      .hero__ethereal-stage {
+        inset: -20px;
+        filter: blur(3px);
+      }
+      .hero__ethereal-blob--a {
+        width: 110%;
+        height: 68%;
+        top: -10%;
+        left: -8%;
+        background-color: rgba(236, 78, 11, 0.085);
+      }
+      .hero__ethereal-blob--b { display: none; }
       .hero__content { padding: 0 24px; }
       .hero__editor-wrap { padding: 0 16px; margin-top: 40px; }
       /* Mobile editor adjustments */
@@ -2032,4 +2107,3 @@
       .showcase__header { padding: 0 24px; }
       .cta-sec__btns { flex-direction: column; align-items: flex-start; }
     }
-
