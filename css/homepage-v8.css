@@ -152,6 +152,152 @@
       background: #ffffff;
     }
 
+    /* ─── Light ray streaks (top-left, like the reference) ─── */
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Wide angled ray */
+    .hero::before {
+      width: 36rem;
+      height: 80rem;
+      top: 0;
+      left: -4rem;
+      transform: rotate(-45deg) translateY(-35%);
+      border-radius: 50%;
+      background: radial-gradient(
+        68.54% 68.72% at 55.02% 31.46%,
+        rgba(236, 78, 11, 0.055) 0%,
+        rgba(236, 78, 11, 0.018) 50%,
+        transparent 80%
+      );
+    }
+    /* Narrow sharp ray */
+    .hero::after {
+      width: 14rem;
+      height: 80rem;
+      top: 0;
+      left: -1rem;
+      transform: rotate(-45deg) translateY(-50%);
+      border-radius: 50%;
+      background: radial-gradient(
+        50% 50% at 50% 50%,
+        rgba(236, 78, 11, 0.04) 0%,
+        rgba(236, 78, 11, 0.012) 80%,
+        transparent 100%
+      );
+    }
+
+    /* ─── Entrance animations ─── */
+    @keyframes hero-in {
+      from {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateY(0);
+      }
+    }
+    .hero__animate {
+      opacity: 0;
+      animation: hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .hero__badge     { animation-delay: 0.05s; }
+    .hero__animate--1 { animation-delay: 0.18s; }
+    .hero__animate--2 { animation-delay: 0.32s; }
+    .hero__animate--3 { animation-delay: 0.46s; }
+    .hero__animate--4 { animation-delay: 0.62s; }
+
+    /* ─── Announcement badge ─── */
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s-400);
+      background: var(--surface-page-secondary);
+      border: 1px solid var(--border-default-secondary);
+      border-radius: var(--br-200);
+      padding: 6px 6px 6px 14px;
+      margin-bottom: var(--s-800);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+    .hero__badge:hover {
+      border-color: var(--border-default-secondary);
+      background: var(--surface-default-secondary);
+    }
+    .hero__badge-text {
+      font-family: var(--font), sans-serif;
+      font-size: var(--text-small-size);
+      font-weight: 500;
+      color: var(--text-default-body);
+      white-space: nowrap;
+      letter-spacing: 0;
+    }
+    .hero__badge-divider {
+      display: block;
+      width: 1px;
+      height: 16px;
+      background: var(--border-default-secondary);
+      flex-shrink: 0;
+    }
+    .hero__badge-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--surface-default);
+      border-radius: calc(var(--br-200) - 2px);
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid var(--border-default-secondary);
+      transition: background 0.2s;
+    }
+    .hero__badge:hover .hero__badge-arrow {
+      background: var(--surface-page-secondary);
+    }
+    /* Two-arrow slide — first slides out, second slides in */
+    .hero__badge-arrow-inner {
+      display: flex;
+      width: 24px;
+      transform: translateX(-50%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      color: var(--text-default-body);
+    }
+    .hero__badge:hover .hero__badge-arrow-inner {
+      transform: translateX(0);
+    }
+    .hero__badge-arrow-inner svg {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto 6px;
+    }
+
+    /* ─── Editor bottom gradient fade ─── */
+    .hero__editor-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 45%;
+      background: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
+      pointer-events: none;
+      z-index: 2;
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
+    }
+
     /* ─── Ethereal shadow background ─── */
     .hero__ethereal {
       position: absolute;
@@ -277,6 +423,7 @@
     .hero__editor-wrap {
       position: relative;
       z-index: 10;
+      isolation: isolate;
       width: 100%;
       max-width: 1100px;
       padding: 0 40px;
