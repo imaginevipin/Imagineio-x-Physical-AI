@@ -20,7 +20,7 @@
 
       <!-- Logo -->
       <a class="nav__logo" href="#">
-        <img src="../assets/logos/Horizontal Light.svg" alt="imagine.io">
+        <img src="../assets/logos/Horizontal.svg" alt="imagine.io">
       </a>
 
       <!-- Desktop links — absolutely centred -->
@@ -120,7 +120,7 @@
   </div>
 
   <!-- LAYER 2 — Editor / Scene Configurator (light mode, primary visual anchor) -->
-  <div class="hero__editor-wrap hero__animate hero__animate--4">
+  <div class="hero__editor-wrap hero__animate hero__animate--4 bp-frame">
     <div class="hero__editor">
 
       <!-- Window chrome + tab bar -->
@@ -255,23 +255,23 @@
 <section class="hero-stats-bar">
   <div class="wrap">
     <div class="hero-stats-bar__inner">
-      <div class="hstat">
+      <div class="hstat reveal reveal--1">
         <div class="hstat__val">6+</div>
         <div class="hstat__lbl">Years in Production</div>
       </div>
-      <div class="hstat">
+      <div class="hstat reveal reveal--2">
         <div class="hstat__val">1M+</div>
         <div class="hstat__lbl">Outputs / Month</div>
       </div>
-      <div class="hstat">
+      <div class="hstat reveal reveal--3">
         <div class="hstat__val">25K+</div>
         <div class="hstat__lbl">Structured Products</div>
       </div>
-      <div class="hstat">
+      <div class="hstat reveal reveal--4">
         <div class="hstat__val">10,000×</div>
         <div class="hstat__lbl">Variation Multiplier</div>
       </div>
-      <div class="hstat">
+      <div class="hstat reveal reveal--5">
         <div class="hstat__val">150+</div>
         <div class="hstat__lbl">Metadata Attributes</div>
       </div>
@@ -286,8 +286,8 @@
 ═══════════════════════════════════════════════════════ -->
 <section class="logo-strip">
   <div class="logo-strip__inner">
-    <p class="logo-strip__label">Used by enterprise robotics &amp; AI teams</p>
-    <div class="logo-strip__logos">
+    <p class="logo-strip__label reveal">Used by enterprise robotics &amp; AI teams</p>
+    <div class="logo-strip__logos reveal reveal--2">
       <img src="../assets/partners-logos/Logo-1.png" alt="Partner logo">
       <img src="../assets/partners-logos/Logo-2.png" alt="Partner logo">
       <img src="../assets/partners-logos/Logo-3.png" alt="Partner logo">
@@ -304,8 +304,8 @@
 <section class="mission" id="proof">
   <div class="wrap">
     <div class="mission__inner">
-      <h2 class="mission__quote">Built as structured data.<br><em>Exported as simulation-ready worlds.</em></h2>
-      <div class="mission__right">
+      <h2 class="mission__quote reveal reveal--left">Built as structured data.<br><em>Exported as simulation-ready worlds.</em></h2>
+      <div class="mission__right reveal reveal--right">
         <p class="mission__p">Every environment is generated from a structured product graph and delivered as OpenUSD — hierarchy, semantics, articulation, and collision intact. Load directly into Isaac Sim or MuJoCo without rework.</p>
         <div class="mission__list">
           <div class="mission__item">
@@ -336,29 +336,29 @@
 ═══════════════════════════════════════════════════════ -->
 <section class="problem">
   <div class="wrap">
-    <p class="pill">The Problem</p>
-    <h2>Training data is <em>the bottleneck.</em></h2>
+    <p class="pill reveal">The Problem</p>
+    <h2 class="reveal reveal--1">Training data is <em>the bottleneck.</em></h2>
     <div class="problem__grid">
 
-      <div class="problem__card">
+      <div class="problem__card bp-frame reveal reveal--2">
         <span class="icon problem__icon">schedule</span>
         <h3 class="problem__title">Asset prep takes weeks</h3>
         <p class="problem__body">40h of rigging per kitchen. 2–4 weeks of cleanup per batch. Teams spend more time fixing assets than training models.</p>
       </div>
 
-      <div class="problem__card">
+      <div class="problem__card bp-frame reveal reveal--3">
         <span class="icon problem__icon">precision_manufacturing</span>
         <h3 class="problem__title">Physics properties don't come for free</h3>
         <p class="problem__body">Joints, limits, and constraints have to be authored manually — they don't come from geometry. Every scene change means another round of script fixes.</p>
       </div>
 
-      <div class="problem__card">
+      <div class="problem__card bp-frame reveal reveal--4">
         <span class="icon problem__icon">label_off</span>
         <h3 class="problem__title">Raw 3D has no structure</h3>
         <p class="problem__body">Semantic labels, collision meshes, and UV integrity don't come with geometry. ML engineers end up debugging UV maps instead of training perception models.</p>
       </div>
 
-      <div class="problem__card">
+      <div class="problem__card bp-frame reveal reveal--5">
         <span class="icon problem__icon">moving</span>
         <h3 class="problem__title">Scale takes months, not days</h3>
         <p class="problem__body">Going from a handful of scenes to training volume requires months of manual work. Every new product or environment starts from zero — there's no reuse.</p>
@@ -389,13 +389,13 @@
 
   <div class="wrap">
     <div class="code-layer__inner">
-      <div class="code-layer__hd">
-        <span class="pill" style="background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.6);">How It's Built</span>
+      <div class="code-layer__hd reveal">
+        <span class="pill" style="background:transparent; border-color:rgba(255,255,255,0.18); color:rgba(255,255,255,0.5);">How It's Built</span>
         <h2 class="code-layer__h2">The structured model behind every <em>environment we generate.</em></h2>
         <p class="code-layer__sub">Each product is stored as a rich data model — not just geometry. Dimensions, materials, joint limits, articulation rules, and semantic labels are all captured once and reused across every scene, variant, and export.</p>
       </div>
 
-      <div class="codeblock">
+      <div class="codeblock bp-frame bp-frame--dark reveal reveal--2">
         <div class="codeblock__bar">
           <span class="codeblock__btn codeblock__btn--r"></span>
           <span class="codeblock__btn codeblock__btn--a"></span>
@@ -434,7 +434,7 @@
 
   <!-- Header scrolls in normally, then track begins -->
   <div class="wrap">
-    <div class="pipeline-scroll__hd">
+    <div class="pipeline-scroll__hd reveal">
       <span class="pill">How It Works</span>
       <h2 class="pipeline-scroll__h2">From structured product data to <em>training-ready environments.</em></h2>
     </div>
@@ -667,13 +667,13 @@
 ═══════════════════════════════════════════════════════ -->
 <section class="deliverables">
   <div class="wrap">
-    <div class="deliverables__hd">
+    <div class="deliverables__hd reveal">
       <span class="pill">What You Get</span>
       <h2 class="deliverables__h2">Everything your pipeline <em>needs to start training.</em></h2>
       <p class="deliverables__sub">Structured, labeled, and ready to drop into Isaac Sim, MuJoCo, or any OpenUSD-compatible stack.</p>
     </div>
     <div class="del-grid">
-      <div class="del-card">
+      <div class="del-card bp-frame reveal reveal--1">
         <span class="del-card__icon">inventory_2</span>
         <p class="del-card__name">OpenUSD Scene</p>
         <p class="del-card__desc">Full SimReady USD export with physics, materials, and hierarchy intact.</p>
@@ -736,7 +736,7 @@
      5. ASSET SHOWCASE MARQUEE — image-first overlay cards
 ═══════════════════════════════════════════════════════ -->
 <section class="showcase">
-  <div class="showcase__header">
+  <div class="showcase__header reveal">
     <span class="pill">Asset Library</span>
     <h2 class="showcase__h2">25,000+ structured environments. <em>Ready for simulation.</em></h2>
   </div>
@@ -795,14 +795,14 @@
 <section class="validation">
   <div class="wrap">
     <div class="validation__inner">
-      <div class="validation__sticky">
+      <div class="validation__sticky reveal">
         <span class="pill">Quality at Scale</span>
         <h2 class="validation__h2">Every <em>asset.</em> Every <em>variant.</em> Validated.</h2>
         <p class="validation__p">Every environment passes physics integrity checks, semantic label verification, and collision mesh validation before delivery. Data that's structurally broken never reaches your pipeline.</p>
       </div>
       <div class="validation__cards">
 
-        <div class="v-card">
+        <div class="v-card reveal reveal--1">
           <div class="v-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Coffee%20Table%20Det%201.png') center/cover no-repeat;"></div>
           <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
           <div class="v-card__overlay">
@@ -881,13 +881,13 @@
 ═══════════════════════════════════════════════════════ -->
 <section class="tiers">
   <div class="wrap">
-    <div class="tiers__hd">
+    <div class="tiers__hd reveal">
       <span class="pill" id="tiers">Application Tiers</span>
       <h2 class="tiers__h2"><em>Perception</em> now. <em>Navigation</em> next. <em>Manipulation</em> coming.</h2>
       <p class="tiers__sub">Start training perception models today. Navigation data is near production. Full manipulation support is on the roadmap.</p>
     </div>
 
-    <div class="tiers__strip">
+    <div class="tiers__strip reveal reveal--2">
 
       <div class="tier">
         <div class="tier__top">
@@ -951,7 +951,7 @@
 <section class="trust">
   <div class="wrap">
     <div class="trust__inner">
-      <div>
+      <div class="reveal reveal--left">
         <span class="pill">Why This Is Different</span>
         <h2 class="trust__h2">Not procedural. Not AI-synthesized. <em>Structured from the source.</em></h2>
         <p class="trust__p">Every environment is built from a structured product graph — not reconstructed from scans, not hallucinated. We capture structured data once from the real product and reuse it across every variant, every scene, and every export. Production infrastructure since 2018.</p>
@@ -963,7 +963,7 @@
           <span class="tbadge"><span class="icon">factory</span>Production infrastructure, not research tooling</span>
         </div>
       </div>
-      <div class="trust__quad">
+      <div class="trust__quad reveal reveal--right">
         <div class="t-stat">
           <div class="t-stat__num">150+</div>
           <p class="t-stat__label">Metadata attributes</p>
@@ -995,34 +995,34 @@
 ═══════════════════════════════════════════════════════ -->
 <section class="ecosystem" id="ecosystem">
   <div class="wrap">
-    <div class="ecosystem__hd">
+    <div class="ecosystem__hd reveal">
       <span class="pill">Ecosystem</span>
       <h2 class="ecosystem__h2">We produce the environment layer. You <em>run the simulation.</em></h2>
       <p class="ecosystem__sub">imagine.io exports directly into the simulation tools your team already runs.</p>
     </div>
     <div class="eco-grid">
-      <div class="eco-card">
+      <div class="eco-card bp-frame reveal reveal--1">
         <div class="eco-card__icon"><span class="icon">developer_board</span></div>
         <div>
           <p class="eco-card__name">NVIDIA Omniverse</p>
           <p class="eco-card__desc">Structured environments and variation pipelines for physical AI simulation — native Omniverse integration.</p>
         </div>
       </div>
-      <div class="eco-card">
+      <div class="eco-card bp-frame reveal reveal--2">
         <div class="eco-card__icon"><span class="icon">precision_manufacturing</span></div>
         <div>
           <p class="eco-card__name">Isaac Sim</p>
           <p class="eco-card__desc">USD export with semantics, collision, and physics for robot training. Load time under 5 minutes.</p>
         </div>
       </div>
-      <div class="eco-card">
+      <div class="eco-card bp-frame reveal reveal--3">
         <div class="eco-card__icon"><span class="icon">schema</span></div>
         <div>
           <p class="eco-card__name">OpenUSD / SimReady</p>
           <p class="eco-card__desc">Native USD pipeline aligned with NVIDIA SimReady specifications — hierarchy and physics preserved end-to-end.</p>
         </div>
       </div>
-      <div class="eco-card">
+      <div class="eco-card bp-frame reveal reveal--4">
         <div class="eco-card__icon"><span class="icon">science</span></div>
         <div>
           <p class="eco-card__name">MuJoCo</p>
@@ -1040,15 +1040,15 @@
 <section class="gtc" id="gtc">
   <div class="wrap">
     <div class="gtc__inner">
-      <div>
+      <div class="reveal reveal--left">
         <div class="gtc__badge"><span class="gtc__badge-dot"></span>Live Event</div>
         <h2 class="gtc__h2"><em>NVIDIA GTC</em><br>March 17–20, 2026<br>San Jose.</h2>
         <p class="gtc__sub">Bring your stack. We'll show the pipeline.</p>
         <p class="gtc__desc">Book 30 minutes to review your simulation workflow, data requirements, and where structured environment generation fits. We'll walk through the full pipeline — from product graph to Isaac Sim.</p>
         <a href="#" class="btn btn-primary btn-lg">Book a Technical Discussion →</a>
       </div>
-      <div class="gtc__details">
-        <div class="gtc__detail"><span class="icon">event</span>March 17–20, 2026</div>
+      <div class="gtc__details reveal reveal--right">
+        <div class="gtc__detail bp-frame bp-frame--dark"><span class="icon">event</span>March 17–20, 2026</div>
         <div class="gtc__detail"><span class="icon">location_on</span>San Jose Convention Center · San Jose, CA</div>
         <div class="gtc__detail"><span class="icon">schedule</span>30-minute technical discussion — bring your stack</div>
         <div class="gtc__detail"><span class="icon">developer_board</span>NVIDIA GTC — the conference for physical AI</div>
@@ -1066,7 +1066,7 @@
     <div class="cta-sec__inner">
 
       <!-- Left: text -->
-      <div class="cta-sec__left">
+      <div class="cta-sec__left reveal reveal--left">
         <span class="pill">Get Started</span>
         <h2 class="cta-sec__h2">Bring <em>your stack.</em> We'll show the pipeline.</h2>
         <p class="cta-sec__sub">Book 30 minutes to review your simulation workflow, data requirements, and where structured environment generation fits.</p>
@@ -1085,7 +1085,7 @@
       </div>
 
       <!-- Right: edge-bleeding image grid -->
-      <div class="cta-sec__right">
+      <div class="cta-sec__right reveal reveal--right">
         <div class="cta-img">
           <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%202.jpg') center/cover no-repeat;"></div>
           <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
@@ -1263,6 +1263,44 @@
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
+}());
+</script>
+
+<!-- ═══════════════════════════════════════════════════════
+     BLUEPRINT — SCROLL REVEAL + CROSSHAIR INJECTION
+═══════════════════════════════════════════════════════ -->
+<script>
+(function () {
+
+  /* ── Scroll-reveal ──────────────────────────────────── */
+  var revealEls = document.querySelectorAll('.reveal');
+  if (revealEls.length && 'IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    /* Fallback: just show everything */
+    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+
+  /* ── Crosshair corner injection ─────────────────────── */
+  /* For every .bp-frame element, inject 4 corner spans    */
+  var CORNERS = ['tl', 'tr', 'bl', 'br'];
+  document.querySelectorAll('.bp-frame').forEach(function (frame) {
+    CORNERS.forEach(function (pos) {
+      var span = document.createElement('span');
+      span.className = 'bp-corner bp-corner--' + pos;
+      span.setAttribute('aria-hidden', 'true');
+      frame.appendChild(span);
+    });
+  });
+
 }());
 </script>
 

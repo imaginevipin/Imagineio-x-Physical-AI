@@ -23,6 +23,20 @@
       --radius-md:   12px;                  /* exception: 12px — no PDS token                 */
       --radius-lg:   20px;                  /* exception: 20px — no PDS token                 */
       --section-y:   120px;                 /* exception: 120px — exceeds PDS scale max --s-1400(72px) */
+
+      /* ─── Blueprint theme tokens ──────────────────────────────────────────────
+         Visual language: engineering schematic — crosshair corners, ruled lines,
+         precision structure. Applied to cards, sections, and UI frames.
+      ──────────────────────────────────────────────────────────────────────── */
+      --bp-mark:        rgba(0, 0, 0, 0.13);       /* crosshair arm color — light sections    */
+      --bp-mark-dark:   rgba(255, 255, 255, 0.18); /* crosshair arm color — dark sections     */
+      --bp-dash:        rgba(0, 0, 0, 0.08);        /* dashed divider / grid line — light      */
+      --bp-dash-dark:   rgba(255, 255, 255, 0.1);   /* dashed divider / grid line — dark       */
+      --bp-arm:         14px;                        /* length of each crosshair arm            */
+      --bp-thickness:   1px;                         /* crosshair line thickness                */
+      --bp-offset:      -1px;                        /* inset/outset of crosshair from corner   */
+      --bp-card-radius: var(--br-100);               /* cards in blueprint theme — 4px          */
+      --bp-section-radius: var(--br-200);            /* section frames — 8px                    */
     }
 
     body {
@@ -72,21 +86,21 @@
     }
     .btn-ghost:hover { border-color: #aaa; background: var(--bg-subtle); }
 
-    /* ─── Section label badge ─── */
+    /* ─── Section label badge — blueprint style ─── */
     .pill {
       display: inline-flex;
       align-items: center;
-      background: rgba(0,0,0,0.06);
+      background: transparent;
       color: var(--text-muted);
-      border-radius: 6px;
+      border-radius: var(--bp-card-radius);        /* 4px — blueprint */
       padding: 4px 10px;
       font-family: var(--font), sans-serif;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 24px;
-      border: none;
+      margin-bottom: 20px;
+      border: 1px solid var(--bp-mark);            /* blueprint: thin ruled border */
     }
 
     /* ─── Placeholder image ─── */
@@ -106,6 +120,145 @@
 
 
     /* ═══════════════════════════════════════════════════════
+       BLUEPRINT — CROSSHAIR CORNER SYSTEM
+       Usage: wrap any element with .bp-frame to get +
+       corner markers. Add .bp-frame--dark on dark bg sections.
+       The 4 corner spans are injected via JS (see bottom of
+       the HTML file) so no manual markup needed per instance.
+    ═══════════════════════════════════════════════════════ */
+
+    /* Container must be position: relative */
+    .bp-frame { position: relative; }
+
+    /* Each corner element — 0×0 box, just an origin point */
+    .bp-corner {
+      position: absolute;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .bp-corner--tl { top:    var(--bp-offset); left:  var(--bp-offset); }
+    .bp-corner--tr { top:    var(--bp-offset); right: var(--bp-offset); }
+    .bp-corner--bl { bottom: var(--bp-offset); left:  var(--bp-offset); }
+    .bp-corner--br { bottom: var(--bp-offset); right: var(--bp-offset); }
+
+    /* Horizontal arm */
+    .bp-corner::before {
+      content: '';
+      position: absolute;
+      height: var(--bp-thickness);
+      width: var(--bp-arm);
+      background: var(--bp-mark);
+    }
+    /* Vertical arm */
+    .bp-corner::after {
+      content: '';
+      position: absolute;
+      width: var(--bp-thickness);
+      height: var(--bp-arm);
+      background: var(--bp-mark);
+    }
+
+    /* Top-left: arms go right and down */
+    .bp-corner--tl::before { top: 0;   left: 0; }
+    .bp-corner--tl::after  { top: 0;   left: 0; }
+
+    /* Top-right: horizontal arm goes left, vertical goes down */
+    .bp-corner--tr::before { top: 0;   right: 0; left: auto; }
+    .bp-corner--tr::after  { top: 0;   right: 0; left: auto; }
+
+    /* Bottom-left: horizontal arm goes right, vertical goes up */
+    .bp-corner--bl::before { bottom: 0; top: auto; left: 0; }
+    .bp-corner--bl::after  { bottom: 0; top: auto; left: 0; }
+
+    /* Bottom-right: arms go left and up */
+    .bp-corner--br::before { bottom: 0; top: auto; right: 0; left: auto; }
+    .bp-corner--br::after  { bottom: 0; top: auto; right: 0; left: auto; }
+
+    /* Dark background variant */
+    .bp-frame--dark .bp-corner::before,
+    .bp-frame--dark .bp-corner::after { background: var(--bp-mark-dark); }
+
+
+    /* ═══════════════════════════════════════════════════════
+       BLUEPRINT — SCROLL REVEAL
+       Add class="reveal" to any element. JS IntersectionObserver
+       adds .is-visible when it enters viewport. Stagger with
+       reveal--1 through reveal--6 delay modifiers.
+    ═══════════════════════════════════════════════════════ */
+
+    @keyframes reveal-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+        filter: blur(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+    }
+    .reveal.is-visible {
+      animation: reveal-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .reveal--1 { animation-delay: 0.05s; }
+    .reveal--2 { animation-delay: 0.15s; }
+    .reveal--3 { animation-delay: 0.25s; }
+    .reveal--4 { animation-delay: 0.35s; }
+    .reveal--5 { animation-delay: 0.48s; }
+    .reveal--6 { animation-delay: 0.62s; }
+
+    /* Slide from left variant */
+    @keyframes reveal-left {
+      from { opacity: 0; transform: translateX(-16px); filter: blur(4px); }
+      to   { opacity: 1; transform: translateX(0);     filter: blur(0);   }
+    }
+    .reveal--left.is-visible {
+      animation: reveal-left 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Slide from right variant */
+    @keyframes reveal-right {
+      from { opacity: 0; transform: translateX(16px); filter: blur(4px); }
+      to   { opacity: 1; transform: translateX(0);    filter: blur(0);   }
+    }
+    .reveal--right.is-visible {
+      animation: reveal-right 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       BLUEPRINT — DASHED DIVIDER
+       <hr class="bp-rule"> or .bp-rule as a div
+    ═══════════════════════════════════════════════════════ */
+    .bp-rule {
+      border: none;
+      border-top: 1px dashed var(--bp-dash);
+      margin: 0;
+    }
+    .bp-rule--dark {
+      border-top-color: var(--bp-dash-dark);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       BLUEPRINT — SECTION FRAME
+       Sections that want the full bordered + cornered frame.
+       Adds a visible 1px border + crosshair corners.
+    ═══════════════════════════════════════════════════════ */
+    .bp-section-frame {
+      border: 1px solid var(--border);
+      border-radius: var(--bp-section-radius);
+      position: relative;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
        1. NAVBAR
     ═══════════════════════════════════════════════════════ */
     .nav {
@@ -117,12 +270,12 @@
       padding: 0 var(--s-400);
     }
 
-    /* Outer pill — this is what shrinks and gains the border on scroll */
+    /* Outer container — blueprint: sharp rectangular, not pill */
     .nav__outer {
       max-width: 1280px;
       margin: var(--s-400) auto 0;
       padding: 0 var(--s-800);
-      border-radius: var(--br-200);
+      border-radius: var(--br-100); /* 4px — blueprint precision, not pill */
       transition:
         max-width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
         padding 0.35s cubic-bezier(0.22, 1, 0.36, 1),
@@ -136,14 +289,15 @@
     }
 
     /* Scrolled state — JS adds .nav--scrolled */
+    /* Blueprint: crisp white box + thin precise border, no heavy shadow */
     .nav--scrolled .nav__outer {
-      max-width: 860px;
+      max-width: 880px;
       padding: 0 var(--s-500);
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(20px) saturate(1.8);
-      -webkit-backdrop-filter: blur(20px) saturate(1.8);
-      border-color: rgba(0,0,0,0.08);
-      box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px) saturate(1.6);
+      -webkit-backdrop-filter: blur(20px) saturate(1.6);
+      border-color: var(--bp-mark);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.05);
     }
 
     .nav__inner {
@@ -273,6 +427,8 @@
       z-index: 1;
       overflow: hidden;
       background: var(--bg);
+      /* Blueprint: subtle crosshair grid across hero bg */
+      background-image: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(0,0,0,0.04)' stroke-width='1'%3E%3Cline x1='24' y1='16' x2='24' y2='32'/%3E%3Cline x1='16' y1='24' x2='32' y2='24'/%3E%3C/g%3E%3C/svg%3E");
     }
 
     /* ─── Light ray streaks (top-left, like the reference) ─── */
@@ -505,9 +661,9 @@
       position: relative;
       z-index: 1;
       background: var(--bg);
-      border: 1px solid rgba(0,0,0,0.1);
-      border-radius: var(--radius-md);
-      box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 24px 72px rgba(0,0,0,0.12);
+      border: 1px solid var(--bp-mark);   /* blueprint: precise ruled border */
+      border-radius: var(--bp-card-radius); /* 4px — sharp, not pill */
+      box-shadow: 0 2px 0 rgba(0,0,0,0.03), 0 16px 56px rgba(0,0,0,0.09);
       overflow: hidden;
     }
 
@@ -688,8 +844,8 @@
     /* ─── Hero stats bar (below hero section) ─── */
     .hero-stats-bar {
       background: var(--bg);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      border-top: 1px solid var(--bp-mark);
+      border-bottom: 1px solid var(--bp-mark);
     }
     .hero-stats-bar__inner {
       display: flex;
@@ -697,14 +853,16 @@
     }
     .hstat {
       flex: 1;
-      padding: 18px 24px;
-      border-right: 1px solid var(--border);
+      padding: 20px 24px;
+      border-right: 1px solid var(--bp-mark);
       text-align: center;
+      transition: background 0.2s;
     }
     .hstat:last-child { border-right: none; }
+    .hstat:hover { background: var(--bg-subtle); }
     .hstat__val {
-      font-size: 20px; font-weight: 600; color: var(--text-head);
-      letter-spacing: -0.5px; line-height: 1; margin-bottom: 4px;
+      font-size: 22px; font-weight: 600; color: var(--text-head);
+      letter-spacing: -0.5px; line-height: 1; margin-bottom: 5px;
     }
     .hstat__lbl {
       font-size: 10px; font-weight: 500; letter-spacing: 1.4px;
@@ -721,27 +879,25 @@
     ═══════════════════════════════════════════════════════ */
     .logo-strip {
       background: var(--bg);
-      border-top: 1px solid rgba(0,0,0,0.07);
-      border-bottom: 1px solid rgba(0,0,0,0.07);
-      padding: 80px 0;
+      border-top: 1px solid var(--bp-mark);
+      border-bottom: 1px solid var(--bp-mark);
     }
     .logo-strip__inner {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 80px 80px;
+      padding: 56px 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 24px;
+      gap: 28px;
     }
     .logo-strip__label {
       font-family: var(--font), sans-serif;
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 600;
-      letter-spacing: 1.8px;
+      letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--text-muted);
-      opacity: 1;
       white-space: nowrap;
     }
     .logo-strip__logos {
@@ -749,7 +905,7 @@
       align-items: center;
       justify-content: center;
       min-height: 40px;
-      gap: clamp(32px, 5vw, 56px);
+      gap: clamp(32px, 5vw, 64px);
       flex-wrap: wrap;
       overflow-x: visible;
       scrollbar-width: none;
@@ -758,13 +914,14 @@
     .logo-strip__logos::-webkit-scrollbar { display: none; }
     .logo-strip__logos img {
       display: block;
-      height: 48px;
+      height: 40px;
       width: auto;
       object-fit: contain;
       flex-shrink: 0;
-      filter: grayscale(0%);
-      opacity: 1;
+      filter: grayscale(100%) opacity(0.45);
+      transition: filter 0.3s;
     }
+    .logo-strip__logos img:hover { filter: grayscale(0%) opacity(1); }
 
 
     /* ═══════════════════════════════════════════════════════
@@ -796,17 +953,18 @@
     }
     .problem__card {
       padding: var(--s-800) var(--s-700);
-      border: 1px solid var(--border-default-secondary);
-      border-radius: var(--br-200);
+      border: 1px solid var(--bp-mark);           /* blueprint: ruled border */
+      border-radius: var(--bp-card-radius);        /* 4px — precise, not rounded */
       display: flex;
       flex-direction: column;
       gap: var(--s-400);
-      background: var(--surface-page-secondary);
-      transition: border-color 0.2s ease;
+      background: var(--white);
+      position: relative;                          /* needed for bp-frame corners */
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
     .problem__card:hover {
-      border-color: var(--border-default-secondary);
-      background: var(--surface-default-secondary);
+      border-color: rgba(0,0,0,0.22);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
     }
     .problem__icon {
       font-size: 22px;
@@ -882,16 +1040,17 @@
       }
     }
 
-    /* Asset cards */
+    /* Asset cards — blueprint: sharp corners, thin border */
     .asset-card {
       position: relative;
       width: 280px;
       aspect-ratio: 4 / 3;
-      border-radius: var(--radius-md);
+      border-radius: var(--bp-card-radius);        /* 4px — blueprint precise */
       overflow: hidden;
       background: #eee;
       flex: 0 0 auto;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: 1px solid var(--bp-mark);
     }
     .asset-card__img {
       position: absolute;
@@ -942,16 +1101,18 @@
     .asset-badge {
       position: absolute;
       top: 10px;
-      padding: 4px 8px;
-      font-size: 10px;
+      padding: 3px 7px;
+      font-size: 9px;
       font-weight: 600;
-      letter-spacing: 0.5px;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.6);
-      color: #fff;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      border-radius: var(--bp-card-radius);        /* 4px — no pill/capsule */
+      background: rgba(0,0,0,0.55);
+      color: rgba(255,255,255,0.92);
       backdrop-filter: blur(6px);
       opacity: 0.9;
       transition: opacity 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.12);    /* subtle blueprint border */
     }
     .asset-badge--left  { left: 10px; }
     .asset-badge--right { right: 10px; }
@@ -1005,28 +1166,30 @@
     ═══════════════════════════════════════════════════════ */
     .code-layer {
       position: relative;
-      background: #0d0d0d;
+      background: var(--dark);
       overflow: hidden;
       padding: var(--section-y) 0;
+      /* Blueprint: crosshair grid on dark background */
+      background-image: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'%3E%3Cline x1='24' y1='16' x2='24' y2='32'/%3E%3Cline x1='16' y1='24' x2='32' y2='24'/%3E%3C/g%3E%3C/svg%3E");
     }
-    /* Full-bleed asset grid in background */
+    /* Full-bleed asset grid — now just a subtle texture overlay */
     .code-layer__bg {
       position: absolute;
       inset: 0;
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       grid-template-rows: repeat(3, 1fr);
-      gap: 3px;
-      opacity: 0.35;
+      gap: 1px;
+      opacity: 0.15;
       pointer-events: none;
     }
-    .code-layer__bg-tile { background: #1a1a1a; }
-    .code-layer__bg-tile:nth-child(odd) { background: #161616; }
-    /* Dark overlay gradient */
+    .code-layer__bg-tile { background: rgba(255,255,255,0.04); }
+    .code-layer__bg-tile:nth-child(odd) { background: rgba(255,255,255,0.02); }
+    /* Dark veil — subtler radial fade */
     .code-layer__veil {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,0.7) 100%);
+      background: radial-gradient(ellipse at 50% 30%, transparent 20%, rgba(0,0,0,0.55) 100%);
       pointer-events: none;
     }
     .code-layer__inner {
@@ -1054,13 +1217,13 @@
       line-height: 1.65;
       color: rgba(255,255,255,0.55);
     }
-    /* Code block */
+    /* Code block — blueprint: sharp corners, precise border */
     .codeblock {
-      background: #161616;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-md);
+      background: #0a0a0a;
+      border: 1px solid var(--bp-mark-dark);
+      border-radius: var(--bp-card-radius);        /* 4px */
       overflow: hidden;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+      box-shadow: 0 24px 72px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.04);
       width: 100%;
       max-width: 680px;
     }
@@ -1068,9 +1231,9 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 12px 16px;
-      background: #1e1e1e;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 10px 16px;
+      background: #111111;
+      border-bottom: 1px solid var(--bp-mark-dark);
     }
     .codeblock__btn { width: 10px; height: 10px; border-radius: 50%; }
     .codeblock__btn--r { background: #ff5f57; }
@@ -1250,19 +1413,19 @@
 
     /* ── Shared card shell ── */
     .ps-card {
-      background: var(--bg);
-      border: 1px solid rgba(0,0,0,0.07);
-      border-radius: 10px;
+      background: var(--white);
+      border: 1px solid var(--bp-mark);
+      border-radius: var(--bp-card-radius);        /* 4px — blueprint */
       overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.03), 0 8px 32px rgba(0,0,0,0.07);
     }
     .ps-card__bar {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 11px 16px;
-      background: #f7f6f3;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 10px 16px;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--bp-mark);
     }
     .ps-card__dots { display: flex; gap: 6px; }
     .ps-card__dot  { width: 11px; height: 11px; border-radius: 50%; }
@@ -1441,11 +1604,13 @@
     /* Validation cards — image-first with overlay */
     .validation__cards { display: flex; flex-direction: column; gap: 12px; }
     .v-card {
-      border-radius: var(--radius-md);
+      border-radius: var(--bp-card-radius);        /* 4px — blueprint */
       overflow: hidden;
-      border: 1px solid rgba(0,0,0,0.08);
+      border: 1px solid var(--bp-mark);
       position: relative;
+      transition: border-color 0.2s, transform 0.2s;
     }
+    .v-card:hover { border-color: rgba(0,0,0,0.22); transform: translateY(-2px); }
     .v-card__img {
       width: 100%;
       height: 200px;
@@ -1530,17 +1695,17 @@
       color: var(--text-body);
       line-height: 1.65;
     }
-    /* Flush ruled strip */
+    /* Flush ruled strip — blueprint: sharp corners, precise dividers */
     .tiers__strip {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
+      border: 1px solid var(--bp-mark);
+      border-radius: var(--bp-card-radius);        /* 4px — blueprint */
       overflow: hidden;
     }
     .tier {
       padding: 44px 40px;
-      border-right: 1px solid var(--border);
+      border-right: 1px solid var(--bp-mark);
       position: relative;
       display: flex;
       flex-direction: column;
@@ -1746,10 +1911,11 @@
     }
     .cta-img {
       position: relative;
-      border-radius: var(--radius-md);
+      border-radius: var(--bp-card-radius);        /* 4px — blueprint */
       overflow: hidden;
+      border: 1px solid var(--bp-mark);
     }
-    .cta-img:first-child { border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+    .cta-img:first-child { border-radius: var(--bp-card-radius); } /* no special rounding */
     .cta-img__ph {
       background: var(--grey-100, #e5e5e5);
       width: 100%;
@@ -1857,17 +2023,21 @@
       gap: 12px;
     }
     .del-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
+      background: var(--white);
+      border: 1px solid var(--bp-mark);
+      border-radius: var(--bp-card-radius);        /* 4px — blueprint precision */
       padding: var(--s-700);
-      transition: border-color 0.2s;
+      position: relative;                          /* for bp-frame corners */
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .del-card:hover { border-color: #bbb; }
+    .del-card:hover {
+      border-color: rgba(0,0,0,0.2);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
     .del-card__icon {
       font-family: 'Material Symbols Outlined';
-      font-size: 22px;
-      color: var(--accent);
+      font-size: 20px;
+      color: var(--text-muted);                    /* muted — not accent */
       display: block;
       margin-bottom: var(--s-400);
     }
@@ -1909,24 +2079,29 @@
       gap: 12px;
     }
     .eco-card {
-      background: var(--bg-warm);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
+      background: var(--white);
+      border: 1px solid var(--bp-mark);
+      border-radius: var(--bp-card-radius);        /* 4px — blueprint */
       padding: var(--s-800);
       display: flex;
       gap: var(--s-600);
       align-items: flex-start;
-      transition: border-color 0.2s;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .eco-card:hover { border-color: #bbb; }
+    .eco-card:hover {
+      border-color: rgba(0,0,0,0.22);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
     .eco-card__icon {
-      width: 48px; height: 48px;
-      border-radius: var(--radius-sm);
-      background: var(--dark);
+      width: 44px; height: 44px;
+      border-radius: var(--bp-card-radius);
+      border: 1px solid var(--bp-mark);
+      background: var(--bg-subtle);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .eco-card__icon .icon { font-size: 22px; color: var(--white); }
+    .eco-card__icon .icon { font-size: 20px; color: var(--text-muted); }
     .eco-card__name { font-size: 16px; font-weight: 600; color: var(--text-head); margin-bottom: 8px; }
     .eco-card__desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
 
@@ -1934,17 +2109,19 @@
        GTC — event section
     ═══════════════════════════════════════════════════════ */
     .gtc {
-      background: #0d0d0d;
+      background: var(--dark);
       padding: var(--section-y) 0;
       position: relative;
       overflow: hidden;
+      /* Blueprint: crosshair grid on dark */
+      background-image: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'%3E%3Cline x1='24' y1='16' x2='24' y2='32'/%3E%3Cline x1='16' y1='24' x2='32' y2='24'/%3E%3C/g%3E%3C/svg%3E");
     }
     .gtc::before {
       content: '';
       position: absolute;
       top: 0; right: 0;
       width: 55%; height: 100%;
-      background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.03), transparent 65%);
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.02), transparent 65%);
       pointer-events: none;
     }
     .gtc__inner {
@@ -1985,13 +2162,14 @@
     .gtc__details { display: flex; flex-direction: column; gap: var(--s-300); }
     .gtc__detail {
       display: flex; align-items: center; gap: 14px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--bp-mark-dark);       /* blueprint: precise dark border */
+      border-radius: var(--bp-card-radius);         /* 4px */
       padding: 18px 20px;
       font-size: 14px; color: rgba(255,255,255,0.55);
+      position: relative;
     }
-    .gtc__detail .icon { font-size: 18px; color: rgba(255,255,255,0.35); flex-shrink: 0; }
+    .gtc__detail .icon { font-size: 18px; color: rgba(255,255,255,0.3); flex-shrink: 0; }
 
     @media (max-width: 1024px) {
       .wrap { padding: 0 40px; }
@@ -2038,7 +2216,7 @@
       .ps-step__desc           { max-height: none !important; opacity: 1 !important; margin-top: 10px !important; }
       .ps-variants-grid { grid-template-columns: repeat(2, 1fr); }
       .tiers__strip { grid-template-columns: 1fr; }
-      .tier { border-right: none; border-bottom: 1px solid var(--border); }
+      .tier { border-right: none; border-bottom: 1px solid var(--bp-mark); }
       .tier:last-child { border-bottom: none; }
       .cta-sec__inner { grid-template-columns: 1fr; gap: 60px; }
       .cta-sec__left { padding-right: 0; }
