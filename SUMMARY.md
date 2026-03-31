@@ -101,6 +101,9 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-31 | v8 CSS fully audited for PDS compliance | `:root` aliases updated: `--accent` → `var(--papaya-500)`, `--accent-dark` → `var(--papaya-600)`, `--bg` → `var(--white)`. All non-PDS values documented as exceptions with comments. Hardcoded `#fff`/`#ffffff` replaced with `var(--bg)` or `var(--white)`. `#141414` → `var(--dark)`. Spacing values throughout replaced with PDS tokens (`--s-200` through `--s-1400`) where exact matches exist. Values with no PDS token (80px, 100px, 6px/12px radius) kept as documented exceptions. |
 | 2026-03-31 | v8 copy rewritten across all sections | Goal: clear for both marketing and technical audiences. Key changes: (1) "What is a product graph?" → "The structured model behind every environment we generate." (2) Pipeline h2: "The system that produced what you just saw." → "From structured product data to training-ready environments." (3) Step descriptions trimmed and clarified. (4) Hero body shortened. (5) Problem card bodies trimmed. (6) Validation body tightened. (7) Tiers sub rewritten to match h2 rhythm. (8) Trust body simplified — stats not repeated since they appear in stat grid. (9) Deliverables sub updated with specific tool names (Isaac Sim, MuJoCo). |
 | 2026-03-31 | v9 created — Blueprint theme implementation (in progress) | New visual language: engineering schematic/blueprint aesthetic. (1) CSS Foundation: `--bp-mark`, `--bp-mark-dark`, `--bp-dash`, `--bp-arm` tokens added; `.bp-frame` crosshair corner system (JS injects 4 `.bp-corner` spans per `.bp-frame` element); scroll-reveal system (`.reveal`, `.reveal--left/right`, stagger variants `--1` through `--6`) via IntersectionObserver. (2) Navbar: sharp 4px radius (vs 8px pill), blueprint border on scrolled state. Dark logo (Horizontal.svg) for light bg. (3) Hero: subtle crosshair grid background via SVG data URI; editor frame uses `var(--bp-mark)` border + 4px radius + `bp-frame` corners. (4) Stats bar + Logo strip: `var(--bp-mark)` borders; logos greyscale 45% opacity + hover restores color. (5) All cards redesigned: problem, deliverables, ecosystem, validation, pipeline (ps-card), asset, CTA image cards — all now 4px radius, `var(--bp-mark)` border. (6) Dark sections (code-layer, GTC): crosshair grid via SVG data URI on dark bg. (7) Pill badges: transparent bg, thin 1px `var(--bp-mark)` border. (8) All section headings, content blocks, cards tagged with `reveal` / `reveal--left` / `reveal--right` / stagger classes. 43 reveal instances + 14 bp-frame instances across the HTML. |
+| 2026-03-31 | v10: stats bar removed; mission section restructured | Stats bar (standalone section after hero) removed. Mission section (`#proof`) rebuilt into a two-column layout: left = h2 + body + 4 feature list items; right = full product image (`Bath/Bathtub_Image 1.jpg`). Stats row (6+, 1M+, 25K+, 10,000×, 150+) moved inside the mission section below the two-column grid, with orange accent numbers. Feature list icons switched from accent to `var(--text-muted)`. |
+| 2026-03-31 | v10: adaptive dark/light navigation | Navbar now detects when it overlaps a dark section (`[data-theme="dark"]`) and switches to dark mode: white-tinted links, dark glass pill (`rgba(14,14,14,0.82)` + `blur(20px)`), white border. Logo swaps between `Horizontal Dark.png` (default) and `Horizontal Light.png` (on dark). Both `.code-layer#platform` and `.gtc#gtc` tagged with `data-theme="dark"`. Detection uses scroll-based `getBoundingClientRect` check — smooth, no flash. |
+| 2026-03-31 | v10 promoted to index.html — now live on Vercel | `outputs/homepage-v10.html` copied to `index.html` with `../` path prefixes stripped. Committed and pushed to `main`. **v10 is now the live version.** |
 
 ---
 
@@ -121,6 +124,7 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-31 | Homepage v8 — CSS PDS audit + full copy rewrite | `outputs/homepage-v8.html` + `css/homepage-v8.css` | CSS: all tokens now reference PDS or documented as exceptions. HTML: all section copy rewritten for dual marketing/technical audience. |
 | 2026-03-31 | Homepage v9 — blueprint theme WIP | `outputs/homepage-v9.html` + `css/homepage-v9.css` | Blueprint/engineering schematic theme experiment. Did not look good — parked. Not to be promoted to index.html. |
 | 2026-03-31 | Homepage v10 — setup, active working version | `outputs/homepage-v10.html` + `css/homepage-v10.css` | Duplicated from v8 (clean base). Logo updated to PNG (`Horizontal Light.png`). Blueprint theme to be applied here going forward. |
+| 2026-03-31 | Homepage v10 — mission section + dark nav | `outputs/homepage-v10.html` + `css/homepage-v10.css` | Stats bar removed. Mission section rebuilt: two-column (copy left, image right), stats row below with orange numbers. Adaptive navbar: detects dark sections via `data-theme="dark"`, switches to dark glass + white links + white logo. Promoted to `index.html` and deployed to Vercel. **v10 is now live.** |
 
 ---
 
@@ -175,10 +179,10 @@ These were discovered and locked in during v4 polish — apply in all future wor
 - **Remote:** `https://github.com/imaginevipin/Imagineio-x-Physical-AI.git`
 - **Branch:** `main`
 - **What's in the repo:**
-  - `outputs/` — current active version: `homepage-v7.html`
+  - `outputs/` — current active version: `homepage-v10.html`
   - `archive/outputs/` — v1–v6 HTML (history only)
   - `archive/css/` — v5–v6 CSS (history only)
-  - `css/` — current: `homepage-v7.css`
+  - `css/` — current: `homepage-v10.css`
   - `assets/fonts/` — PP Neue Montreal (6 OTF weights)
   - `assets/logos/` — all imagine.io SVG variants
   - `assets/partners-logos/` — 5 partner PNGs (Logo-1 to Logo-5)
@@ -198,7 +202,7 @@ git push
 ## Vercel Deployment
 
 - **Goal:** deploy final version as a live URL (Vercel)
-- **Status:** `index.html` pushed to GitHub — ready to connect Vercel
+- **Status:** Live — `index.html` = homepage-v10, deployed via Vercel auto-deploy on push to `main`
 - **Setup (one-time):**
   1. Go to vercel.com → Add New → Project → Import `imaginevipin/Imagineio-x-Physical-AI`
   2. Framework: `Other` — leave all settings as default (root `/`, no build command)
@@ -208,11 +212,11 @@ git push
 ### index.html Workflow
 
 - `index.html` lives at the **project root** — this is the live version Vercel serves
-- It is always a copy of the latest approved output (currently: **homepage-v7**)
+- It is always a copy of the latest approved output (currently: **homepage-v10**)
 - `outputs/` folder is untouched version history — never delete or overwrite files there
 - **To update the live site:** copy the new approved version over `index.html`, strip `../` path prefixes (since `index.html` is at root, not in `outputs/`), then push
   ```bash
-  sed 's|"\.\./|"|g' outputs/homepage-v7.html > index.html
+  sed 's|"\.\./|"|g' outputs/homepage-v10.html > index.html
   git add index.html && git commit -m "vN promoted to index.html — now live on Vercel" && git push
   ```
 
@@ -230,21 +234,21 @@ All product images are served from the `library-assets` GitHub repo via jsDelivr
 
 ## Known Issues / Pending Items
 
-- `homepage-v10` is the **active working version**. `homepage-v7` is locked — live on Vercel via `index.html`. ✅
+- `homepage-v10` is the **active working version** and is **live on Vercel** via `index.html`. ✅
+- `homepage-v7` is locked — kept in `outputs/` as version history only.
 - `homepage-v9` is parked — blueprint theme experiment that didn't look good. Not to be used.
 - `com.apple.provenance` extended attribute appears on all files in the `css/` folder (macOS behavior) — does NOT block writes; file is writable by owner.
 - **Pending decision:** Add a Moat section? PM site has one between Product Graph and Pipeline. Decision deferred.
-- **CSS compliance:** `homepage-v10.css` (same as v8) is PDS-compliant. Documented exceptions: `--bg-warm`, `--bg-subtle`, `--border`, `--text-head`, `--text-body`, `--text-muted`, `--radius-sm/md/lg`, `--section-y`, plus spacing above 72px and decorative UI colors (macOS window dots, code syntax colors, status badges).
-- **Logos:** PNG files (`Horizontal Dark.png`, `Horizontal Light.png`, `Vertical Dark.png`, `Vertical Light.png`, `Logo Mark.png`) added to `assets/logos/`. Old SVGs kept alongside — not deleted. v8/v9/v10 all updated to reference `Horizontal Light.png`.
+- **CSS compliance:** `homepage-v10.css` is PDS-compliant. Documented exceptions: `--bg-warm`, `--bg-subtle`, `--border`, `--text-head`, `--text-body`, `--text-muted`, `--radius-sm/md/lg`, `--section-y`, plus spacing above 72px and decorative UI colors (macOS window dots, code syntax colors, status badges).
+- **Logos:** PNG files (`Horizontal Dark.png`, `Horizontal Light.png`, `Vertical Dark.png`, `Vertical Light.png`, `Logo Mark.png`) in `assets/logos/`. Old SVGs kept alongside. v10 uses dual logo system: `Horizontal Dark.png` default; `Horizontal Light.png` on dark sections.
 
 ---
 
 ## Next Steps
 
-1. **v10 is active** — clean base from v8, logo updated to PNG. Continue building the blueprint/engineering schematic theme here.
-2. **Blueprint theme direction** — engineering schematic aesthetic: crosshair corner markers, dashed ruled lines, precision structure. Light theme primary; dark sections follow the same language. Reference screenshot: dark CTA section with `+` crosshair corners at section boundary and vertical dashed center divider.
-3. **Keep from v8:** nav scroll animation + glassmorphic pill, hero load animations (`hero__animate` system), sticky-scroll pipeline animation.
-4. **Extend to all sections:** scroll-triggered reveal animations (same feel as hero load-in).
-5. **Moat section** — deferred. Decide before v10 is approved.
-6. **When v10 is approved:** copy to `index.html`, strip `../` prefixes, push to deploy.
-7. **Inner pages:** `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
+1. **v10 is live** — promoted to `index.html` and deployed. Active working version for continued iteration.
+2. **v10 section order (current):** Navbar → Hero → Logo Strip → Mission (proof + stats) → Problem → Code Layer (dark) → Pipeline → Deliverables → Asset Showcase → Validation → Tiers → Why Different → Ecosystem → GTC (dark) → Final CTA → Footer.
+3. **Adaptive dark nav** — implemented. Detects `.code-layer` and `.gtc` dark sections. Add `data-theme="dark"` to any new dark section to automatically inherit the behaviour.
+4. **Moat section** — deferred. Decide before next major version bump.
+5. **Continued v10 polish** — further section-level UI refinements as needed before declaring final.
+6. **Inner pages:** `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html` — to start after v10 is declared final.

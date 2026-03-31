@@ -18,10 +18,10 @@
   <div class="nav__outer">
     <div class="nav__inner">
 
-      <!-- Logo — dark/light variants swap with nav--on-dark -->
+      <!-- Logo — dark text on light surfaces, light text on dark surfaces -->
       <a class="nav__logo" href="#">
-        <img class="nav__logo-dark" src="../assets/logos/Horizontal Dark.png" alt="imagine.io">
-        <img class="nav__logo-light" src="../assets/logos/Horizontal Light.png" alt="imagine.io">
+        <img class="nav__logo-dark" src="../assets/logos/Horizontal Light.png" alt="imagine.io">
+        <img class="nav__logo-light" src="../assets/logos/Horizontal Dark.png" alt="imagine.io">
       </a>
 
       <!-- Desktop links — absolutely centred -->
@@ -349,29 +349,70 @@
     <h2>Training data is <em>the bottleneck.</em></h2>
     <div class="problem__grid">
 
-      <div class="problem__card">
-        <span class="icon problem__icon">schedule</span>
-        <h3 class="problem__title">Asset prep takes weeks</h3>
-        <p class="problem__body">40h of rigging per kitchen. 2–4 weeks of cleanup per batch. Teams spend more time fixing assets than training models.</p>
-      </div>
+      <article class="problem__card problem__card--prep">
+        <div class="problem__meta">
+          <span class="problem__eyebrow">01 · Asset Operations</span>
+        </div>
+        <div class="problem__copy">
+          <h3 class="problem__title">Asset prep takes weeks</h3>
+          <p class="problem__body">40h of rigging per kitchen. 2–4 weeks of cleanup per batch. Teams spend more time fixing assets than training models.</p>
+        </div>
+        <div class="problem__visual problem__visual--prep" aria-hidden="true">
+          <span class="problem__line problem__line--1"></span>
+          <span class="problem__line problem__line--2"></span>
+          <span class="problem__line problem__line--3"></span>
+          <span class="problem__pulse"></span>
+        </div>
+      </article>
 
-      <div class="problem__card">
-        <span class="icon problem__icon">precision_manufacturing</span>
-        <h3 class="problem__title">Physics properties don't come for free</h3>
-        <p class="problem__body">Joints, limits, and constraints have to be authored manually — they don't come from geometry. Every scene change means another round of script fixes.</p>
-      </div>
+      <article class="problem__card problem__card--physics">
+        <div class="problem__meta">
+          <span class="problem__eyebrow">02 · Physics Authoring</span>
+        </div>
+        <div class="problem__copy">
+          <h3 class="problem__title">Physics can't be improvised</h3>
+          <p class="problem__body">Joints, limits, and constraints have to be authored manually — they don't come from geometry. Every scene change means another round of script fixes.</p>
+        </div>
+        <div class="problem__visual problem__visual--physics" aria-hidden="true">
+          <span class="problem__orb"></span>
+          <span class="problem__orbit problem__orbit--a"></span>
+          <span class="problem__orbit problem__orbit--b"></span>
+          <span class="problem__anchor"></span>
+        </div>
+      </article>
 
-      <div class="problem__card">
-        <span class="icon problem__icon">label_off</span>
-        <h3 class="problem__title">Raw 3D has no structure</h3>
-        <p class="problem__body">Semantic labels, collision meshes, and UV integrity don't come with geometry. ML engineers end up debugging UV maps instead of training perception models.</p>
-      </div>
+      <article class="problem__card problem__card--structure">
+        <div class="problem__meta">
+          <span class="problem__eyebrow">03 · Semantics</span>
+        </div>
+        <div class="problem__copy">
+          <h3 class="problem__title">Raw 3D has no structure</h3>
+          <p class="problem__body">Semantic labels, collision meshes, and UV integrity don't come with geometry. ML engineers end up debugging UV maps instead of training perception models.</p>
+        </div>
+        <div class="problem__visual problem__visual--structure" aria-hidden="true">
+          <span class="problem__node problem__node--a"></span>
+          <span class="problem__node problem__node--b"></span>
+          <span class="problem__node problem__node--c"></span>
+          <span class="problem__branch problem__branch--a"></span>
+          <span class="problem__branch problem__branch--b"></span>
+        </div>
+      </article>
 
-      <div class="problem__card">
-        <span class="icon problem__icon">moving</span>
-        <h3 class="problem__title">Scale takes months, not days</h3>
-        <p class="problem__body">Going from a handful of scenes to training volume requires months of manual work. Every new product or environment starts from zero — there's no reuse.</p>
-      </div>
+      <article class="problem__card problem__card--scale">
+        <div class="problem__meta">
+          <span class="problem__eyebrow">04 · Throughput</span>
+        </div>
+        <div class="problem__copy">
+          <h3 class="problem__title">Scale takes months</h3>
+          <p class="problem__body">Going from a handful of scenes to training volume requires months of manual work. Every new product or environment starts from zero — there's no reuse.</p>
+        </div>
+        <div class="problem__visual problem__visual--scale" aria-hidden="true">
+          <span class="problem__bar problem__bar--1"></span>
+          <span class="problem__bar problem__bar--2"></span>
+          <span class="problem__bar problem__bar--3"></span>
+          <span class="problem__trail"></span>
+        </div>
+      </article>
 
     </div>
   </div>
@@ -437,237 +478,138 @@
 
 
 <!-- ═══════════════════════════════════════════════════════
-     8–9. PIPELINE — sticky-scroll, 3 steps
+     8–9. PIPELINE — process split
 ═══════════════════════════════════════════════════════ -->
 <section class="pipeline-scroll">
-
-  <!-- Header scrolls in normally, then track begins -->
   <div class="wrap">
     <div class="pipeline-scroll__hd">
       <span class="pill">How It Works</span>
       <h2 class="pipeline-scroll__h2">From structured product data to <em>training-ready environments.</em></h2>
+      <p class="pipeline-scroll__sub">A controlled pipeline turns structured inputs into environments that are labeled, validated, and ready for simulation.</p>
     </div>
   </div>
 
-  <!-- Tall track — creates scroll space for the sticky inner -->
   <div class="pipeline-scroll__track">
     <div class="pipeline-scroll__sticky">
       <div class="wrap">
         <div class="pipeline-scroll__grid">
+          <div class="pipeline-scroll__left" aria-label="How it works steps">
 
-          <!-- Left: step list -->
-          <div class="pipeline-scroll__left">
-
-            <div class="ps-step ps-step--active">
+            <div class="ps-step ps-step--active" data-step="1">
               <div class="ps-step__top">
                 <span class="ps-step__num">01</span>
-                <h3 class="ps-step__title">Every object is labeled at creation — no post-processing required</h3>
+                <h3 class="ps-step__title">Ingest structured source data</h3>
               </div>
-              <p class="ps-step__desc">Every object in a scene carries its semantic class, instance ID, and physical dimensions from the moment it's generated — not added after rendering. Labels like <em>dishwasher</em>, <em>base_cabinet</em>, and <em>countertop</em> are structural outputs of the product graph, not a post-processing step you have to run.</p>
+              <p class="ps-step__desc">Product graph, materials, dimensions, and metadata enter the pipeline as the source of truth.</p>
             </div>
 
-            <div class="ps-step">
+            <div class="ps-step" data-step="2">
               <div class="ps-step__top">
                 <span class="ps-step__num">02</span>
-                <h3 class="ps-step__title">One base environment, multiplied into thousands of valid training scenes</h3>
+                <h3 class="ps-step__title">Normalize semantics</h3>
               </div>
-              <p class="ps-step__desc">Materials, lighting, layout, and object placement are all parameter-driven — so every variant is structurally valid by construction. 1 base environment × 9 material finishes × 4 lighting rigs × 3 layout arrangements = 432 environments. Add clutter and spatial randomization and you're generating tens of thousands of training-ready scenes.</p>
+              <p class="ps-step__desc">Classes, hierarchy, and object identity are standardized before anything is rendered or exported.</p>
             </div>
 
-            <div class="ps-step">
+            <div class="ps-step" data-step="3">
               <div class="ps-step__top">
                 <span class="ps-step__num">03</span>
-                <h3 class="ps-step__title">Train on environments grounded in the real world</h3>
+                <h3 class="ps-step__title">Validate physics and variation</h3>
               </div>
-              <p class="ps-step__desc">Surfaces use PBR materials derived from real product specs. Layouts are dimensionally accurate. Every object is semantically labeled. Your models train on grounded environments — not procedural approximations, not AI-hallucinated scenes.</p>
+              <p class="ps-step__desc">Collision, articulation, and scene permutations are checked so outputs stay structurally valid.</p>
             </div>
 
-          </div><!-- /pipeline-scroll__left -->
+            <div class="ps-step" data-step="4">
+              <div class="ps-step__top">
+                <span class="ps-step__num">04</span>
+                <h3 class="ps-step__title">Deploy simulation-ready output</h3>
+              </div>
+              <p class="ps-step__desc">Approved environments move into OpenUSD and downstream simulation workflows without manual cleanup.</p>
+            </div>
 
-          <!-- Right: one visual shown at a time, JS swaps on scroll -->
+          </div>
+
           <div class="pipeline-scroll__right">
 
-            <!-- Visual 01: Scene graph tree -->
-            <div class="ps-visual ps-visual--active">
-              <div class="ps-card">
-                <div class="ps-card__bar">
-                  <div class="ps-card__dots">
-                    <span class="ps-card__dot ps-card__dot--r"></span>
-                    <span class="ps-card__dot ps-card__dot--a"></span>
-                    <span class="ps-card__dot ps-card__dot--g"></span>
+            <section class="ps-visual ps-visual--active" id="ps-panel-1" data-panel="1">
+              <div class="ps-stage">
+                <div class="ps-stage__window">
+                  <div class="ps-stage__bar">
+                    <div class="ps-stage__dots">
+                      <span class="ps-stage__dot ps-stage__dot--r"></span>
+                      <span class="ps-stage__dot ps-stage__dot--a"></span>
+                      <span class="ps-stage__dot ps-stage__dot--g"></span>
+                    </div>
+                    <span class="ps-stage__label">source_graph.json</span>
                   </div>
-                  <span class="ps-card__fn">scene_graph.json</span>
-                </div>
-                <div class="ps-card__body">
-                  <div class="ps-tree">
-                    <div class="ps-tree__root">KitchenEnvironment</div>
-                    <div class="ps-tree__branch">
-                      <div class="ps-tree__item">
-                        <span class="ps-tree__line">├─</span>
-                        <span class="ps-tree__key">Cabinet_01</span>
-                        <span class="ps-tree__tag ps-tree__tag--label">label: upper_cabinet</span>
-                        <span class="ps-tree__tag ps-tree__tag--id">id: 0x001</span>
-                      </div>
-                      <div class="ps-tree__sub">
-                        <div class="ps-tree__item">
-                          <span class="ps-tree__line">│ ├─</span>
-                          <span class="ps-tree__key ps-tree__key--joint">Door_Left</span>
-                          <span class="ps-tree__tag ps-tree__tag--joint">hinge · 0°–110°</span>
-                        </div>
-                        <div class="ps-tree__item">
-                          <span class="ps-tree__line">│ └─</span>
-                          <span class="ps-tree__key ps-tree__key--joint">Door_Right</span>
-                          <span class="ps-tree__tag ps-tree__tag--joint">hinge · 0°–110°</span>
-                        </div>
-                      </div>
-                      <div class="ps-tree__item">
-                        <span class="ps-tree__line">├─</span>
-                        <span class="ps-tree__key">Refrigerator</span>
-                        <span class="ps-tree__tag ps-tree__tag--label">label: refrigerator</span>
-                        <span class="ps-tree__tag ps-tree__tag--id">id: 0x004</span>
-                      </div>
-                      <div class="ps-tree__sub">
-                        <div class="ps-tree__item">
-                          <span class="ps-tree__line">│ └─</span>
-                          <span class="ps-tree__key ps-tree__key--joint">Door</span>
-                          <span class="ps-tree__tag ps-tree__tag--joint">articulated · 0°–90°</span>
-                        </div>
-                      </div>
-                      <div class="ps-tree__item">
-                        <span class="ps-tree__line">├─</span>
-                        <span class="ps-tree__key">Dishwasher</span>
-                        <span class="ps-tree__tag ps-tree__tag--label">label: dishwasher</span>
-                        <span class="ps-tree__tag ps-tree__tag--id">id: 0x007</span>
-                      </div>
-                      <div class="ps-tree__sub">
-                        <div class="ps-tree__item">
-                          <span class="ps-tree__line">│ └─</span>
-                          <span class="ps-tree__key ps-tree__key--joint">Drawer</span>
-                          <span class="ps-tree__tag ps-tree__tag--joint">prismatic · 0–520mm</span>
-                        </div>
-                      </div>
-                      <div class="ps-tree__item">
-                        <span class="ps-tree__line">└─</span>
-                        <span class="ps-tree__key">Countertop</span>
-                        <span class="ps-tree__tag ps-tree__tag--label">label: countertop</span>
-                        <span class="ps-tree__tag ps-tree__tag--mat">material: granite_01</span>
-                      </div>
+                  <div class="ps-stage__body ps-stage__body--code">
+                    <div class="ps-mini-tree">
+                      <div class="ps-mini-tree__line"><strong>Chair_01</strong> <span>category: furniture</span></div>
+                      <div class="ps-mini-tree__line"><span>material: wood + tissue</span></div>
+                      <div class="ps-mini-tree__line"><span>dimensions: 720 × 740 × 810 mm</span></div>
+                      <div class="ps-mini-tree__line"><span>metadata: structured</span></div>
                     </div>
                   </div>
-                  <div class="ps-card__tags">
-                    <span class="ps-ctag"><span class="icon">label</span>Semantic Labels</span>
-                    <span class="ps-ctag"><span class="icon">tag</span>Instance IDs</span>
-                    <span class="ps-ctag"><span class="icon">account_tree</span>Hierarchies</span>
-                    <span class="ps-ctag"><span class="icon">settings_ethernet</span>Joints</span>
+                  <div class="ps-stage__footer">
+                    <span>Structured Metadata</span>
+                    <span>Known Dimensions</span>
+                    <span>Material Inputs</span>
                   </div>
                 </div>
               </div>
-            </div><!-- /ps-visual 1 -->
+            </section>
 
-            <!-- Visual 02: Variation image grid -->
-            <div class="ps-visual">
-              <div class="ps-card">
-                <div class="ps-card__bar">
-                  <div class="ps-card__dots">
-                    <span class="ps-card__dot ps-card__dot--r"></span>
-                    <span class="ps-card__dot ps-card__dot--a"></span>
-                    <span class="ps-card__dot ps-card__dot--g"></span>
-                  </div>
-                  <span class="ps-card__fn">variation_set · 432 configs</span>
-                </div>
-                <div class="ps-card__body">
-                  <div class="ps-variants-grid">
-                    <div class="ps-variant-card">
-                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Dutch%20Oven_Image%201.jpg')"></div>
-                      <div class="ps-variant-card__info">
-                        <span class="ps-variant-card__name">Dutch Oven</span>
-                        <span class="ps-variant-card__meta">mat: matte_black · light: warm</span>
-                      </div>
-                    </div>
-                    <div class="ps-variant-card">
-                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Kitchen%20Faucet_Image%201.jpg')"></div>
-                      <div class="ps-variant-card__info">
-                        <span class="ps-variant-card__name">Kitchen Faucet</span>
-                        <span class="ps-variant-card__meta">mat: chrome · light: neutral</span>
-                      </div>
-                    </div>
-                    <div class="ps-variant-card">
-                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%201.jpg')"></div>
-                      <div class="ps-variant-card__info">
-                        <span class="ps-variant-card__name">Kingston Sofa</span>
-                        <span class="ps-variant-card__meta">mat: linen_grey · light: cool</span>
-                      </div>
-                    </div>
-                    <div class="ps-variant-card">
-                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2010.jpg')"></div>
-                      <div class="ps-variant-card__info">
-                        <span class="ps-variant-card__name">Lounge Chair</span>
-                        <span class="ps-variant-card__meta">mat: velvet_olive · light: warm</span>
-                      </div>
-                    </div>
-                    <div class="ps-variant-card">
-                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Bath/Walnut%20Vanity_Image%201.jpg')"></div>
-                      <div class="ps-variant-card__info">
-                        <span class="ps-variant-card__name">Walnut Vanity</span>
-                        <span class="ps-variant-card__meta">mat: walnut_dark · light: neutral</span>
-                      </div>
-                    </div>
-                    <div class="ps-variant-card">
-                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Bath/Bathtub_Image%201.jpg')"></div>
-                      <div class="ps-variant-card__info">
-                        <span class="ps-variant-card__name">Bathtub</span>
-                        <span class="ps-variant-card__meta">mat: ceramic_white · light: cool</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="ps-card__footer">
-                    <span class="ps-card__stat">1 base env</span>
-                    <span class="ps-card__sep">×</span>
-                    <span class="ps-card__stat">9 finishes</span>
-                    <span class="ps-card__sep">×</span>
-                    <span class="ps-card__stat">4 lighting</span>
-                    <span class="ps-card__sep">×</span>
-                    <span class="ps-card__stat">3 layouts</span>
-                    <span class="ps-card__sep">=</span>
-                    <span class="ps-card__stat ps-card__stat--total">432 valid environments</span>
+            <section class="ps-visual" id="ps-panel-2" data-panel="2" hidden>
+              <div class="ps-stage">
+                <div class="ps-stage__asset">
+                  <img src="https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Chair%20Silo%20frt.png" alt="Structured chair asset">
+                  <div class="ps-tag-cluster" aria-label="Semantic tags">
+                    <p class="ps-tag-cluster__label">Semantic Tags</p>
+                    <span class="ps-tag-cluster__chip">Chair</span>
+                    <span class="ps-tag-cluster__chip">Furniture</span>
+                    <span class="ps-tag-cluster__chip">Wood &amp; Tissue</span>
                   </div>
                 </div>
               </div>
-            </div><!-- /ps-visual 2 -->
+            </section>
 
-            <!-- Visual 03: Labeled scene -->
-            <div class="ps-visual">
-              <div class="ps-card">
-                <div class="ps-card__bar">
-                  <div class="ps-card__dots">
-                    <span class="ps-card__dot ps-card__dot--r"></span>
-                    <span class="ps-card__dot ps-card__dot--a"></span>
-                    <span class="ps-card__dot ps-card__dot--g"></span>
-                  </div>
-                  <span class="ps-card__fn">perception_frame_0047.png</span>
-                </div>
-                <div class="ps-card__body ps-card__body--img">
-                  <div class="ps-labeled-env">
-                    <div class="ps-labeled-env__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Kessler%20Table%20Lamp_Image%203.jpg')"></div>
-                    <div class="ps-label-box ps-label-box--1"><span class="ps-label-tag">table_lamp · 0x021</span></div>
-                    <div class="ps-label-box ps-label-box--2"><span class="ps-label-tag">desk_surface · 0x022</span></div>
-                    <div class="ps-label-box ps-label-box--3"><span class="ps-label-tag">chair · 0x023</span></div>
-                  </div>
-                  <div class="ps-card__tags">
-                    <span class="ps-ctag"><span class="icon">view_in_ar</span>PBR Materials</span>
-                    <span class="ps-ctag"><span class="icon">label</span>Per-object Labels</span>
-                    <span class="ps-ctag"><span class="icon">straighten</span>Dimensionally Accurate</span>
+            <section class="ps-visual" id="ps-panel-3" data-panel="3" hidden>
+              <div class="ps-stage">
+                <div class="ps-stage__asset">
+                  <img src="https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Chair%20Silo%20frt.png" alt="Validated chair asset">
+                  <div class="ps-status ps-status--top">Quality Check <span>Done</span></div>
+                  <div class="ps-status-card">
+                    <div class="ps-status-card__row"><span>Category</span><strong>Furniture</strong></div>
+                    <div class="ps-status-card__row"><span>Physics</span><strong>Reviewing</strong></div>
+                    <div class="ps-status-card__row"><span>Mesh Quality</span><strong>High-poly</strong></div>
+                    <div class="ps-status-card__row"><span>Export</span><strong>.USD</strong></div>
                   </div>
                 </div>
               </div>
-            </div><!-- /ps-visual 3 -->
+            </section>
 
-          </div><!-- /pipeline-scroll__right -->
-        </div><!-- /pipeline-scroll__grid -->
-      </div><!-- /wrap -->
-    </div><!-- /pipeline-scroll__sticky -->
-  </div><!-- /pipeline-scroll__track -->
+            <section class="ps-visual" id="ps-panel-4" data-panel="4" hidden>
+              <div class="ps-stage">
+                <div class="ps-stage__window ps-stage__window--export">
+                  <div class="ps-export">
+                    <p class="ps-export__eyebrow">Approved Output</p>
+                    <h3 class="ps-export__title">Simulation-ready package</h3>
+                    <div class="ps-export__chips">
+                      <span>OpenUSD</span>
+                      <span>Isaac Sim Ready</span>
+                      <span>Structured Metadata</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 </section>
 
 
@@ -807,78 +749,52 @@
       <div class="validation__sticky">
         <span class="pill">Quality at Scale</span>
         <h2 class="validation__h2">Every <em>asset.</em> Every <em>variant.</em> Validated.</h2>
-        <p class="validation__p">Every environment passes physics integrity checks, semantic label verification, and collision mesh validation before delivery. Data that's structurally broken never reaches your pipeline.</p>
+        <p class="validation__p">Structured inputs make validation predictable — from product graph to semantic labels, physics checks, and simulation-ready export.</p>
       </div>
-      <div class="validation__cards">
+      <div class="validation__workspace">
+        <div class="validation__grid">
+          <article class="v-method-card">
+            <div class="v-method-card__top">
+              <span class="v-method-card__eyebrow">01. Structured Source</span>
+            </div>
+            <h3 class="v-method-card__title">Product Graph</h3>
+            <p class="v-method-card__desc">Dimensions, materials, metadata</p>
+            <span class="v-method-card__tag">Source of truth</span>
+          </article>
 
-        <div class="v-card">
-          <div class="v-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Coffee%20Table%20Det%201.png') center/cover no-repeat;"></div>
-          <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
-          <div class="v-card__overlay">
-            <div class="v-card__row">
-              <span class="v-card__label">Living Room — Object Manipulation</span>
-              <span class="v-card__count">3,831+ variants</span>
+          <span class="v-method-flow" aria-hidden="true">→</span>
+
+          <article class="v-method-card">
+            <div class="v-method-card__top">
+              <span class="v-method-card__eyebrow">02. Semantics</span>
             </div>
-            <div class="v-card__tags">
-              <span class="v-tag">USD Physics</span>
-              <span class="v-tag">Collision Mesh</span>
-              <span class="v-tag">Semantics</span>
-              <span class="v-tag">Isaac Sim Ready</span>
+            <h3 class="v-method-card__title">Object Identity</h3>
+            <p class="v-method-card__desc">Labels, hierarchy, relationships</p>
+            <span class="v-method-card__tag">Fully structured</span>
+          </article>
+
+          <span class="v-method-flow" aria-hidden="true">→</span>
+
+          <article class="v-method-card">
+            <div class="v-method-card__top">
+              <span class="v-method-card__eyebrow">03. Physics</span>
             </div>
-          </div>
+            <h3 class="v-method-card__title">Validation Layer</h3>
+            <p class="v-method-card__desc">Collision, articulation, motion ranges</p>
+            <span class="v-method-card__tag">Derived, not guessed</span>
+          </article>
+
+          <span class="v-method-flow" aria-hidden="true">→</span>
+
+          <article class="v-method-card">
+            <div class="v-method-card__top">
+              <span class="v-method-card__eyebrow">04. Export Ready</span>
+            </div>
+            <h3 class="v-method-card__title">Simulation Delivery</h3>
+            <p class="v-method-card__desc">OpenUSD and downstream pipeline ready</p>
+            <span class="v-method-card__tag">Approved output</span>
+          </article>
         </div>
-
-        <div class="v-card">
-          <div class="v-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Console%20Silo%20frt.png') center/cover no-repeat;"></div>
-          <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
-          <div class="v-card__overlay">
-            <div class="v-card__row">
-              <span class="v-card__label">Entryway — Navigation Task</span>
-              <span class="v-card__count">2,853+ variants</span>
-            </div>
-            <div class="v-card__tags">
-              <span class="v-tag">USD Physics</span>
-              <span class="v-tag">Multi-body</span>
-              <span class="v-tag">Semantics</span>
-              <span class="v-tag">MuJoCo Ready</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="v-card">
-          <div class="v-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Foundry%20Table%20Lamp_Image%203.jpg') center/cover no-repeat;"></div>
-          <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
-          <div class="v-card__overlay">
-            <div class="v-card__row">
-              <span class="v-card__label">Office — Desk Manipulation</span>
-              <span class="v-card__count">2,410+ variants</span>
-            </div>
-            <div class="v-card__tags">
-              <span class="v-tag">USD Physics</span>
-              <span class="v-tag">Collision Mesh</span>
-              <span class="v-tag">30+ Classes</span>
-              <span class="v-tag">OpenUSD</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="v-card">
-          <div class="v-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Chair%20Silo%20frt.png') center/cover no-repeat;"></div>
-          <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
-          <div class="v-card__overlay">
-            <div class="v-card__row">
-              <span class="v-card__label">Furniture — Grasping Task</span>
-              <span class="v-card__count">1,920+ variants</span>
-            </div>
-            <div class="v-card__tags">
-              <span class="v-tag">Multi-body</span>
-              <span class="v-tag">Joint Limits</span>
-              <span class="v-tag">Physics</span>
-              <span class="v-tag">Isaac Sim Ready</span>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -898,56 +814,53 @@
 
     <div class="tiers__strip">
 
-      <div class="tier">
-        <div class="tier__top">
-          <span class="tier__num">01. Tier</span>
-          <span class="tier__arrow"><span class="icon">arrow_outward</span></span>
-        </div>
+      <article class="tier tier--ready">
+        <span class="tier__num">Tier 01</span>
+        <div class="tier__rule" aria-hidden="true"></div>
         <span class="tier__status tier__status--ready"><span class="tier__status-dot"></span>Ready Now</span>
         <h3 class="tier__title">Perception</h3>
         <p class="tier__desc">Vision model training at scale. Semantically complete environments with physically accurate materials and full lighting variation.</p>
-        <div class="tier__feats">
-          <div class="tier__feat"><span class="icon">check</span><span>10,000+ material / lighting combinations</span></div>
-          <div class="tier__feat"><span class="icon">check</span><span>Semantic + instance segmentation labels</span></div>
-          <div class="tier__feat"><span class="icon">check</span><span>Full lighting variation — morning to night</span></div>
-          <div class="tier__feat"><span class="icon">check</span><span>RGB + depth + segmentation masks</span></div>
+        <div class="tier__signals">
+          <span class="tier__signal">Material + lighting variation</span>
+          <span class="tier__signal">Semantic + instance segmentation</span>
         </div>
-        <span class="tier__badge">Fully structured</span>
-      </div>
+        <div class="tier__foot">
+          <span class="tier__meta">Best for vision model training</span>
+          <span class="tier__proof">RGB + depth + masks</span>
+        </div>
+      </article>
 
-      <div class="tier">
-        <div class="tier__top">
-          <span class="tier__num">02. Tier</span>
-          <span class="tier__arrow"><span class="icon">arrow_outward</span></span>
-        </div>
-        <span class="tier__status tier__status--ready"><span class="tier__status-dot"></span>Near-Ready</span>
+      <article class="tier tier--near">
+        <span class="tier__num">Tier 02</span>
+        <div class="tier__rule" aria-hidden="true"></div>
+        <span class="tier__status tier__status--near"><span class="tier__status-dot"></span>Near-Ready</span>
         <h3 class="tier__title">Navigation</h3>
         <p class="tier__desc">Mobile robot navigation in structured indoor environments with cm-accurate geometry, collision data, and spatial occupancy metadata.</p>
-        <div class="tier__feats">
-          <div class="tier__feat"><span class="icon">check</span><span>Bounding box + convex hull collision</span></div>
-          <div class="tier__feat"><span class="icon">check</span><span>cm-accurate real-world dimensions</span></div>
-          <div class="tier__feat"><span class="icon">check</span><span>Nav meshes &amp; obstacle maps</span></div>
-          <div class="tier__feat"><span class="icon">check</span><span>Valid spatial layouts only</span></div>
+        <div class="tier__signals">
+          <span class="tier__signal">Collision + occupancy metadata</span>
+          <span class="tier__signal">Nav meshes + valid spatial layouts</span>
         </div>
-        <span class="tier__badge">Fully validated</span>
-      </div>
+        <div class="tier__foot">
+          <span class="tier__meta">Best for indoor robot navigation</span>
+          <span class="tier__proof">cm-accurate geometry</span>
+        </div>
+      </article>
 
-      <div class="tier">
-        <div class="tier__top">
-          <span class="tier__num">03. Tier</span>
-          <span class="tier__arrow"><span class="icon">arrow_outward</span></span>
-        </div>
+      <article class="tier tier--roadmap">
+        <span class="tier__num">Tier 03</span>
+        <div class="tier__rule" aria-hidden="true"></div>
         <span class="tier__status tier__status--soon"><span class="tier__status-dot"></span>Roadmap</span>
         <h3 class="tier__title">Manipulation</h3>
         <p class="tier__desc">Full contact-rich manipulation data — per-part collision, mass and friction properties, grasp affordances, aligning with NVIDIA SimReady spec.</p>
-        <div class="tier__feats">
-          <div class="tier__feat"><span class="icon">check</span><span>Per-part collision meshes</span></div>
-          <div class="tier__feat"><span class="icon">check</span><span>Mass, density, center of mass</span></div>
-          <div class="tier__feat tier__feat--dim"><span class="icon">schedule</span><span>Grasp affordance zones — coming soon</span></div>
-          <div class="tier__feat tier__feat--dim"><span class="icon">schedule</span><span>Aligning with NVIDIA SimReady spec</span></div>
+        <div class="tier__signals">
+          <span class="tier__signal">Per-part collision + material properties</span>
+          <span class="tier__signal tier__signal--muted">Grasp affordance zones in development</span>
         </div>
-        <span class="tier__badge">In development</span>
-      </div>
+        <div class="tier__foot">
+          <span class="tier__meta">Best for contact-rich manipulation</span>
+          <span class="tier__proof tier__proof--muted">SimReady-aligned roadmap</span>
+        </div>
+      </article>
 
     </div>
   </div>
@@ -1049,18 +962,45 @@
 <section class="gtc" id="gtc" data-theme="dark">
   <div class="wrap">
     <div class="gtc__inner">
-      <div>
+      <div class="gtc__copy">
         <div class="gtc__badge"><span class="gtc__badge-dot"></span>Live Event</div>
         <h2 class="gtc__h2"><em>NVIDIA GTC</em><br>March 17–20, 2026<br>San Jose.</h2>
-        <p class="gtc__sub">Bring your stack. We'll show the pipeline.</p>
-        <p class="gtc__desc">Book 30 minutes to review your simulation workflow, data requirements, and where structured environment generation fits. We'll walk through the full pipeline — from product graph to Isaac Sim.</p>
-        <a href="#" class="btn btn-primary btn-lg">Book a Technical Discussion →</a>
+        <p class="gtc__sub">Meeting physical AI teams in San Jose.</p>
+        <p class="gtc__desc">Bring your current stack, simulation target, and data gaps. We’ll map where structured environments can accelerate training, validation, and deployment.</p>
+        <a href="#" class="btn btn-primary btn-lg">Schedule a GTC Meeting</a>
       </div>
-      <div class="gtc__details">
-        <div class="gtc__detail"><span class="icon">event</span>March 17–20, 2026</div>
-        <div class="gtc__detail"><span class="icon">location_on</span>San Jose Convention Center · San Jose, CA</div>
-        <div class="gtc__detail"><span class="icon">schedule</span>30-minute technical discussion — bring your stack</div>
-        <div class="gtc__detail"><span class="icon">developer_board</span>NVIDIA GTC — the conference for physical AI</div>
+      <div class="gtc__panel">
+        <div class="gtc__panel-head">
+          <div>
+            <p class="gtc__panel-kicker">Private workflow review</p>
+            <p class="gtc__panel-title">What we’ll cover</p>
+          </div>
+          <span class="gtc__panel-chip">30 min</span>
+        </div>
+        <div class="gtc__panel-meta">
+          <div class="gtc__panel-meta-item">
+            <span class="gtc__panel-meta-label">When</span>
+            <strong>March 17–20, 2026</strong>
+          </div>
+          <div class="gtc__panel-meta-item">
+            <span class="gtc__panel-meta-label">Where</span>
+            <strong>San Jose Convention Center</strong>
+          </div>
+        </div>
+        <div class="gtc__agenda">
+          <div class="gtc__agenda-item">
+            <span class="gtc__agenda-step">01</span>
+            <p>Review your simulation workflow and environment requirements.</p>
+          </div>
+          <div class="gtc__agenda-item">
+            <span class="gtc__agenda-step">02</span>
+            <p>Identify what should be structured, labeled, and physics-validated.</p>
+          </div>
+          <div class="gtc__agenda-item">
+            <span class="gtc__agenda-step">03</span>
+            <p>Map the fastest path into OpenUSD, Isaac Sim, or downstream tooling.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1068,65 +1008,19 @@
 
 
 <!-- ═══════════════════════════════════════════════════════
-     15. FINAL CTA — asymmetric text left + image grid right
+     15. FINAL CTA — premium SaaS close
 ═══════════════════════════════════════════════════════ -->
 <section class="cta-sec">
   <div class="wrap">
-    <div class="cta-sec__inner">
-
-      <!-- Left: text -->
-      <div class="cta-sec__left">
+    <div class="cta-sec__shell">
+      <div class="cta-sec__intro">
         <span class="pill">Get Started</span>
-        <h2 class="cta-sec__h2">Bring <em>your stack.</em> We'll show the pipeline.</h2>
-        <p class="cta-sec__sub">Book 30 minutes to review your simulation workflow, data requirements, and where structured environment generation fits.</p>
+        <h2 class="cta-sec__h2">See <em>your environments</em> at production quality.</h2>
+        <p class="cta-sec__sub">Share your workflow and we’ll show how structured product data turns into labeled, validated, simulation-ready scenes.</p>
         <div class="cta-sec__btns">
-          <a href="#" class="btn btn-primary btn-lg">Book a Technical Discussion →</a>
-        </div>
-        <p class="cta-sec__trust">Trusted by teams at</p>
-        <div class="cta-sec__logos">
-          <span class="cta-sec__logo">NVIDIA</span>
-          <span class="cta-sec__logo">Amazon</span>
-          <span class="cta-sec__logo">Boston Dynamics</span>
-          <span class="cta-sec__logo">Microsoft</span>
-          <span class="cta-sec__logo">Figure AI</span>
-          <span class="cta-sec__logo">1X Technologies</span>
+          <a href="#" class="btn btn-primary btn-lg">Book a Workflow Review</a>
         </div>
       </div>
-
-      <!-- Right: edge-bleeding image grid -->
-      <div class="cta-sec__right">
-        <div class="cta-img">
-          <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%202.jpg') center/cover no-repeat;"></div>
-          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
-          <div class="cta-img__overlay"><p class="cta-img__label">Living Room Manipulation</p><p class="cta-img__count">3,831+ variants</p></div>
-        </div>
-        <div class="cta-img">
-          <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Basra%20Floor%20Lamp_Image%203.jpg') center/cover no-repeat;"></div>
-          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
-          <div class="cta-img__overlay"><p class="cta-img__label">Residential Navigation</p><p class="cta-img__count">2,853+ variants</p></div>
-        </div>
-        <div class="cta-img">
-          <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Kessler%20Table%20Lamp_Image%203.jpg') center/cover no-repeat;"></div>
-          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
-          <div class="cta-img__overlay"><p class="cta-img__label">Office Navigation</p><p class="cta-img__count">2,410+ variants</p></div>
-        </div>
-        <div class="cta-img">
-          <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2011.jpg') center/cover no-repeat;"></div>
-          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
-          <div class="cta-img__overlay"><p class="cta-img__label">Residential Interiors</p><p class="cta-img__count">3,800+ scenes</p></div>
-        </div>
-        <div class="cta-img">
-          <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Coat%20Lifestyle%202.png') center/cover no-repeat;"></div>
-          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
-          <div class="cta-img__overlay"><p class="cta-img__label">Outdoor Perception</p><p class="cta-img__count">1,920+ variants</p></div>
-        </div>
-        <div class="cta-img">
-          <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Blouse%20Lifestyle%203.png') center/cover no-repeat;"></div>
-          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
-          <div class="cta-img__overlay"><p class="cta-img__label">Outdoor / Urban</p><p class="cta-img__count">4,100+ scenes</p></div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -1138,51 +1032,38 @@
 <footer class="footer">
   <div class="wrap">
     <div class="footer__main">
-      <div>
+      <div class="footer__brand">
         <div class="footer__logo">
-          <img src="../assets/logos/Horizontal Light.png" alt="imagine.io">
+          <img src="../assets/logos/Horizontal Dark.png" alt="imagine.io">
         </div>
-        <p class="footer__tagline">Structured World Infrastructure for Physical AI.</p>
-        <p class="footer__tagline" style="margin-top:12px;">San Francisco · <a href="mailto:preet@imagine.io" style="color:inherit;">preet@imagine.io</a></p>
+        <p class="footer__tagline">The world generation layer for Physical AI. Real-world accuracy. Physics-validated. Built to scale.</p>
       </div>
-      <div>
-        <p class="footer__col-hd">Products</p>
+      <div class="footer__col">
+        <p class="footer__col-hd">Product</p>
         <ul class="footer__links">
-          <li><a href="#">Robotics Data</a></li>
-          <li><a href="#">Foundation Model Data</a></li>
-          <li><a href="#">API &amp; SDK</a></li>
-          <li><a href="#">Simulation Exports</a></li>
-          <li><a href="#">Enterprise</a></li>
+          <li><a href="#platform">Platform</a></li>
+          <li><a href="#">Environments</a></li>
+          <li><a href="#">Robotics Simulation</a></li>
+          <li><a href="#">Synthetic Data</a></li>
         </ul>
       </div>
-      <div>
-        <p class="footer__col-hd">Use Cases</p>
-        <ul class="footer__links">
-          <li><a href="#">Manipulation</a></li>
-          <li><a href="#">Navigation</a></li>
-          <li><a href="#">Perception</a></li>
-          <li><a href="#">World Models</a></li>
-          <li><a href="#">Domain Randomisation</a></li>
-        </ul>
-      </div>
-      <div>
+      <div class="footer__col">
         <p class="footer__col-hd">Company</p>
         <ul class="footer__links">
           <li><a href="#">About</a></li>
           <li><a href="#">Blog</a></li>
-          <li><a href="#">Careers</a></li>
           <li><a href="#">Contact</a></li>
-          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-hd">Resources</p>
+        <ul class="footer__links">
+          <li><a href="#">Request Demo</a></li>
         </ul>
       </div>
     </div>
     <div class="footer__bottom">
       <p class="footer__legal">© 2026 imagine.io. All rights reserved.</p>
-      <div class="footer__bot-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Security</a>
-      </div>
     </div>
   </div>
 </footer>
@@ -1190,12 +1071,13 @@
 
 
 <script>
-/* ── Pipeline sticky-scroll: scroll-position-based step activation ── */
+/* ── Pipeline sticky-scroll activation ── */
 (function () {
   var track   = document.querySelector('.pipeline-scroll__track');
   var steps   = document.querySelectorAll('.ps-step');
   var visuals = document.querySelectorAll('.ps-visual');
-  var n = steps.length;
+  var sticky  = document.querySelector('.pipeline-scroll__sticky');
+  var n = Math.min(steps.length, visuals.length);
   if (!track || !n) return;
 
   var current = -1;
@@ -1203,21 +1085,31 @@
   function setActive(i) {
     if (i === current) return;
     current = i;
-    steps.forEach(function (s, idx)   { s.classList.toggle('ps-step--active',   idx === i); });
-    visuals.forEach(function (v, idx) { v.classList.toggle('ps-visual--active', idx === i); });
+    steps.forEach(function (s, idx) {
+      s.classList.toggle('ps-step--active', idx === i);
+    });
+    visuals.forEach(function (v, idx) {
+      var active = idx === i;
+      v.classList.toggle('ps-visual--active', active);
+      v.hidden = !active;
+    });
   }
 
   function onScroll() {
-    var rect     = track.getBoundingClientRect();
-    var scrolled = -rect.top;                          // px scrolled past section top
-    var range    = rect.height - window.innerHeight;   // total scroll space
-    if (range <= 0) { setActive(0); return; }
+    var rect = track.getBoundingClientRect();
+    var stickyTop = sticky ? parseFloat(window.getComputedStyle(sticky).top) || 0 : 0;
+    var scrolled = stickyTop - rect.top;
+    var range = rect.height - (window.innerHeight - stickyTop);
+    if (range <= 0) {
+      setActive(0);
+      return;
+    }
     var progress = Math.max(0, Math.min(1, scrolled / range));
     setActive(Math.min(Math.floor(progress * n), n - 1));
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // init on load
+  onScroll();
 }());
 </script>
 
@@ -1283,6 +1175,95 @@
   requestAnimationFrame(tick);
 }());
 </script>
+
+<!-- SECTION REVEALS -->
+<script>
+(function () {
+  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function markVisible(el) {
+    el.classList.add('is-visible');
+  }
+
+  function register(selector, variant, stagger) {
+    document.querySelectorAll(selector).forEach(function (el, index) {
+      if (el.dataset.revealReady === 'true') return;
+      el.dataset.revealReady = 'true';
+      el.classList.add('reveal');
+      if (variant) el.classList.add(variant);
+      if (stagger) {
+        el.style.setProperty('--reveal-delay', String(index * stagger) + 'ms');
+      }
+    });
+  }
+
+  register('.logo-strip__inner', 'reveal--soft', 0);
+  register('.mission__left', 'reveal--left', 0);
+  register('.mission__image-wrap', 'reveal--right', 0);
+  register('.mission__stats .hstat', 'reveal--scale', 70);
+
+  register('.problem .pill, .problem h2', 'reveal--soft', 80);
+  register('.problem__card', 'reveal--scale', 85);
+
+  register('.code-layer__hd', 'reveal--soft', 0);
+  register('.codeblock', 'reveal--scale', 0);
+  register('.code-layer__feat', 'reveal--soft', 70);
+
+  register('.pipeline-scroll__hd', 'reveal--soft', 0);
+  register('.pipeline-scroll__left', 'reveal--left', 0);
+  register('.pipeline-scroll__right', 'reveal--right', 0);
+
+  register('.deliverables__hd', 'reveal--soft', 0);
+  register('.del-card', 'reveal--scale', 60);
+
+  register('.showcase__header', 'reveal--soft', 0);
+  register('.mq', 'reveal--soft', 90);
+
+  register('.validation__sticky', 'reveal--soft', 0);
+  register('.validation__grid', 'reveal--soft', 0);
+  register('.v-method-card', 'reveal--scale', 70);
+
+  register('.tiers__hd', 'reveal--soft', 0);
+  register('.tier', 'reveal--scale', 90);
+
+  register('.trust__inner > div', 'reveal--soft', 100);
+
+  register('.ecosystem__hd', 'reveal--soft', 0);
+  register('.eco-card', 'reveal--scale', 80);
+
+  register('.gtc__inner > div', 'reveal--soft', 120);
+
+  register('.cta-sec__left', 'reveal--left', 0);
+  register('.cta-img', 'reveal--scale', 65);
+
+  register('.footer__main > div', 'reveal--soft', 70);
+  register('.footer__bottom', 'reveal--soft', 0);
+
+  var revealEls = document.querySelectorAll('.reveal');
+  if (!revealEls.length) return;
+
+  if (reducedMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(markVisible);
+    return;
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      markVisible(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.16,
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  revealEls.forEach(function (el) {
+    observer.observe(el);
+  });
+}());
+</script>
+
 
 </body>
 </html>
