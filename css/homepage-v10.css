@@ -968,22 +968,24 @@
     .mission__inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 100px;
+      gap: var(--s-1300);
       align-items: start;
     }
+    .mission__left {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-700);
+    }
     .mission__quote {
-      font-size: clamp(32px, 3.2vw, 44px);
+      font-size: clamp(28px, 3vw, 40px);
       font-weight: 400;
       line-height: 1.2;
       letter-spacing: -1px;
       color: var(--text-head);
-      position: sticky;
-      top: 100px;
     }
-    .mission__quote em { font-style: normal; color: var(--accent); font-weight: 500; }
-    .mission__right { display: flex; flex-direction: column; gap: var(--s-700); }
-    .mission__p { font-size: 17px; line-height: 1.75; color: var(--text-body); }
-    .mission__list { display: flex; flex-direction: column; gap: 14px; margin-top: var(--s-200); }
+    .mission__quote em { font-style: normal; color: var(--accent); font-weight: 400; }
+    .mission__p { font-size: 16px; line-height: 1.75; color: var(--text-body); }
+    .mission__list { display: flex; flex-direction: column; gap: 14px; }
     .mission__item {
       display: flex;
       align-items: flex-start;
@@ -994,9 +996,45 @@
     }
     .mission__item .icon {
       font-size: 18px;
-      color: var(--accent);
+      color: var(--text-muted);
       flex-shrink: 0;
       margin-top: 1px;
+    }
+    .mission__image-wrap {
+      /* slight top offset so image aligns with first line of text */
+    }
+    .mission__image {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    /* Stats row inside the mission section */
+    .mission__stats {
+      display: flex;
+      margin-top: var(--s-1300);
+      border-top: 1px solid var(--border);
+    }
+    .mission__stats .hstat {
+      flex: 1;
+      padding: var(--s-700) var(--s-600);
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .mission__stats .hstat:last-child { border-right: none; }
+    .mission__stats .hstat__val {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+      line-height: 1;
+      margin-bottom: var(--s-200);
+    }
+    .mission__stats .hstat__lbl {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
     }
 
 
@@ -2080,9 +2118,9 @@
       /* Mobile editor adjustments */
       .editor-sidebar { display: none; }
       .editor-bar__right { display: none; }
-      .hero-stats-bar__inner { flex-wrap: wrap; }
-      .hstat { flex: 0 0 50%; border-bottom: 1px solid var(--border); }
-      .hstat:last-child { flex: 0 0 100%; border-right: none; border-bottom: none; }
+      .mission__stats { flex-wrap: wrap; }
+      .mission__stats .hstat { flex: 0 0 50%; border-bottom: 1px solid var(--border); }
+      .mission__stats .hstat:last-child { flex: 0 0 100%; border-right: none; border-bottom: none; }
       /* Mobile nav */
       .nav__outer { margin-top: var(--s-300); padding: 0 var(--s-500); }
       .nav__links { display: none; }
@@ -2092,7 +2130,6 @@
       .mission__inner,
       .validation__inner,
       .trust__inner { grid-template-columns: 1fr; gap: 48px; }
-      .mission__quote { position: static; }
       .validation__sticky { position: static; }
       .pipeline-scroll__track  { height: auto; }
       .pipeline-scroll__sticky { position: static; height: auto; padding: 20px 0 60px; }
