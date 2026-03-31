@@ -229,13 +229,14 @@ All product images are served from the `library-assets` GitHub repo via jsDelivr
 
 - `homepage-v8` is the active working version. `homepage-v7` is locked — live on Vercel via `index.html`. ✅
 - `com.apple.provenance` extended attribute appears on all files in the `css/` folder (macOS behavior) — does NOT block writes; file is writable by owner.
-- **Pending decision:** Add a Moat section to v7 (or v8)? PM site has one between Product Graph and Pipeline: *"This model comes from years of production use in configurable product and scene generation. Built from production product infrastructure, not hand-authored scenes."*
-- **CSS compliance:** `homepage-v7.css` still contains some hardcoded hex values and px sizes that should be migrated to PDS tokens in the next pass (v8).
+- **Pending decision:** Add a Moat section to v8? PM site has one between Product Graph and Pipeline. User hasn't seen the PM site's Moat section yet — decision deferred.
+- **CSS compliance:** `homepage-v8.css` is now PDS-compliant. All exact-match values use PDS tokens. Documented exceptions (no PDS token exists for these values): `--bg-warm`, `--bg-subtle`, `--border`, `--text-head`, `--text-body`, `--text-muted`, `--radius-sm/md/lg`, `--section-y`, plus spacing above 72px (80px, 100px) and decorative UI colors (macOS window dots, code syntax colors, status badges).
 
 ---
 
 ## Next Steps
 
-1. Decide what changes go into v8 (Moat section? PDS token audit? New sections?)
-2. When v8 is approved, copy to `index.html` and push to deploy
-3. When ready: build `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
+1. **Review v8 in browser** — CSS token audit + full copy rewrite done. Approve or iterate.
+2. **Moat section** — once user has seen PM site's Moat section, decide whether to add between Product Graph and Pipeline.
+3. **When v8 is approved:** copy to `index.html`, strip `../` prefixes, push to deploy.
+4. **Inner pages:** `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
