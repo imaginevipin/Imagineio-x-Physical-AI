@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>imagine.io — Structured World Infrastructure for Physical AI</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+  <link rel="stylesheet" href="../css/homepage-v9.css">
+</head>
+<body>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     1. NAVBAR
+═══════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav__outer">
+    <div class="nav__inner">
+
+      <!-- Logo -->
+      <a class="nav__logo" href="#">
+        <img src="../assets/logos/Horizontal Light.svg" alt="imagine.io">
+      </a>
+
+      <!-- Desktop links — absolutely centred -->
+      <ul class="nav__links">
+        <li><a href="#platform">Platform</a></li>
+        <li><a href="#tiers">Tiers</a></li>
+        <li><a href="#ecosystem">Ecosystem</a></li>
+        <li><a href="#gtc">GTC</a></li>
+      </ul>
+
+      <!-- Desktop CTA -->
+      <div class="nav__cta">
+        <a href="#" class="btn btn-primary nav__btn-cta">Talk to Sales</a>
+      </div>
+
+      <!-- Hamburger (mobile only) -->
+      <button class="nav__burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+        <span class="nav__burger-bar"></span>
+        <span class="nav__burger-bar"></span>
+        <span class="nav__burger-bar"></span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="nav__mobile" id="nav-mobile" aria-hidden="true">
+    <ul class="nav__mobile-links">
+      <li><a href="#platform">Platform</a></li>
+      <li><a href="#tiers">Tiers</a></li>
+      <li><a href="#ecosystem">Ecosystem</a></li>
+      <li><a href="#gtc">GTC</a></li>
+    </ul>
+    <div class="nav__mobile-cta">
+      <a href="#" class="btn btn-ghost">Login</a>
+      <a href="#" class="btn btn-primary">Talk to Sales</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     2. HERO — 3-layer: copy | editor | strip
+═══════════════════════════════════════════════════════ -->
+<section class="hero">
+
+  <!-- ETHEREAL SHADOW BACKGROUND -->
+  <div class="hero__ethereal" aria-hidden="true">
+
+    <!-- Hidden SVG: filter definition only, no render -->
+    <svg width="0" height="0" style="position:absolute;">
+      <defs>
+        <filter id="ethereal-filter" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+          <feTurbulence
+            result="undulation"
+            numOctaves="2"
+            baseFrequency="0.0007,0.0026"
+            seed="2"
+            type="turbulence"
+          />
+          <feColorMatrix
+            id="ethereal-hue"
+            in="undulation"
+            type="hueRotate"
+            values="180"
+          />
+          <feColorMatrix
+            in="dist"
+            result="circulation"
+            type="matrix"
+            values="4 0 0 0 1  4 0 0 0 1  4 0 0 0 1  1 0 0 0 0"
+          />
+          <feDisplacementMap in="SourceGraphic" in2="circulation" scale="65" result="dist"/>
+          <feDisplacementMap in="dist" in2="undulation" scale="65" result="output"/>
+        </filter>
+      </defs>
+    </svg>
+
+    <!-- Animated layer — blobs inside the displaced container -->
+    <div class="hero__ethereal-stage">
+      <div class="hero__ethereal-blob hero__ethereal-blob--a"></div>
+      <div class="hero__ethereal-blob hero__ethereal-blob--b"></div>
+    </div>
+
+  </div>
+
+  <!-- LAYER 1 — Headline + CTA (centered) -->
+  <div class="hero__content">
+
+    <h1 class="hero__h1 hero__animate hero__animate--1">Structured product data for <em>simulation-ready</em> world generation.</h1>
+    <p class="hero__body hero__animate hero__animate--2">imagine.io converts structured product catalog data into simulation-ready training environments — with physics, semantics, and variation built in from the start, not bolted on afterward.</p>
+    <div class="hero__cta hero__animate hero__animate--3">
+      <a href="#" class="btn btn-primary btn-lg">Book a Demo</a>
+      <a href="#proof" class="btn btn-ghost btn-lg">See how it works</a>
+    </div>
+
+  </div>
+
+  <!-- LAYER 2 — Editor / Scene Configurator (light mode, primary visual anchor) -->
+  <div class="hero__editor-wrap hero__animate hero__animate--4">
+    <div class="hero__editor">
+
+      <!-- Window chrome + tab bar -->
+      <div class="editor-bar">
+        <div class="editor-bar__dots">
+          <span class="editor-bar__dot editor-bar__dot--r"></span>
+          <span class="editor-bar__dot editor-bar__dot--a"></span>
+          <span class="editor-bar__dot editor-bar__dot--g"></span>
+        </div>
+        
+        <div class="editor-bar__right">
+          <button class="editor-tab">Validation</button>
+          <button class="editor-tab editor-tab--active">Export</button>
+        </div>
+      </div>
+
+      <!-- Editor body — sidebar + main -->
+      <div class="editor-body">
+
+        <!-- Left: asset browser -->
+        <div class="editor-sidebar">
+          <div class="editor-search">
+            <span class="icon">search</span>
+            <span class="editor-search__ph">Search assets…</span>
+          </div>
+          <div class="editor-cats">
+            <button class="editor-cat editor-cat--active">Products</button>
+            <button class="editor-cat">Materials</button>
+          </div>
+          <div class="editor-asset-list">
+            <div class="editor-asset editor-asset--selected">
+              <div class="editor-asset__thumb" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%201.jpg') center/cover no-repeat;"></div>
+              <div class="editor-asset__info">
+                <span class="editor-asset__name">Kingston Sofa</span>
+                <span class="editor-asset__status">Sim-ready · 24 variants</span>
+              </div>
+              <span class="icon editor-asset__check">check_circle</span>
+            </div>
+            <div class="editor-asset">
+              <div class="editor-asset__thumb" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Coffee%20Table%20lfs%201.png') center/cover no-repeat;"></div>
+              <div class="editor-asset__info">
+                <span class="editor-asset__name">Coffee Table</span>
+                <span class="editor-asset__status">Sim-ready · 8 variants</span>
+              </div>
+            </div>
+            <div class="editor-asset">
+              <div class="editor-asset__thumb" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2010.jpg') center/cover no-repeat;"></div>
+              <div class="editor-asset__info">
+                <span class="editor-asset__name">Lounge Chair</span>
+                <span class="editor-asset__status">Sim-ready · 12 variants</span>
+              </div>
+            </div>
+            <div class="editor-asset">
+              <div class="editor-asset__thumb" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Console%20lfs%201.png') center/cover no-repeat;"></div>
+              <div class="editor-asset__info">
+                <span class="editor-asset__name">Console Table</span>
+                <span class="editor-asset__status">Sim-ready · 6 variants</span>
+              </div>
+            </div>
+            <div class="editor-asset">
+              <div class="editor-asset__thumb" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Foundry%20Table%20Lamp_Image%201.jpg') center/cover no-repeat;"></div>
+              <div class="editor-asset__info">
+                <span class="editor-asset__name">Foundry Lamp</span>
+                <span class="editor-asset__status">Beauty · 4 variants</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: scene canvas + properties -->
+        <div class="editor-main">
+          <div class="editor-main__header">
+            <span class="editor-main__title">Living Room — Scene #4082</span>
+            <div class="editor-chips">
+              <span class="editor-chip">12 objects</span>
+              <span class="editor-chip">3 variants</span>
+              <span class="editor-chip editor-chip--green">Sim-ready</span>
+            </div>
+          </div>
+
+          <!-- Top-down floor plan canvas -->
+          <div class="editor-canvas">
+            <div class="fp-room"></div>
+            <div class="fp-item fp-item--rug"></div>
+            <div class="fp-item fp-item--sofa">
+              <span class="fp-label">Sofa</span>
+              <div class="fp-selected-ring"></div>
+            </div>
+            <div class="fp-item fp-item--table"><span class="fp-label">Table</span></div>
+            <div class="fp-item fp-item--chair-a"><span class="fp-label">Chair</span></div>
+            <div class="fp-item fp-item--chair-b"><span class="fp-label">Chair</span></div>
+            <div class="fp-item fp-item--lamp"></div>
+          </div>
+
+          <!-- Properties bar -->
+          <div class="editor-props">
+            <div class="editor-prop">
+              <span class="editor-prop__label">Material</span>
+              <div class="editor-prop__value">
+                <span class="editor-prop__swatch" style="background:#8B7355;"></span>
+                Walnut Natural
+              </div>
+            </div>
+            <div class="editor-prop__sep"></div>
+            <div class="editor-prop">
+              <span class="editor-prop__label">Variant</span>
+              <div class="editor-prop__value">3 of 24</div>
+            </div>
+            <div class="editor-prop__sep"></div>
+            <div class="editor-prop">
+              <span class="editor-prop__label">Joint</span>
+              <div class="editor-prop__value">hinge · 0°–110°</div>
+            </div>
+            <div class="editor-prop__sep"></div>
+            <div class="editor-prop">
+              <span class="editor-prop__label">Label</span>
+              <div class="editor-prop__value">sofa_01 · 0x2A4</div>
+            </div>
+          </div>
+        </div><!-- /editor-main -->
+
+      </div><!-- /editor-body -->
+    </div><!-- /hero__editor -->
+  </div><!-- /hero__editor-wrap -->
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     STATS BAR — repositioned from hero
+═══════════════════════════════════════════════════════ -->
+<section class="hero-stats-bar">
+  <div class="wrap">
+    <div class="hero-stats-bar__inner">
+      <div class="hstat">
+        <div class="hstat__val">6+</div>
+        <div class="hstat__lbl">Years in Production</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat__val">1M+</div>
+        <div class="hstat__lbl">Outputs / Month</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat__val">25K+</div>
+        <div class="hstat__lbl">Structured Products</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat__val">10,000×</div>
+        <div class="hstat__lbl">Variation Multiplier</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat__val">150+</div>
+        <div class="hstat__lbl">Metadata Attributes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ═══════════════════════════════════════════════════════
+     4. LOGO STRIP
+═══════════════════════════════════════════════════════ -->
+<section class="logo-strip">
+  <div class="logo-strip__inner">
+    <p class="logo-strip__label">Used by enterprise robotics &amp; AI teams</p>
+    <div class="logo-strip__logos">
+      <img src="../assets/partners-logos/Logo-1.png" alt="Partner logo">
+      <img src="../assets/partners-logos/Logo-2.png" alt="Partner logo">
+      <img src="../assets/partners-logos/Logo-3.png" alt="Partner logo">
+      <img src="../assets/partners-logos/Logo-4.png" alt="Partner logo">
+      <img src="../assets/partners-logos/Logo-5.png" alt="Partner logo">
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     5. WHO WE ARE — positioning statement
+═══════════════════════════════════════════════════════ -->
+<section class="mission" id="proof">
+  <div class="wrap">
+    <div class="mission__inner">
+      <h2 class="mission__quote">Built as structured data.<br><em>Exported as simulation-ready worlds.</em></h2>
+      <div class="mission__right">
+        <p class="mission__p">Every environment is generated from a structured product graph and delivered as OpenUSD — hierarchy, semantics, articulation, and collision intact. Load directly into Isaac Sim or MuJoCo without rework.</p>
+        <div class="mission__list">
+          <div class="mission__item">
+            <span class="icon">inventory_2</span>
+            <span>OpenUSD export — hierarchy, semantics, and physics intact</span>
+          </div>
+          <div class="mission__item">
+            <span class="icon">radar</span>
+            <span>Collision meshes + joint limits — per-part, from product source</span>
+          </div>
+          <div class="mission__item">
+            <span class="icon">account_tree</span>
+            <span>Semantic scene graph — every object labeled at generation time</span>
+          </div>
+          <div class="mission__item">
+            <span class="icon">verified_user</span>
+            <span>SimReady-aligned — production infrastructure running at scale since 2018 · SOC 2 Type II</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     6. WHAT WE SOLVE — 4 problem cards
+═══════════════════════════════════════════════════════ -->
+<section class="problem">
+  <div class="wrap">
+    <p class="pill">The Problem</p>
+    <h2>Training data is <em>the bottleneck.</em></h2>
+    <div class="problem__grid">
+
+      <div class="problem__card">
+        <span class="icon problem__icon">schedule</span>
+        <h3 class="problem__title">Asset prep takes weeks</h3>
+        <p class="problem__body">40h of rigging per kitchen. 2–4 weeks of cleanup per batch. Teams spend more time fixing assets than training models.</p>
+      </div>
+
+      <div class="problem__card">
+        <span class="icon problem__icon">precision_manufacturing</span>
+        <h3 class="problem__title">Physics properties don't come for free</h3>
+        <p class="problem__body">Joints, limits, and constraints have to be authored manually — they don't come from geometry. Every scene change means another round of script fixes.</p>
+      </div>
+
+      <div class="problem__card">
+        <span class="icon problem__icon">label_off</span>
+        <h3 class="problem__title">Raw 3D has no structure</h3>
+        <p class="problem__body">Semantic labels, collision meshes, and UV integrity don't come with geometry. ML engineers end up debugging UV maps instead of training perception models.</p>
+      </div>
+
+      <div class="problem__card">
+        <span class="icon problem__icon">moving</span>
+        <h3 class="problem__title">Scale takes months, not days</h3>
+        <p class="problem__body">Going from a handful of scenes to training volume requires months of manual work. Every new product or environment starts from zero — there's no reuse.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     7. CODE DEMO LAYERED OVER ASSET GRID
+═══════════════════════════════════════════════════════ -->
+<section class="code-layer" id="platform">
+  <!-- Background asset tile grid -->
+  <div class="code-layer__bg">
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+    <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
+  </div>
+  <div class="code-layer__veil"></div>
+
+  <div class="wrap">
+    <div class="code-layer__inner">
+      <div class="code-layer__hd">
+        <span class="pill" style="background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.6);">How It's Built</span>
+        <h2 class="code-layer__h2">The structured model behind every <em>environment we generate.</em></h2>
+        <p class="code-layer__sub">Each product is stored as a rich data model — not just geometry. Dimensions, materials, joint limits, articulation rules, and semantic labels are all captured once and reused across every scene, variant, and export.</p>
+      </div>
+
+      <div class="codeblock">
+        <div class="codeblock__bar">
+          <span class="codeblock__btn codeblock__btn--r"></span>
+          <span class="codeblock__btn codeblock__btn--a"></span>
+          <span class="codeblock__btn codeblock__btn--g"></span>
+          <span class="codeblock__fn">scene_graph.json</span>
+        </div>
+        <pre><span class="t-fn">KitchenEnvironment</span> {
+  <span class="t-key">Cabinet_01</span>: { <span class="t-key">label</span>: <span class="t-str">"upper_cabinet"</span>, <span class="t-key">id</span>: <span class="t-str">"0x001"</span> }
+    <span class="t-fn">├─ Door_Left</span>  (<span class="t-kw">hinge_joint</span>, <span class="t-num">0°–110°</span>)
+    <span class="t-fn">└─ Door_Right</span> (<span class="t-kw">hinge_joint</span>, <span class="t-num">0°–110°</span>)
+  <span class="t-key">Refrigerator</span>: { <span class="t-key">label</span>: <span class="t-str">"refrigerator"</span>, <span class="t-key">id</span>: <span class="t-str">"0x004"</span> }
+    <span class="t-fn">└─ Door</span>       (<span class="t-kw">articulated_joint</span>, <span class="t-num">0°–90°</span>)
+  <span class="t-key">Dishwasher</span>:   { <span class="t-key">label</span>: <span class="t-str">"dishwasher"</span>,   <span class="t-key">id</span>: <span class="t-str">"0x007"</span> }
+    <span class="t-fn">└─ Drawer</span>     (<span class="t-kw">prismatic_joint</span>, <span class="t-num">0–520mm</span>)
+  <span class="t-key">Countertop</span>:   { <span class="t-key">label</span>: <span class="t-str">"countertop"</span>, <span class="t-key">material</span>: <span class="t-str">"granite_01"</span> }
+}
+<span class="t-cmt">// Labels like dishwasher, base_cabinet, countertop</span>
+<span class="t-cmt">// — generated at creation, not post-processed</span></pre>
+      </div>
+
+      <div class="code-layer__feats">
+        <span class="code-layer__feat"><span class="icon">view_in_ar</span>Geometry — dimensionally accurate from real product specs</span>
+        <span class="code-layer__feat"><span class="icon">rule</span>Rules — only valid object combinations can be assembled</span>
+        <span class="code-layer__feat"><span class="icon">settings_ethernet</span>Articulation — doors, drawers, joint limits &amp; travel ranges</span>
+        <span class="code-layer__feat"><span class="icon">label</span>Semantics — object class &amp; instance hierarchy, generated at creation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     8–9. PIPELINE — sticky-scroll, 3 steps
+═══════════════════════════════════════════════════════ -->
+<section class="pipeline-scroll">
+
+  <!-- Header scrolls in normally, then track begins -->
+  <div class="wrap">
+    <div class="pipeline-scroll__hd">
+      <span class="pill">How It Works</span>
+      <h2 class="pipeline-scroll__h2">From structured product data to <em>training-ready environments.</em></h2>
+    </div>
+  </div>
+
+  <!-- Tall track — creates scroll space for the sticky inner -->
+  <div class="pipeline-scroll__track">
+    <div class="pipeline-scroll__sticky">
+      <div class="wrap">
+        <div class="pipeline-scroll__grid">
+
+          <!-- Left: step list -->
+          <div class="pipeline-scroll__left">
+
+            <div class="ps-step ps-step--active">
+              <div class="ps-step__top">
+                <span class="ps-step__num">01</span>
+                <h3 class="ps-step__title">Every object is labeled at creation — no post-processing required</h3>
+              </div>
+              <p class="ps-step__desc">Every object in a scene carries its semantic class, instance ID, and physical dimensions from the moment it's generated — not added after rendering. Labels like <em>dishwasher</em>, <em>base_cabinet</em>, and <em>countertop</em> are structural outputs of the product graph, not a post-processing step you have to run.</p>
+            </div>
+
+            <div class="ps-step">
+              <div class="ps-step__top">
+                <span class="ps-step__num">02</span>
+                <h3 class="ps-step__title">One base environment, multiplied into thousands of valid training scenes</h3>
+              </div>
+              <p class="ps-step__desc">Materials, lighting, layout, and object placement are all parameter-driven — so every variant is structurally valid by construction. 1 base environment × 9 material finishes × 4 lighting rigs × 3 layout arrangements = 432 environments. Add clutter and spatial randomization and you're generating tens of thousands of training-ready scenes.</p>
+            </div>
+
+            <div class="ps-step">
+              <div class="ps-step__top">
+                <span class="ps-step__num">03</span>
+                <h3 class="ps-step__title">Train on environments grounded in the real world</h3>
+              </div>
+              <p class="ps-step__desc">Surfaces use PBR materials derived from real product specs. Layouts are dimensionally accurate. Every object is semantically labeled. Your models train on grounded environments — not procedural approximations, not AI-hallucinated scenes.</p>
+            </div>
+
+          </div><!-- /pipeline-scroll__left -->
+
+          <!-- Right: one visual shown at a time, JS swaps on scroll -->
+          <div class="pipeline-scroll__right">
+
+            <!-- Visual 01: Scene graph tree -->
+            <div class="ps-visual ps-visual--active">
+              <div class="ps-card">
+                <div class="ps-card__bar">
+                  <div class="ps-card__dots">
+                    <span class="ps-card__dot ps-card__dot--r"></span>
+                    <span class="ps-card__dot ps-card__dot--a"></span>
+                    <span class="ps-card__dot ps-card__dot--g"></span>
+                  </div>
+                  <span class="ps-card__fn">scene_graph.json</span>
+                </div>
+                <div class="ps-card__body">
+                  <div class="ps-tree">
+                    <div class="ps-tree__root">KitchenEnvironment</div>
+                    <div class="ps-tree__branch">
+                      <div class="ps-tree__item">
+                        <span class="ps-tree__line">├─</span>
+                        <span class="ps-tree__key">Cabinet_01</span>
+                        <span class="ps-tree__tag ps-tree__tag--label">label: upper_cabinet</span>
+                        <span class="ps-tree__tag ps-tree__tag--id">id: 0x001</span>
+                      </div>
+                      <div class="ps-tree__sub">
+                        <div class="ps-tree__item">
+                          <span class="ps-tree__line">│ ├─</span>
+                          <span class="ps-tree__key ps-tree__key--joint">Door_Left</span>
+                          <span class="ps-tree__tag ps-tree__tag--joint">hinge · 0°–110°</span>
+                        </div>
+                        <div class="ps-tree__item">
+                          <span class="ps-tree__line">│ └─</span>
+                          <span class="ps-tree__key ps-tree__key--joint">Door_Right</span>
+                          <span class="ps-tree__tag ps-tree__tag--joint">hinge · 0°–110°</span>
+                        </div>
+                      </div>
+                      <div class="ps-tree__item">
+                        <span class="ps-tree__line">├─</span>
+                        <span class="ps-tree__key">Refrigerator</span>
+                        <span class="ps-tree__tag ps-tree__tag--label">label: refrigerator</span>
+                        <span class="ps-tree__tag ps-tree__tag--id">id: 0x004</span>
+                      </div>
+                      <div class="ps-tree__sub">
+                        <div class="ps-tree__item">
+                          <span class="ps-tree__line">│ └─</span>
+                          <span class="ps-tree__key ps-tree__key--joint">Door</span>
+                          <span class="ps-tree__tag ps-tree__tag--joint">articulated · 0°–90°</span>
+                        </div>
+                      </div>
+                      <div class="ps-tree__item">
+                        <span class="ps-tree__line">├─</span>
+                        <span class="ps-tree__key">Dishwasher</span>
+                        <span class="ps-tree__tag ps-tree__tag--label">label: dishwasher</span>
+                        <span class="ps-tree__tag ps-tree__tag--id">id: 0x007</span>
+                      </div>
+                      <div class="ps-tree__sub">
+                        <div class="ps-tree__item">
+                          <span class="ps-tree__line">│ └─</span>
+                          <span class="ps-tree__key ps-tree__key--joint">Drawer</span>
+                          <span class="ps-tree__tag ps-tree__tag--joint">prismatic · 0–520mm</span>
+                        </div>
+                      </div>
+                      <div class="ps-tree__item">
+                        <span class="ps-tree__line">└─</span>
+                        <span class="ps-tree__key">Countertop</span>
+                        <span class="ps-tree__tag ps-tree__tag--label">label: countertop</span>
+                        <span class="ps-tree__tag ps-tree__tag--mat">material: granite_01</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ps-card__tags">
+                    <span class="ps-ctag"><span class="icon">label</span>Semantic Labels</span>
+                    <span class="ps-ctag"><span class="icon">tag</span>Instance IDs</span>
+                    <span class="ps-ctag"><span class="icon">account_tree</span>Hierarchies</span>
+                    <span class="ps-ctag"><span class="icon">settings_ethernet</span>Joints</span>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /ps-visual 1 -->
+
+            <!-- Visual 02: Variation image grid -->
+            <div class="ps-visual">
+              <div class="ps-card">
+                <div class="ps-card__bar">
+                  <div class="ps-card__dots">
+                    <span class="ps-card__dot ps-card__dot--r"></span>
+                    <span class="ps-card__dot ps-card__dot--a"></span>
+                    <span class="ps-card__dot ps-card__dot--g"></span>
+                  </div>
+                  <span class="ps-card__fn">variation_set · 432 configs</span>
+                </div>
+                <div class="ps-card__body">
+                  <div class="ps-variants-grid">
+                    <div class="ps-variant-card">
+                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Dutch%20Oven_Image%201.jpg')"></div>
+                      <div class="ps-variant-card__info">
+                        <span class="ps-variant-card__name">Dutch Oven</span>
+                        <span class="ps-variant-card__meta">mat: matte_black · light: warm</span>
+                      </div>
+                    </div>
+                    <div class="ps-variant-card">
+                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Kitchen%20Faucet_Image%201.jpg')"></div>
+                      <div class="ps-variant-card__info">
+                        <span class="ps-variant-card__name">Kitchen Faucet</span>
+                        <span class="ps-variant-card__meta">mat: chrome · light: neutral</span>
+                      </div>
+                    </div>
+                    <div class="ps-variant-card">
+                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%201.jpg')"></div>
+                      <div class="ps-variant-card__info">
+                        <span class="ps-variant-card__name">Kingston Sofa</span>
+                        <span class="ps-variant-card__meta">mat: linen_grey · light: cool</span>
+                      </div>
+                    </div>
+                    <div class="ps-variant-card">
+                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2010.jpg')"></div>
+                      <div class="ps-variant-card__info">
+                        <span class="ps-variant-card__name">Lounge Chair</span>
+                        <span class="ps-variant-card__meta">mat: velvet_olive · light: warm</span>
+                      </div>
+                    </div>
+                    <div class="ps-variant-card">
+                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Bath/Walnut%20Vanity_Image%201.jpg')"></div>
+                      <div class="ps-variant-card__info">
+                        <span class="ps-variant-card__name">Walnut Vanity</span>
+                        <span class="ps-variant-card__meta">mat: walnut_dark · light: neutral</span>
+                      </div>
+                    </div>
+                    <div class="ps-variant-card">
+                      <div class="ps-variant-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Bath/Bathtub_Image%201.jpg')"></div>
+                      <div class="ps-variant-card__info">
+                        <span class="ps-variant-card__name">Bathtub</span>
+                        <span class="ps-variant-card__meta">mat: ceramic_white · light: cool</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ps-card__footer">
+                    <span class="ps-card__stat">1 base env</span>
+                    <span class="ps-card__sep">×</span>
+                    <span class="ps-card__stat">9 finishes</span>
+                    <span class="ps-card__sep">×</span>
+                    <span class="ps-card__stat">4 lighting</span>
+                    <span class="ps-card__sep">×</span>
+                    <span class="ps-card__stat">3 layouts</span>
+                    <span class="ps-card__sep">=</span>
+                    <span class="ps-card__stat ps-card__stat--total">432 valid environments</span>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /ps-visual 2 -->
+
+            <!-- Visual 03: Labeled scene -->
+            <div class="ps-visual">
+              <div class="ps-card">
+                <div class="ps-card__bar">
+                  <div class="ps-card__dots">
+                    <span class="ps-card__dot ps-card__dot--r"></span>
+                    <span class="ps-card__dot ps-card__dot--a"></span>
+                    <span class="ps-card__dot ps-card__dot--g"></span>
+                  </div>
+                  <span class="ps-card__fn">perception_frame_0047.png</span>
+                </div>
+                <div class="ps-card__body ps-card__body--img">
+                  <div class="ps-labeled-env">
+                    <div class="ps-labeled-env__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Kessler%20Table%20Lamp_Image%203.jpg')"></div>
+                    <div class="ps-label-box ps-label-box--1"><span class="ps-label-tag">table_lamp · 0x021</span></div>
+                    <div class="ps-label-box ps-label-box--2"><span class="ps-label-tag">desk_surface · 0x022</span></div>
+                    <div class="ps-label-box ps-label-box--3"><span class="ps-label-tag">chair · 0x023</span></div>
+                  </div>
+                  <div class="ps-card__tags">
+                    <span class="ps-ctag"><span class="icon">view_in_ar</span>PBR Materials</span>
+                    <span class="ps-ctag"><span class="icon">label</span>Per-object Labels</span>
+                    <span class="ps-ctag"><span class="icon">straighten</span>Dimensionally Accurate</span>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /ps-visual 3 -->
+
+          </div><!-- /pipeline-scroll__right -->
+        </div><!-- /pipeline-scroll__grid -->
+      </div><!-- /wrap -->
+    </div><!-- /pipeline-scroll__sticky -->
+  </div><!-- /pipeline-scroll__track -->
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     WHAT YOU GET — 9 deliverables
+═══════════════════════════════════════════════════════ -->
+<section class="deliverables">
+  <div class="wrap">
+    <div class="deliverables__hd">
+      <span class="pill">What You Get</span>
+      <h2 class="deliverables__h2">Everything your pipeline <em>needs to start training.</em></h2>
+      <p class="deliverables__sub">Structured, labeled, and ready to drop into Isaac Sim, MuJoCo, or any OpenUSD-compatible stack.</p>
+    </div>
+    <div class="del-grid">
+      <div class="del-card">
+        <span class="del-card__icon">inventory_2</span>
+        <p class="del-card__name">OpenUSD Scene</p>
+        <p class="del-card__desc">Full SimReady USD export with physics, materials, and hierarchy intact.</p>
+        <span class="del-card__fmt">.usd / .usda</span>
+      </div>
+      <div class="del-card">
+        <span class="del-card__icon">sell</span>
+        <p class="del-card__name">Semantic Labels</p>
+        <p class="del-card__desc">Per-object class labels and instance IDs — cabinet, dishwasher, countertop, hinge.</p>
+        <span class="del-card__fmt">JSON + USD metadata</span>
+      </div>
+      <div class="del-card">
+        <span class="del-card__icon">radar</span>
+        <p class="del-card__name">Collision Meshes</p>
+        <p class="del-card__desc">Convex hull and per-part collision geometry auto-generated from product structure.</p>
+        <span class="del-card__fmt">Physics-ready</span>
+      </div>
+      <div class="del-card">
+        <span class="del-card__icon">settings_ethernet</span>
+        <p class="del-card__name">Articulated Joints</p>
+        <p class="del-card__desc">Doors, drawers, hinges with correct travel limits from source specifications.</p>
+        <span class="del-card__fmt">USD Physics joints</span>
+      </div>
+      <div class="del-card">
+        <span class="del-card__icon">perm_media</span>
+        <p class="del-card__name">Dataset Frames</p>
+        <p class="del-card__desc">100K+ labeled frames per environment via Isaac Sim Synthetic Data Recorder.</p>
+        <span class="del-card__fmt">RGB + depth + masks</span>
+      </div>
+      <div class="del-card">
+        <span class="del-card__icon">account_tree</span>
+        <p class="del-card__name">Scene Graph JSON</p>
+        <p class="del-card__desc">Complete structured scene description — every object, identity, position, and relationships.</p>
+        <span class="del-card__fmt">Structured JSON</span>
+      </div>
+      <div class="del-card">
+        <span class="del-card__icon">wb_sunny</span>
+        <p class="del-card__name">Lighting Variations</p>
+        <p class="del-card__desc">Parameterized lighting rigs — time of day, temperature, intensity, direction.</p>
+        <span class="del-card__fmt">10K+ combos</span>
+      </div>
+      <div class="del-card">
+        <span class="del-card__icon">shuffle</span>
+        <p class="del-card__name">Variation Sets</p>
+        <p class="del-card__desc">Parameter-driven environment variants — same layout, different materials, lighting, clutter.</p>
+        <span class="del-card__fmt">Batch generation</span>
+      </div>
+      <div class="del-card">
+        <span class="del-card__icon">videocam</span>
+        <p class="del-card__name">Camera Rigs</p>
+        <p class="del-card__desc">Configurable camera positions for robot POV, overhead, and egocentric views.</p>
+        <span class="del-card__fmt">Isaac Sim compatible</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     5. ASSET SHOWCASE MARQUEE — image-first overlay cards
+═══════════════════════════════════════════════════════ -->
+<section class="showcase">
+  <div class="showcase__header">
+    <span class="pill">Asset Library</span>
+    <h2 class="showcase__h2">25,000+ structured environments. <em>Ready for simulation.</em></h2>
+  </div>
+  <div class="showcase__rows">
+
+    <!-- Row 1 → left -->
+    <div class="mq">
+      <div class="mq__track">
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Residential Interiors</div><div class="asset-card__count">5,200+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Coffee%20Table%20lfs%201.png')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Living Room Scenes</div><div class="asset-card__count">3,400+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Foundry%20Table%20Lamp_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Office Spaces</div><div class="asset-card__count">2,900+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Dutch%20Oven_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Kitchen Environments</div><div class="asset-card__count">1,800+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Console%20lfs%201.png')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Entryway &amp; Hallways</div><div class="asset-card__count">1,900+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Bath/Walnut%20Vanity_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Bathroom Spaces</div><div class="asset-card__count">2,100+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Basra%20Floor%20Lamp_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Hotel &amp; Lounge Spaces</div><div class="asset-card__count">1,700+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <!-- Duplicate set -->
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Residential Interiors</div><div class="asset-card__count">5,200+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Coffee%20Table%20lfs%201.png')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Living Room Scenes</div><div class="asset-card__count">3,400+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Foundry%20Table%20Lamp_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Office Spaces</div><div class="asset-card__count">2,900+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Dutch%20Oven_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Kitchen Environments</div><div class="asset-card__count">1,800+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Console%20lfs%201.png')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Entryway &amp; Hallways</div><div class="asset-card__count">1,900+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Bath/Walnut%20Vanity_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Bathroom Spaces</div><div class="asset-card__count">2,100+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Basra%20Floor%20Lamp_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Hotel &amp; Lounge Spaces</div><div class="asset-card__count">1,700+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+      </div>
+    </div>
+
+    <!-- Row 2 → right -->
+    <div class="mq">
+      <div class="mq__track mq__track--rev">
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2010.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Residential Interiors</div><div class="asset-card__count">3,800+ scenes</div></div></div><div class="asset-badge asset-badge--left">BEAUTY RENDERS</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Aspen%20Chair_Image%202.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Dining Environments</div><div class="asset-card__count">2,200+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Kessler%20Table%20Lamp_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Bedroom Environments</div><div class="asset-card__count">1,400+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Kitchen%20Faucet_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Kitchen &amp; Bath Fixtures</div><div class="asset-card__count">1,500+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Bath/Bathtub_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Spa &amp; Wellness</div><div class="asset-card__count">1,200+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Lorenzo%20Table%20Lamp_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Hospitality &amp; Hotels</div><div class="asset-card__count">1,600+ scenes</div></div></div><div class="asset-badge asset-badge--left">BEAUTY RENDERS</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Marilyn%20Chandelier_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Premium Interiors</div><div class="asset-card__count">1,100+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <!-- Duplicate -->
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2010.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Residential Interiors</div><div class="asset-card__count">3,800+ scenes</div></div></div><div class="asset-badge asset-badge--left">BEAUTY RENDERS</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Aspen%20Chair_Image%202.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Dining Environments</div><div class="asset-card__count">2,200+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Kessler%20Table%20Lamp_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Bedroom Environments</div><div class="asset-card__count">1,400+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Kitchen/Kitchen%20Faucet_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Kitchen &amp; Bath Fixtures</div><div class="asset-card__count">1,500+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Bath/Bathtub_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Spa &amp; Wellness</div><div class="asset-card__count">1,200+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Lorenzo%20Table%20Lamp_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Hospitality &amp; Hotels</div><div class="asset-card__count">1,600+ scenes</div></div></div><div class="asset-badge asset-badge--left">BEAUTY RENDERS</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+        <div class="asset-card"><div class="asset-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Marilyn%20Chandelier_Image%201.jpg')"></div><div class="asset-card__overlay"><div class="asset-card__bottom"><div class="asset-card__label">Premium Interiors</div><div class="asset-card__count">1,100+ scenes</div></div></div><div class="asset-badge asset-badge--left">SIM READY</div><div class="asset-badge asset-badge--right">VERIFIED</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- ═══════════════════════════════════════════════════════
+     12. VALIDATION SHOWCASE
+═══════════════════════════════════════════════════════ -->
+<section class="validation">
+  <div class="wrap">
+    <div class="validation__inner">
+      <div class="validation__sticky">
+        <span class="pill">Quality at Scale</span>
+        <h2 class="validation__h2">Every <em>asset.</em> Every <em>variant.</em> Validated.</h2>
+        <p class="validation__p">Every environment passes physics integrity checks, semantic label verification, and collision mesh validation before delivery. Data that's structurally broken never reaches your pipeline.</p>
+      </div>
+      <div class="validation__cards">
+
+        <div class="v-card">
+          <div class="v-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Coffee%20Table%20Det%201.png') center/cover no-repeat;"></div>
+          <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
+          <div class="v-card__overlay">
+            <div class="v-card__row">
+              <span class="v-card__label">Living Room — Object Manipulation</span>
+              <span class="v-card__count">3,831+ variants</span>
+            </div>
+            <div class="v-card__tags">
+              <span class="v-tag">USD Physics</span>
+              <span class="v-tag">Collision Mesh</span>
+              <span class="v-tag">Semantics</span>
+              <span class="v-tag">Isaac Sim Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="v-card">
+          <div class="v-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Console%20Silo%20frt.png') center/cover no-repeat;"></div>
+          <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
+          <div class="v-card__overlay">
+            <div class="v-card__row">
+              <span class="v-card__label">Entryway — Navigation Task</span>
+              <span class="v-card__count">2,853+ variants</span>
+            </div>
+            <div class="v-card__tags">
+              <span class="v-tag">USD Physics</span>
+              <span class="v-tag">Multi-body</span>
+              <span class="v-tag">Semantics</span>
+              <span class="v-tag">MuJoCo Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="v-card">
+          <div class="v-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Foundry%20Table%20Lamp_Image%203.jpg') center/cover no-repeat;"></div>
+          <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
+          <div class="v-card__overlay">
+            <div class="v-card__row">
+              <span class="v-card__label">Office — Desk Manipulation</span>
+              <span class="v-card__count">2,410+ variants</span>
+            </div>
+            <div class="v-card__tags">
+              <span class="v-tag">USD Physics</span>
+              <span class="v-tag">Collision Mesh</span>
+              <span class="v-tag">30+ Classes</span>
+              <span class="v-tag">OpenUSD</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="v-card">
+          <div class="v-card__img" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Chair%20Silo%20frt.png') center/cover no-repeat;"></div>
+          <span class="v-card__verified"><span class="icon">verified</span> Verified</span>
+          <div class="v-card__overlay">
+            <div class="v-card__row">
+              <span class="v-card__label">Furniture — Grasping Task</span>
+              <span class="v-card__count">1,920+ variants</span>
+            </div>
+            <div class="v-card__tags">
+              <span class="v-tag">Multi-body</span>
+              <span class="v-tag">Joint Limits</span>
+              <span class="v-tag">Physics</span>
+              <span class="v-tag">Isaac Sim Ready</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     13. APPLICATION TIERS — flush ruled cards
+═══════════════════════════════════════════════════════ -->
+<section class="tiers">
+  <div class="wrap">
+    <div class="tiers__hd">
+      <span class="pill" id="tiers">Application Tiers</span>
+      <h2 class="tiers__h2"><em>Perception</em> now. <em>Navigation</em> next. <em>Manipulation</em> coming.</h2>
+      <p class="tiers__sub">Start training perception models today. Navigation data is near production. Full manipulation support is on the roadmap.</p>
+    </div>
+
+    <div class="tiers__strip">
+
+      <div class="tier">
+        <div class="tier__top">
+          <span class="tier__num">01. Tier</span>
+          <span class="tier__arrow"><span class="icon">arrow_outward</span></span>
+        </div>
+        <span class="tier__status tier__status--ready"><span class="tier__status-dot"></span>Ready Now</span>
+        <h3 class="tier__title">Perception</h3>
+        <p class="tier__desc">Vision model training at scale. Semantically complete environments with physically accurate materials and full lighting variation.</p>
+        <div class="tier__feats">
+          <div class="tier__feat"><span class="icon">check</span><span>10,000+ material / lighting combinations</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>Semantic + instance segmentation labels</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>Full lighting variation — morning to night</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>RGB + depth + segmentation masks</span></div>
+        </div>
+        <span class="tier__badge">Fully structured</span>
+      </div>
+
+      <div class="tier">
+        <div class="tier__top">
+          <span class="tier__num">02. Tier</span>
+          <span class="tier__arrow"><span class="icon">arrow_outward</span></span>
+        </div>
+        <span class="tier__status tier__status--ready"><span class="tier__status-dot"></span>Near-Ready</span>
+        <h3 class="tier__title">Navigation</h3>
+        <p class="tier__desc">Mobile robot navigation in structured indoor environments with cm-accurate geometry, collision data, and spatial occupancy metadata.</p>
+        <div class="tier__feats">
+          <div class="tier__feat"><span class="icon">check</span><span>Bounding box + convex hull collision</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>cm-accurate real-world dimensions</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>Nav meshes &amp; obstacle maps</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>Valid spatial layouts only</span></div>
+        </div>
+        <span class="tier__badge">Fully validated</span>
+      </div>
+
+      <div class="tier">
+        <div class="tier__top">
+          <span class="tier__num">03. Tier</span>
+          <span class="tier__arrow"><span class="icon">arrow_outward</span></span>
+        </div>
+        <span class="tier__status tier__status--soon"><span class="tier__status-dot"></span>Roadmap</span>
+        <h3 class="tier__title">Manipulation</h3>
+        <p class="tier__desc">Full contact-rich manipulation data — per-part collision, mass and friction properties, grasp affordances, aligning with NVIDIA SimReady spec.</p>
+        <div class="tier__feats">
+          <div class="tier__feat"><span class="icon">check</span><span>Per-part collision meshes</span></div>
+          <div class="tier__feat"><span class="icon">check</span><span>Mass, density, center of mass</span></div>
+          <div class="tier__feat tier__feat--dim"><span class="icon">schedule</span><span>Grasp affordance zones — coming soon</span></div>
+          <div class="tier__feat tier__feat--dim"><span class="icon">schedule</span><span>Aligning with NVIDIA SimReady spec</span></div>
+        </div>
+        <span class="tier__badge">In development</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     WHY DIFFERENT — scale proof before connection
+═══════════════════════════════════════════════════════ -->
+<section class="trust">
+  <div class="wrap">
+    <div class="trust__inner">
+      <div>
+        <span class="pill">Why This Is Different</span>
+        <h2 class="trust__h2">Not procedural. Not AI-synthesized. <em>Structured from the source.</em></h2>
+        <p class="trust__p">Every environment is built from a structured product graph — not reconstructed from scans, not hallucinated. We capture structured data once from the real product and reuse it across every variant, every scene, and every export. Production infrastructure since 2018.</p>
+        <div class="trust__badges">
+          <span class="tbadge"><span class="icon">verified_user</span>SOC 2 Type II Certified</span>
+          <span class="tbadge"><span class="icon">data_object</span>150+ metadata attributes per product</span>
+          <span class="tbadge"><span class="icon">hub</span>NVIDIA Ecosystem Partner</span>
+          <span class="tbadge"><span class="icon">rule</span>Physics-validated on every asset</span>
+          <span class="tbadge"><span class="icon">factory</span>Production infrastructure, not research tooling</span>
+        </div>
+      </div>
+      <div class="trust__quad">
+        <div class="t-stat">
+          <div class="t-stat__num">150+</div>
+          <p class="t-stat__label">Metadata attributes</p>
+          <p class="t-stat__sub">Per structured product</p>
+        </div>
+        <div class="t-stat">
+          <div class="t-stat__num">1M+</div>
+          <p class="t-stat__label">Outputs per month</p>
+          <p class="t-stat__sub">Production scale, continuously</p>
+        </div>
+        <div class="t-stat">
+          <div class="t-stat__num">25K+</div>
+          <p class="t-stat__label">Structured products</p>
+          <p class="t-stat__sub">In the product graph</p>
+        </div>
+        <div class="t-stat">
+          <div class="t-stat__num">5K+</div>
+          <p class="t-stat__label">Sim-ready environments</p>
+          <p class="t-stat__sub">Physics-validated, labeled</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     ECOSYSTEM — partner integrations
+═══════════════════════════════════════════════════════ -->
+<section class="ecosystem" id="ecosystem">
+  <div class="wrap">
+    <div class="ecosystem__hd">
+      <span class="pill">Ecosystem</span>
+      <h2 class="ecosystem__h2">We produce the environment layer. You <em>run the simulation.</em></h2>
+      <p class="ecosystem__sub">imagine.io exports directly into the simulation tools your team already runs.</p>
+    </div>
+    <div class="eco-grid">
+      <div class="eco-card">
+        <div class="eco-card__icon"><span class="icon">developer_board</span></div>
+        <div>
+          <p class="eco-card__name">NVIDIA Omniverse</p>
+          <p class="eco-card__desc">Structured environments and variation pipelines for physical AI simulation — native Omniverse integration.</p>
+        </div>
+      </div>
+      <div class="eco-card">
+        <div class="eco-card__icon"><span class="icon">precision_manufacturing</span></div>
+        <div>
+          <p class="eco-card__name">Isaac Sim</p>
+          <p class="eco-card__desc">USD export with semantics, collision, and physics for robot training. Load time under 5 minutes.</p>
+        </div>
+      </div>
+      <div class="eco-card">
+        <div class="eco-card__icon"><span class="icon">schema</span></div>
+        <div>
+          <p class="eco-card__name">OpenUSD / SimReady</p>
+          <p class="eco-card__desc">Native USD pipeline aligned with NVIDIA SimReady specifications — hierarchy and physics preserved end-to-end.</p>
+        </div>
+      </div>
+      <div class="eco-card">
+        <div class="eco-card__icon"><span class="icon">science</span></div>
+        <div>
+          <p class="eco-card__name">MuJoCo</p>
+          <p class="eco-card__desc">Structured scene export with collision and physics for manipulation research and policy training.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     GTC — event section
+═══════════════════════════════════════════════════════ -->
+<section class="gtc" id="gtc">
+  <div class="wrap">
+    <div class="gtc__inner">
+      <div>
+        <div class="gtc__badge"><span class="gtc__badge-dot"></span>Live Event</div>
+        <h2 class="gtc__h2"><em>NVIDIA GTC</em><br>March 17–20, 2026<br>San Jose.</h2>
+        <p class="gtc__sub">Bring your stack. We'll show the pipeline.</p>
+        <p class="gtc__desc">Book 30 minutes to review your simulation workflow, data requirements, and where structured environment generation fits. We'll walk through the full pipeline — from product graph to Isaac Sim.</p>
+        <a href="#" class="btn btn-primary btn-lg">Book a Technical Discussion →</a>
+      </div>
+      <div class="gtc__details">
+        <div class="gtc__detail"><span class="icon">event</span>March 17–20, 2026</div>
+        <div class="gtc__detail"><span class="icon">location_on</span>San Jose Convention Center · San Jose, CA</div>
+        <div class="gtc__detail"><span class="icon">schedule</span>30-minute technical discussion — bring your stack</div>
+        <div class="gtc__detail"><span class="icon">developer_board</span>NVIDIA GTC — the conference for physical AI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     15. FINAL CTA — asymmetric text left + image grid right
+═══════════════════════════════════════════════════════ -->
+<section class="cta-sec">
+  <div class="wrap">
+    <div class="cta-sec__inner">
+
+      <!-- Left: text -->
+      <div class="cta-sec__left">
+        <span class="pill">Get Started</span>
+        <h2 class="cta-sec__h2">Bring <em>your stack.</em> We'll show the pipeline.</h2>
+        <p class="cta-sec__sub">Book 30 minutes to review your simulation workflow, data requirements, and where structured environment generation fits.</p>
+        <div class="cta-sec__btns">
+          <a href="#" class="btn btn-primary btn-lg">Book a Technical Discussion →</a>
+        </div>
+        <p class="cta-sec__trust">Trusted by teams at</p>
+        <div class="cta-sec__logos">
+          <span class="cta-sec__logo">NVIDIA</span>
+          <span class="cta-sec__logo">Amazon</span>
+          <span class="cta-sec__logo">Boston Dynamics</span>
+          <span class="cta-sec__logo">Microsoft</span>
+          <span class="cta-sec__logo">Figure AI</span>
+          <span class="cta-sec__logo">1X Technologies</span>
+        </div>
+      </div>
+
+      <!-- Right: edge-bleeding image grid -->
+      <div class="cta-sec__right">
+        <div class="cta-img">
+          <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Kingston%20Sofa_Image%202.jpg') center/cover no-repeat;"></div>
+          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
+          <div class="cta-img__overlay"><p class="cta-img__label">Living Room Manipulation</p><p class="cta-img__count">3,831+ variants</p></div>
+        </div>
+        <div class="cta-img">
+          <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Basra%20Floor%20Lamp_Image%203.jpg') center/cover no-repeat;"></div>
+          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
+          <div class="cta-img__overlay"><p class="cta-img__label">Residential Navigation</p><p class="cta-img__count">2,853+ variants</p></div>
+        </div>
+        <div class="cta-img">
+          <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Lighting/Kessler%20Table%20Lamp_Image%203.jpg') center/cover no-repeat;"></div>
+          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
+          <div class="cta-img__overlay"><p class="cta-img__label">Office Navigation</p><p class="cta-img__count">2,410+ variants</p></div>
+        </div>
+        <div class="cta-img">
+          <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Furniture/Lounge%20Chair_Image%2011.jpg') center/cover no-repeat;"></div>
+          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
+          <div class="cta-img__overlay"><p class="cta-img__label">Residential Interiors</p><p class="cta-img__count">3,800+ scenes</p></div>
+        </div>
+        <div class="cta-img">
+          <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Coat%20Lifestyle%202.png') center/cover no-repeat;"></div>
+          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
+          <div class="cta-img__overlay"><p class="cta-img__label">Outdoor Perception</p><p class="cta-img__count">1,920+ variants</p></div>
+        </div>
+        <div class="cta-img">
+          <div class="cta-img__ph" style="background-image:url('https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/Apparel/Blouse%20Lifestyle%203.png') center/cover no-repeat;"></div>
+          <span class="cta-img__verified"><span class="icon">verified</span> Verified</span>
+          <div class="cta-img__overlay"><p class="cta-img__label">Outdoor / Urban</p><p class="cta-img__count">4,100+ scenes</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div>
+        <div class="footer__logo">
+          <img src="../assets/logos/Horizontal Light.svg" alt="imagine.io">
+        </div>
+        <p class="footer__tagline">Structured World Infrastructure for Physical AI.</p>
+        <p class="footer__tagline" style="margin-top:12px;">San Francisco · <a href="mailto:preet@imagine.io" style="color:inherit;">preet@imagine.io</a></p>
+      </div>
+      <div>
+        <p class="footer__col-hd">Products</p>
+        <ul class="footer__links">
+          <li><a href="#">Robotics Data</a></li>
+          <li><a href="#">Foundation Model Data</a></li>
+          <li><a href="#">API &amp; SDK</a></li>
+          <li><a href="#">Simulation Exports</a></li>
+          <li><a href="#">Enterprise</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-hd">Use Cases</p>
+        <ul class="footer__links">
+          <li><a href="#">Manipulation</a></li>
+          <li><a href="#">Navigation</a></li>
+          <li><a href="#">Perception</a></li>
+          <li><a href="#">World Models</a></li>
+          <li><a href="#">Domain Randomisation</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-hd">Company</p>
+        <ul class="footer__links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__legal">© 2026 imagine.io. All rights reserved.</p>
+      <div class="footer__bot-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<script>
+/* ── Pipeline sticky-scroll: scroll-position-based step activation ── */
+(function () {
+  var track   = document.querySelector('.pipeline-scroll__track');
+  var steps   = document.querySelectorAll('.ps-step');
+  var visuals = document.querySelectorAll('.ps-visual');
+  var n = steps.length;
+  if (!track || !n) return;
+
+  var current = -1;
+
+  function setActive(i) {
+    if (i === current) return;
+    current = i;
+    steps.forEach(function (s, idx)   { s.classList.toggle('ps-step--active',   idx === i); });
+    visuals.forEach(function (v, idx) { v.classList.toggle('ps-visual--active', idx === i); });
+  }
+
+  function onScroll() {
+    var rect     = track.getBoundingClientRect();
+    var scrolled = -rect.top;                          // px scrolled past section top
+    var range    = rect.height - window.innerHeight;   // total scroll space
+    if (range <= 0) { setActive(0); return; }
+    var progress = Math.max(0, Math.min(1, scrolled / range));
+    setActive(Math.min(Math.floor(progress * n), n - 1));
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // init on load
+}());
+</script>
+
+<!-- NAV: scroll shrink + hamburger -->
+<script>
+(function () {
+  var nav    = document.getElementById('nav');
+  var burger = document.getElementById('nav-burger');
+  var mobile = document.getElementById('nav-mobile');
+
+  // Scroll — add .nav--scrolled after 60px
+  function onNavScroll() {
+    if (window.scrollY > 60) {
+      nav.classList.add('nav--scrolled');
+    } else {
+      nav.classList.remove('nav--scrolled');
+    }
+  }
+  window.addEventListener('scroll', onNavScroll, { passive: true });
+  onNavScroll();
+
+  // Hamburger toggle
+  burger.addEventListener('click', function () {
+    var isOpen = mobile.classList.toggle('is-open');
+    burger.classList.toggle('is-open', isOpen);
+    burger.setAttribute('aria-expanded', String(isOpen));
+    mobile.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Close drawer when a mobile link is clicked
+  mobile.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      mobile.classList.remove('is-open');
+      burger.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      mobile.setAttribute('aria-hidden', 'true');
+    });
+  });
+}());
+</script>
+
+<!-- ETHEREAL SHADOW ANIMATION -->
+<script>
+(function () {
+  var hueEl = document.getElementById('ethereal-hue');
+  if (!hueEl) return;
+  var hue = 180;
+  var speed = 0.55; // degrees per frame at 60fps — slow, meditative
+  function tick() {
+    hue = (hue + speed) % 360;
+    hueEl.setAttribute('values', String(hue));
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}());
+</script>
+
+</body>
+</html>
