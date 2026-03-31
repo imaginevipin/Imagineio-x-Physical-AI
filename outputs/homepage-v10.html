@@ -18,9 +18,10 @@
   <div class="nav__outer">
     <div class="nav__inner">
 
-      <!-- Logo -->
+      <!-- Logo — dark/light variants swap with nav--on-dark -->
       <a class="nav__logo" href="#">
-        <img src="../assets/logos/Horizontal Light.png" alt="imagine.io">
+        <img class="nav__logo-dark" src="../assets/logos/Horizontal Dark.png" alt="imagine.io">
+        <img class="nav__logo-light" src="../assets/logos/Horizontal Light.png" alt="imagine.io">
       </a>
 
       <!-- Desktop links — absolutely centred -->
@@ -380,7 +381,7 @@
 <!-- ═══════════════════════════════════════════════════════
      7. CODE DEMO LAYERED OVER ASSET GRID
 ═══════════════════════════════════════════════════════ -->
-<section class="code-layer" id="platform">
+<section class="code-layer" id="platform" data-theme="dark">
   <!-- Background asset tile grid -->
   <div class="code-layer__bg">
     <div class="code-layer__bg-tile"></div><div class="code-layer__bg-tile"></div>
@@ -1045,7 +1046,7 @@
 <!-- ═══════════════════════════════════════════════════════
      GTC — event section
 ═══════════════════════════════════════════════════════ -->
-<section class="gtc" id="gtc">
+<section class="gtc" id="gtc" data-theme="dark">
   <div class="wrap">
     <div class="gtc__inner">
       <div>
@@ -1227,13 +1228,22 @@
   var burger = document.getElementById('nav-burger');
   var mobile = document.getElementById('nav-mobile');
 
-  // Scroll — add .nav--scrolled after 60px
+  // Dark sections — toggle nav--on-dark when nav overlaps a [data-theme="dark"] section
+  var darkSections = document.querySelectorAll('[data-theme="dark"]');
+  function checkDarkSection() {
+    var navBottom = nav.getBoundingClientRect().bottom;
+    var onDark = false;
+    darkSections.forEach(function (s) {
+      var r = s.getBoundingClientRect();
+      if (r.top < navBottom && r.bottom > 0) { onDark = true; }
+    });
+    nav.classList.toggle('nav--on-dark', onDark);
+  }
+
+  // Scroll — add .nav--scrolled after 60px + check dark sections
   function onNavScroll() {
-    if (window.scrollY > 60) {
-      nav.classList.add('nav--scrolled');
-    } else {
-      nav.classList.remove('nav--scrolled');
-    }
+    nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+    checkDarkSection();
   }
   window.addEventListener('scroll', onNavScroll, { passive: true });
   onNavScroll();
