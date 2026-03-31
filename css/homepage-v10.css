@@ -546,7 +546,7 @@
       font-weight: 400;
       line-height: 1.75;
       color: var(--text-muted);
-      max-width: 520px;
+      max-width: 540px;
       margin: 0 auto 36px;
     }
     .hero__cta {
@@ -2218,12 +2218,12 @@
       line-height: 1.16;
       text-wrap: balance;
       margin: 0 0 18px;
-      max-width: 12ch;
+      max-width: 540px;
     }
     .cta-sec__sub {
       font-size: 17px;
       color: var(--text-body);
-      max-width: 44ch;
+      max-width: 540px;
       margin-bottom: 26px;
       line-height: 1.7;
     }
@@ -2287,21 +2287,21 @@
       line-height: 1.2;
       text-wrap: balance;
       margin-bottom: 14px;
-      max-width: 10.4ch;
+      max-width: 540px;
     }
     .gtc__sub {
       font-size: 17px;
       color: rgba(255,255,255,0.76);
       line-height: 1.5;
       margin-bottom: 14px;
-      max-width: 20ch;
+      max-width: 540px;
     }
     .gtc__desc {
       font-size: 14px;
       color: rgba(255,255,255,0.54);
       line-height: 1.75;
       margin-bottom: 28px;
-      max-width: 38ch;
+      max-width: 540px;
     }
     .gtc__panel {
       max-width: 572px;
