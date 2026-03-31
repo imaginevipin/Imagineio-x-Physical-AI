@@ -119,7 +119,8 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-30 | Homepage v7 — complete, live on Vercel | `outputs/homepage-v7.html` + `css/homepage-v7.css` | Major changes from v6: (1) Pipeline rebuilt as sticky-scroll (physicl.ai reference) — 200vh track, sticky inner, 3 steps with animated descriptions, 3 absolutely-positioned visuals inside warm container stage; (2) "Built for your team" use cases section removed; (3) copied to `index.html` and deployed to Vercel. **v7 is now locked — do not edit.** |
 | 2026-03-30 | Homepage v8 — setup | `outputs/homepage-v8.html` + `css/homepage-v8.css` | Duplicated from v7. Active working version. |
 | 2026-03-31 | Homepage v8 — CSS PDS audit + full copy rewrite | `outputs/homepage-v8.html` + `css/homepage-v8.css` | CSS: all tokens now reference PDS or documented as exceptions. HTML: all section copy rewritten for dual marketing/technical audience. |
-| 2026-03-31 | Homepage v9 — blueprint theme WIP | `outputs/homepage-v9.html` + `css/homepage-v9.css` | Blueprint/engineering schematic theme. Foundation CSS done. All cards, borders, hero, dark sections updated. Scroll-reveal + crosshair corner system live. See decisions log for full list of changes. |
+| 2026-03-31 | Homepage v9 — blueprint theme WIP | `outputs/homepage-v9.html` + `css/homepage-v9.css` | Blueprint/engineering schematic theme experiment. Did not look good — parked. Not to be promoted to index.html. |
+| 2026-03-31 | Homepage v10 — setup, active working version | `outputs/homepage-v10.html` + `css/homepage-v10.css` | Duplicated from v8 (clean base). Logo updated to PNG (`Horizontal Light.png`). Blueprint theme to be applied here going forward. |
 
 ---
 
@@ -229,16 +230,21 @@ All product images are served from the `library-assets` GitHub repo via jsDelivr
 
 ## Known Issues / Pending Items
 
-- `homepage-v8` is the active working version. `homepage-v7` is locked — live on Vercel via `index.html`. ✅
+- `homepage-v10` is the **active working version**. `homepage-v7` is locked — live on Vercel via `index.html`. ✅
+- `homepage-v9` is parked — blueprint theme experiment that didn't look good. Not to be used.
 - `com.apple.provenance` extended attribute appears on all files in the `css/` folder (macOS behavior) — does NOT block writes; file is writable by owner.
-- **Pending decision:** Add a Moat section to v8? PM site has one between Product Graph and Pipeline. User hasn't seen the PM site's Moat section yet — decision deferred.
-- **CSS compliance:** `homepage-v8.css` is now PDS-compliant. All exact-match values use PDS tokens. Documented exceptions (no PDS token exists for these values): `--bg-warm`, `--bg-subtle`, `--border`, `--text-head`, `--text-body`, `--text-muted`, `--radius-sm/md/lg`, `--section-y`, plus spacing above 72px (80px, 100px) and decorative UI colors (macOS window dots, code syntax colors, status badges).
+- **Pending decision:** Add a Moat section? PM site has one between Product Graph and Pipeline. Decision deferred.
+- **CSS compliance:** `homepage-v10.css` (same as v8) is PDS-compliant. Documented exceptions: `--bg-warm`, `--bg-subtle`, `--border`, `--text-head`, `--text-body`, `--text-muted`, `--radius-sm/md/lg`, `--section-y`, plus spacing above 72px and decorative UI colors (macOS window dots, code syntax colors, status badges).
+- **Logos:** PNG files (`Horizontal Dark.png`, `Horizontal Light.png`, `Vertical Dark.png`, `Vertical Light.png`, `Logo Mark.png`) added to `assets/logos/`. Old SVGs kept alongside — not deleted. v8/v9/v10 all updated to reference `Horizontal Light.png`.
 
 ---
 
 ## Next Steps
 
-1. **Review v8 in browser** — CSS token audit + full copy rewrite done. Approve or iterate.
-2. **Moat section** — once user has seen PM site's Moat section, decide whether to add between Product Graph and Pipeline.
-3. **When v8 is approved:** copy to `index.html`, strip `../` prefixes, push to deploy.
-4. **Inner pages:** `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
+1. **v10 is active** — clean base from v8, logo updated to PNG. Continue building the blueprint/engineering schematic theme here.
+2. **Blueprint theme direction** — engineering schematic aesthetic: crosshair corner markers, dashed ruled lines, precision structure. Light theme primary; dark sections follow the same language. Reference screenshot: dark CTA section with `+` crosshair corners at section boundary and vertical dashed center divider.
+3. **Keep from v8:** nav scroll animation + glassmorphic pill, hero load animations (`hero__animate` system), sticky-scroll pipeline animation.
+4. **Extend to all sections:** scroll-triggered reveal animations (same feel as hero load-in).
+5. **Moat section** — deferred. Decide before v10 is approved.
+6. **When v10 is approved:** copy to `index.html`, strip `../` prefixes, push to deploy.
+7. **Inner pages:** `robotics-v1.html`, `foundation-models-v1.html`, `company-v1.html`
