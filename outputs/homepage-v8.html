@@ -111,7 +111,7 @@
   <div class="hero__content">
 
     <h1 class="hero__h1 hero__animate hero__animate--1">Structured product data for <em>simulation-ready</em> world generation.</h1>
-    <p class="hero__body hero__animate hero__animate--2">imagine.io turns structured product representations into valid environments for physical AI — preserving geometry, semantics, articulation, constraints, and variation from the start.</p>
+    <p class="hero__body hero__animate hero__animate--2">imagine.io converts structured product catalog data into simulation-ready training environments — with physics, semantics, and variation built in from the start, not bolted on afterward.</p>
     <div class="hero__cta hero__animate hero__animate--3">
       <a href="#" class="btn btn-primary btn-lg">Book a Demo</a>
       <a href="#proof" class="btn btn-ghost btn-lg">See how it works</a>
@@ -286,7 +286,7 @@
 ═══════════════════════════════════════════════════════ -->
 <section class="logo-strip">
   <div class="logo-strip__inner">
-    <p class="logo-strip__label">Trusted by Enterprise Brands</p>
+    <p class="logo-strip__label">Used by enterprise robotics &amp; AI teams</p>
     <div class="logo-strip__logos">
       <img src="../assets/partners-logos/Logo-1.png" alt="Partner logo">
       <img src="../assets/partners-logos/Logo-2.png" alt="Partner logo">
@@ -306,7 +306,7 @@
     <div class="mission__inner">
       <h2 class="mission__quote">Built as structured data.<br><em>Exported as simulation-ready worlds.</em></h2>
       <div class="mission__right">
-        <p class="mission__p">Generated from structured product graphs and delivered as OpenUSD.<br>Hierarchy, semantics, articulation, and collision are preserved end-to-end so scenes load directly into simulation without rework.</p>
+        <p class="mission__p">Every environment is generated from a structured product graph and delivered as OpenUSD — hierarchy, semantics, articulation, and collision intact. Load directly into Isaac Sim or MuJoCo without rework.</p>
         <div class="mission__list">
           <div class="mission__item">
             <span class="icon">inventory_2</span>
@@ -314,15 +314,15 @@
           </div>
           <div class="mission__item">
             <span class="icon">radar</span>
-            <span>Collision + articulation — per-part meshes and joint limits</span>
+            <span>Collision meshes + joint limits — per-part, from product source</span>
           </div>
           <div class="mission__item">
             <span class="icon">account_tree</span>
-            <span>Semantic scene graph — every object labeled at creation</span>
+            <span>Semantic scene graph — every object labeled at generation time</span>
           </div>
           <div class="mission__item">
             <span class="icon">verified_user</span>
-            <span>SimReady-aligned structure — production infrastructure, not a one-off scene build · SOC 2 Type II</span>
+            <span>SimReady-aligned — production infrastructure running at scale since 2018 · SOC 2 Type II</span>
           </div>
         </div>
       </div>
@@ -343,13 +343,13 @@
       <div class="problem__card">
         <span class="icon problem__icon">schedule</span>
         <h3 class="problem__title">Asset prep takes weeks</h3>
-        <p class="problem__body">40 hours of rigging per kitchen. 2–4 weeks of cleanup per batch. 10–20 hours of scene assembly per layout. Teams spend more time fixing assets than training models.</p>
+        <p class="problem__body">40h of rigging per kitchen. 2–4 weeks of cleanup per batch. Teams spend more time fixing assets than training models.</p>
       </div>
 
       <div class="problem__card">
         <span class="icon problem__icon">precision_manufacturing</span>
-        <h3 class="problem__title">Physics can't be improvised</h3>
-        <p class="problem__body">Procedural systems don't derive articulation — joints, limits, and constraints have to be authored manually. Scripts break every time the scene changes.</p>
+        <h3 class="problem__title">Physics properties don't come for free</h3>
+        <p class="problem__body">Joints, limits, and constraints have to be authored manually — they don't come from geometry. Every scene change means another round of script fixes.</p>
       </div>
 
       <div class="problem__card">
@@ -360,8 +360,8 @@
 
       <div class="problem__card">
         <span class="icon problem__icon">moving</span>
-        <h3 class="problem__title">Scale takes months</h3>
-        <p class="problem__body">Going from a handful of scenes to training volume requires months of manual work. There's no infrastructure — every new product or environment starts from zero.</p>
+        <h3 class="problem__title">Scale takes months, not days</h3>
+        <p class="problem__body">Going from a handful of scenes to training volume requires months of manual work. Every new product or environment starts from zero — there's no reuse.</p>
       </div>
 
     </div>
@@ -390,9 +390,9 @@
   <div class="wrap">
     <div class="code-layer__inner">
       <div class="code-layer__hd">
-        <span class="pill" style="background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.6);">Core Model</span>
-        <h2 class="code-layer__h2">What is a <em>product graph?</em></h2>
-        <p class="code-layer__sub">The structured source of truth behind scalable, valid environment generation — geometry, dimensions, materials, rules, articulation, semantics, and spatial constraints.</p>
+        <span class="pill" style="background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.6);">How It's Built</span>
+        <h2 class="code-layer__h2">The structured model behind every <em>environment we generate.</em></h2>
+        <p class="code-layer__sub">Each product is stored as a rich data model — not just geometry. Dimensions, materials, joint limits, articulation rules, and semantic labels are all captured once and reused across every scene, variant, and export.</p>
       </div>
 
       <div class="codeblock">
@@ -417,10 +417,10 @@
       </div>
 
       <div class="code-layer__feats">
-        <span class="code-layer__feat"><span class="icon">view_in_ar</span>Geometry — dimensionally grounded product structure</span>
-        <span class="code-layer__feat"><span class="icon">rule</span>Rules — valid combinations enforced by constraint engine</span>
-        <span class="code-layer__feat"><span class="icon">settings_ethernet</span>Articulation — doors, drawers, travel limits &amp; state logic</span>
-        <span class="code-layer__feat"><span class="icon">label</span>Semantics — object classes &amp; parent-child hierarchies at creation</span>
+        <span class="code-layer__feat"><span class="icon">view_in_ar</span>Geometry — dimensionally accurate from real product specs</span>
+        <span class="code-layer__feat"><span class="icon">rule</span>Rules — only valid object combinations can be assembled</span>
+        <span class="code-layer__feat"><span class="icon">settings_ethernet</span>Articulation — doors, drawers, joint limits &amp; travel ranges</span>
+        <span class="code-layer__feat"><span class="icon">label</span>Semantics — object class &amp; instance hierarchy, generated at creation</span>
       </div>
     </div>
   </div>
@@ -436,7 +436,7 @@
   <div class="wrap">
     <div class="pipeline-scroll__hd">
       <span class="pill">How It Works</span>
-      <h2 class="pipeline-scroll__h2">The system that produced <em>what you just saw.</em></h2>
+      <h2 class="pipeline-scroll__h2">From structured product data to <em>training-ready environments.</em></h2>
     </div>
   </div>
 
@@ -452,25 +452,25 @@
             <div class="ps-step ps-step--active">
               <div class="ps-step__top">
                 <span class="ps-step__num">01</span>
-                <h3 class="ps-step__title">Fully tagged scene graph — generated at creation</h3>
+                <h3 class="ps-step__title">Every object is labeled at creation — no post-processing required</h3>
               </div>
-              <p class="ps-step__desc">Every object carries its full identity from creation: semantic class, instance ID, dimensions, spatial transform. Not post-processed annotation — generated from the product graph. Labels like <em>dishwasher</em>, <em>base_cabinet</em>, <em>countertop</em> — with instance IDs and parent-child hierarchies — are structural outputs, not afterthoughts.</p>
+              <p class="ps-step__desc">Every object in a scene carries its semantic class, instance ID, and physical dimensions from the moment it's generated — not added after rendering. Labels like <em>dishwasher</em>, <em>base_cabinet</em>, and <em>countertop</em> are structural outputs of the product graph, not a post-processing step you have to run.</p>
             </div>
 
             <div class="ps-step">
               <div class="ps-step__top">
                 <span class="ps-step__num">02</span>
-                <h3 class="ps-step__title">Parameter-driven variation at dataset scale</h3>
+                <h3 class="ps-step__title">One base environment, multiplied into thousands of valid training scenes</h3>
               </div>
-              <p class="ps-step__desc">Materials, lighting, layout permutation, object placement — all parameter-driven. Every variant is structurally valid. 1 base environment × 9 finishes × 4 lighting × 3 layouts = 432 valid environments — plus clutter and spatial randomisation → tens of thousands of training scenes.</p>
+              <p class="ps-step__desc">Materials, lighting, layout, and object placement are all parameter-driven — so every variant is structurally valid by construction. 1 base environment × 9 material finishes × 4 lighting rigs × 3 layout arrangements = 432 environments. Add clutter and spatial randomization and you're generating tens of thousands of training-ready scenes.</p>
             </div>
 
             <div class="ps-step">
               <div class="ps-step__top">
                 <span class="ps-step__num">03</span>
-                <h3 class="ps-step__title">Perception training on physically accurate environments</h3>
+                <h3 class="ps-step__title">Train on environments grounded in the real world</h3>
               </div>
-              <p class="ps-step__desc">Every surface has physically accurate PBR materials derived from structured product data. Every layout is dimensionally accurate and physically plausible. Every object is semantically labeled. Your models train on grounded environments — not procedural approximations or AI-synthesized scenes.</p>
+              <p class="ps-step__desc">Surfaces use PBR materials derived from real product specs. Layouts are dimensionally accurate. Every object is semantically labeled. Your models train on grounded environments — not procedural approximations, not AI-hallucinated scenes.</p>
             </div>
 
           </div><!-- /pipeline-scroll__left -->
@@ -669,8 +669,8 @@
   <div class="wrap">
     <div class="deliverables__hd">
       <span class="pill">What You Get</span>
-      <h2 class="deliverables__h2">Concrete deliverables <em>your pipeline consumes.</em></h2>
-      <p class="deliverables__sub">Everything structured, labeled, and ready to drop into your simulation stack.</p>
+      <h2 class="deliverables__h2">Everything your pipeline <em>needs to start training.</em></h2>
+      <p class="deliverables__sub">Structured, labeled, and ready to drop into Isaac Sim, MuJoCo, or any OpenUSD-compatible stack.</p>
     </div>
     <div class="del-grid">
       <div class="del-card">
@@ -798,7 +798,7 @@
       <div class="validation__sticky">
         <span class="pill">Quality at Scale</span>
         <h2 class="validation__h2">Every <em>asset.</em> Every <em>variant.</em> Validated.</h2>
-        <p class="validation__p">imagine.io doesn't just generate data — it validates it. Every environment and variant passes physics integrity checks, semantic labelling verification, and collision mesh validation before entering your pipeline.</p>
+        <p class="validation__p">Every environment passes physics integrity checks, semantic label verification, and collision mesh validation before delivery. Data that's structurally broken never reaches your pipeline.</p>
       </div>
       <div class="validation__cards">
 
@@ -884,7 +884,7 @@
     <div class="tiers__hd">
       <span class="pill" id="tiers">Application Tiers</span>
       <h2 class="tiers__h2"><em>Perception</em> now. <em>Navigation</em> next. <em>Manipulation</em> coming.</h2>
-      <p class="tiers__sub">imagine.io is built to grow with your pipeline — from vision model training today to full manipulation data on the roadmap.</p>
+      <p class="tiers__sub">Start training perception models today. Navigation data is near production. Full manipulation support is on the roadmap.</p>
     </div>
 
     <div class="tiers__strip">
@@ -954,7 +954,7 @@
       <div>
         <span class="pill">Why This Is Different</span>
         <h2 class="trust__h2">Not procedural. Not AI-synthesized. <em>Structured from the source.</em></h2>
-        <p class="trust__p">Every environment imagine.io generates is built from a product graph — 150+ metadata attributes per object, captured once, reused endlessly. Not reconstructed from scans. Not hallucinated from noise. Production infrastructure running at 1M+ outputs per month since 2018.</p>
+        <p class="trust__p">Every environment is built from a structured product graph — not reconstructed from scans, not hallucinated. We capture structured data once from the real product and reuse it across every variant, every scene, and every export. Production infrastructure since 2018.</p>
         <div class="trust__badges">
           <span class="tbadge"><span class="icon">verified_user</span>SOC 2 Type II Certified</span>
           <span class="tbadge"><span class="icon">data_object</span>150+ metadata attributes per product</span>
@@ -998,7 +998,7 @@
     <div class="ecosystem__hd">
       <span class="pill">Ecosystem</span>
       <h2 class="ecosystem__h2">We produce the environment layer. You <em>run the simulation.</em></h2>
-      <p class="ecosystem__sub">imagine.io integrates directly with the tools your team already uses.</p>
+      <p class="ecosystem__sub">imagine.io exports directly into the simulation tools your team already runs.</p>
     </div>
     <div class="eco-grid">
       <div class="eco-card">
