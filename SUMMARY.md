@@ -104,6 +104,7 @@ See `research/design-reference.md` for the living visual design reference — up
 | 2026-03-31 | v10: stats bar removed; mission section restructured | Stats bar (standalone section after hero) removed. Mission section (`#proof`) rebuilt into a two-column layout: left = h2 + body + 4 feature list items; right = full product image (`Bath/Bathtub_Image 1.jpg`). Stats row (6+, 1M+, 25K+, 10,000×, 150+) moved inside the mission section below the two-column grid, with orange accent numbers. Feature list icons switched from accent to `var(--text-muted)`. |
 | 2026-03-31 | v10: adaptive dark/light navigation | Navbar now detects when it overlaps a dark section (`[data-theme="dark"]`) and switches to dark mode: white-tinted links, dark glass pill (`rgba(14,14,14,0.82)` + `blur(20px)`), white border. Logo swaps between `Horizontal Dark.png` (default) and `Horizontal Light.png` (on dark). Both `.code-layer#platform` and `.gtc#gtc` tagged with `data-theme="dark"`. Detection uses scroll-based `getBoundingClientRect` check — smooth, no flash. |
 | 2026-03-31 | v10 promoted to index.html — now live on Vercel | `outputs/homepage-v10.html` copied to `index.html` with `../` path prefixes stripped. Committed and pushed to `main`. **v10 is now the live version.** |
+| 2026-04-02 | Image repo migrated from `vipinmeena1468/library-assets` → `imaginevipin/imagine-assets-library` | New repo has a different structure: `01 Silo/[Category]/[Product]/[file].webp` and `02 Lifestyle/[Category]/[Product]/[file].webp`. All `.jpg`/`.png` files replaced with `.webp`. Applied across v7–v10 + index.html. Apparel category no longer exists — substituted with `02 Lifestyle/Textiles/`. Coffee Table and Console have no equivalent — substituted with Melrose Upholstered Sectional and Lucinda Nightstand respectively. `Chair Silo frt.png` → Aspen Side Chair image 1. |
 
 ---
 
@@ -226,8 +227,9 @@ git push
 
 All product images are served from the `imagine-assets-library` GitHub repo via jsDelivr CDN:
 - **Repo:** `github.com/imaginevipin/imagine-assets-library`
-- **CDN pattern:** `https://cdn.jsdelivr.net/gh/imaginevipin/imagine-assets-library@main/[Category]/[filename]`
-- **Categories used:** Furniture, Lighting, Kitchen, Bath (Apparel removed)
+- **Structure:** Two top-level folders — `01 Silo/` (white-bg product shots) and `02 Lifestyle/` (styled scene shots). Each contains category subfolders → product subfolders → `.webp` files.
+- **CDN pattern:** `https://cdn.jsdelivr.net/gh/imaginevipin/imagine-assets-library@main/01%20Silo/[Category]/[Product]/[Product]_image%20N.webp`
+- **Categories used:** Furniture, Lighting, Kitchen, Bath, Case Goods (Silo); Furniture, Textiles, Case Goods (Lifestyle)
 - Images can be used freely across our HTML files — just reference via CDN URL.
 
 ---
