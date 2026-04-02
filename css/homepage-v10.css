@@ -2390,12 +2390,14 @@
   display: grid;
   grid-template-columns: 56px minmax(0, 32ch);
   justify-content: start;
+  justify-items: start;
   column-gap: 18px;
   align-items: center;
   padding: 14px 16px;
   border-radius: 16px;
   background: rgba(255,255,255,0.045);
   border: 1px solid rgba(255,255,255,0.06);
+  text-align: left;
 }
 .gtc__agenda-step {
   display: flex;
@@ -2412,11 +2414,13 @@
       line-height: 1.2;
     }
 .gtc__agenda-item p {
+  justify-self: start;
   font-size: 14px;
   line-height: 1.62;
   color: rgba(255,255,255,0.76);
   max-width: 32ch;
   margin: 0;
+  text-align: left;
 }
 
 
