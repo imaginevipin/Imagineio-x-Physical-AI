@@ -224,9 +224,9 @@ git push
 
 ## Image Source
 
-All product images are served from the `library-assets` GitHub repo via jsDelivr CDN:
-- **Repo:** `github.com/vipinmeena1468/library-assets` — **DO NOT MODIFY this repo.** Other products use it.
-- **CDN pattern:** `https://cdn.jsdelivr.net/gh/vipinmeena1468/library-assets@main/[Category]/[filename]`
+All product images are served from the `imagine-assets-library` GitHub repo via jsDelivr CDN:
+- **Repo:** `github.com/imaginevipin/imagine-assets-library`
+- **CDN pattern:** `https://cdn.jsdelivr.net/gh/imaginevipin/imagine-assets-library@main/[Category]/[filename]`
 - **Categories used:** Furniture, Lighting, Kitchen, Bath (Apparel removed)
 - Images can be used freely across our HTML files — just reference via CDN URL.
 
